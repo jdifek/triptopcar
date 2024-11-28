@@ -1,0 +1,66 @@
+"use client";
+
+import { usePathname } from "next/navigation";
+import { FC } from "react";
+import Logo from "./ui/logo";
+import { TELEGRAM_LINK, WHATSAPP_LINK } from "@/lib/config";
+import TelegramIcon from "./icons/telegram-icon";
+import WhatsAppIcon from "./icons/whats-app-icon";
+import Link from "next/link";
+import clsx from "clsx";
+import Breadcrumbs from "./breadcrumbs";
+
+const links: { name: string; path: string }[] = [
+  { name: "Routes", path: "/routes" },
+  { name: "Partnership", path: "/partnership" },
+  { name: "Contract", path: "/contract" },
+  { name: "Contact Us", path: "/contact-us" },
+];
+
+const breadCrumbsPaths = ["/booking"];
+
+const Header: FC = () => {
+  const pathname = usePathname();
+
+  return (
+    <header className="bg-brand-base px-8 py-4 pb-20 max-sm:px-2">
+      <div className="container mx-auto flex items-center justify-between max-md:w-full">
+        <div className="flex items-center gap-10">
+          <Link href="/">
+            <Logo />
+          </Link>
+          {breadCrumbsPaths.some((breadcrumb) =>
+            pathname.includes(breadcrumb)
+          ) ? (
+            <Breadcrumbs pathname={pathname} className="max-sm:hidden" />
+          ) : (
+            <nav className="flex items-center justify-between">
+              <ul className="flex flex-col items-center justify-center gap-8 sm:flex-row max-md:hidden">
+                {links.map((link, index) => (
+                  <li key={index}>
+                    <Link
+                      href={link.path}
+                      className="font-semibold text-white"
+                    >
+                      {link.name}
+                    </Link>
+                  </li>
+                ))}
+              </ul>
+            </nav>
+          )}
+        </div>
+        <div className="flex flex-row items-center gap-8">
+          <Link href={TELEGRAM_LINK} target="_blank">
+            <TelegramIcon className="h-6 w-6 text-white" />
+          </Link>
+          <Link href={WHATSAPP_LINK} target="_blank">
+            <WhatsAppIcon className="h-6 w-6 text-white" />
+          </Link>
+        </div>
+      </div>
+    </header>
+  );
+};
+
+export default Header;
