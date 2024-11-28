@@ -8,6 +8,7 @@ export interface Car {
   id: number;
   imageUrl: string;
   name: string;
+  deposit: number;
   carBodyType: CarBodyType["name"];
   pricePerDay: number;
   engineCapacity: number;

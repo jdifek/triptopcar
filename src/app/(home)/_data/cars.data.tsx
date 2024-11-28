@@ -10,6 +10,7 @@ export const cars: Car[] = [
     engineCapacity: 2.4,
     fuelType: "Gasoline",
     seatsQuantity: 4,
+    deposit: 15000, 
     year: 2023,
     transmissionType: "Automatic",
     reviews: [
@@ -39,6 +40,7 @@ export const cars: Car[] = [
     pricePerDay: 400,
     engineCapacity: 1.2,
     year: 2024,
+    deposit: 6000,
     fuelType: "Gasoline",
     seatsQuantity: 4,
     transmissionType: "Automatic",
@@ -70,6 +72,7 @@ export const cars: Car[] = [
     engineCapacity: 1.5,
     year: 2021,
     fuelType: "Gasoline",
+    deposit: 9000,
     seatsQuantity: 4,
     transmissionType: "Automatic",
     reviews: [

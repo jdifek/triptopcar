@@ -1,15 +1,9 @@
 "use client";
 
-import Pickup from "@/components/icons/car-types/pickup";
-import Sedan from "@/components/icons/car-types/sedan";
-import SUV from "@/components/icons/car-types/suv";
-import Van from "@/components/icons/car-types/van";
 import { FC, useState } from "react";
 import Select from "react-select";
 import CarCard from "./car-card";
 import { Car, CarBodyType } from "@/typing/interfaces";
-import Hatchback from "@/components/icons/car-types/hatchback";
-import Cabriolet from "@/components/icons/car-types/cabriolet";
 import { carTypes } from "../_data/carTypes.data";
 import { cars } from "../_data/cars.data";
 import dynamic from "next/dynamic";

@@ -37,8 +37,8 @@ const SearchForm: FC = () => {
 
   useEffect(() => {
     form.reset({
-      locationTo: Number(searchParams.get("locationTo")) || 1,
-      locationFrom: Number(searchParams.get("locationFrom")) || 1,
+      locationTo: Number(searchParams.get("locationTo")) || 0,
+      locationFrom: Number(searchParams.get("locationFrom")) || 0,
       startDate: searchParams.get("startDate")
         ? new Date(Number(searchParams.get("startDate")))
         : new Date(),
@@ -74,7 +74,7 @@ const SearchForm: FC = () => {
         className="grid grid-cols-[1fr_1fr_1fr_1fr_120px] gap-2 max-md:grid-cols-2 max-md:relative max-md:mb-20 max-md:gap-y-10 max-[450px]:grid-cols-1"
       >
         <div className="w-full h-full">
-          <p className="text-sm mb-2 text-gray-500">Pick-up Location</p>
+          <p className="text-sm mb-2 text-gray-500">Pick-up Location + {areas.find(area => area.id == form.watch("locationFrom"))?.deliveryPrice ?? 0}฿</p>
           <Select
             className="w-full h-[50px]"
             classNamePrefix="react-select"
@@ -95,9 +95,9 @@ const SearchForm: FC = () => {
               form.setValue("locationFrom", value?.value ?? 0)
             }
             value={{
-              label: areas.find(
-                (area) => area.id === form.watch("locationFrom")
-              )?.name,
+              label:
+                areas.find((area) => area.id === form.watch("locationFrom"))
+                  ?.name ?? "Select a pick-up location",
               value: form.watch("locationFrom"),
             }}
           />
@@ -123,7 +123,7 @@ const SearchForm: FC = () => {
           />
         </div>
         <div className="w-full h-full">
-          <p className="text-sm mb-2 text-gray-500">Drop-off Location</p>
+          <p className="text-sm mb-2 text-gray-500">Drop-off Location + {areas.find(area => area.id == form.watch("locationTo"))?.deliveryPrice ?? 0}฿</p>
           <Select
             classNamePrefix="react-select"
             className="w-full h-[50px]"
@@ -142,8 +142,9 @@ const SearchForm: FC = () => {
             })}
             onChange={(value) => form.setValue("locationTo", value?.value || 0)}
             value={{
-              label: areas.find((area) => area.id === form.watch("locationTo"))
-                ?.name,
+              label:
+                areas.find((area) => area.id === form.watch("locationTo"))
+                  ?.name ?? "Select a drop-off location",
               value: form.watch("locationTo"),
             }}
           />
