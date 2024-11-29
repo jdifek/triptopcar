@@ -18,8 +18,10 @@ interface BookCarProps {
 interface Form {
   phone: string;
   fullName: string;
-  location: string;
-  time: string;
+  pickupLocation: string;
+  pickupTime: string;
+  dropoffLocation: string;
+  dropoffTime: string;
 }
 
 const BookCar: React.FC<BookCarProps> = ({ className, car }) => {
@@ -49,20 +51,30 @@ const BookCar: React.FC<BookCarProps> = ({ className, car }) => {
   } = useBookCar();
   const { register, handleSubmit } = useForm<Form>({ shouldFocusError: true });
 
-  const submitHandler = async ({ fullName, location, phone, time }: Form) => {
+  const submitHandler = async ({
+    fullName,
+    dropoffTime,
+    dropoffLocation,
+    pickupTime,
+    pickupLocation,
+    phone,
+  }: Form) => {
     if (
       fullName &&
       phone &&
-      location &&
-      time &&
-      location.length &&
+      pickupLocation &&
+      pickupTime &&
+      dropoffTime &&
+      dropoffLocation &&
+      pickupLocation.length &&
+      dropoffLocation.length &&
       phone.startsWith("+") &&
       phone.length == 12
     ) {
       createBooking(
-        `Car Booking\n\n${car.name} ${car.year}\nLocation: ${
-          location ?? "Not mentioned"
-        } + 400฿ \nTime: ${time}\nStart: ${new Date(
+        `Car Booking\n\n${car.name} ${car.year}\nPick-up Location: ${
+          pickupLocation ?? "Not mentioned"
+        } + 400฿ \nPick-up Time: ${pickupTime}\nDrop-off Location: ${dropoffLocation}\nDrop-off Time: ${dropoffTime}\nStart: ${new Date(
           startDate
         ).toLocaleDateString()}\nFinish: ${new Date(
           endDate
@@ -106,26 +118,50 @@ const BookCar: React.FC<BookCarProps> = ({ className, car }) => {
         onSubmit={handleSubmit(submitHandler)}
       >
         <div className="flex flex-col items-start gap-2">
-          <label htmlFor="location" className="text-lg font-medium">
-            Location{" "}
+          <label htmlFor="pickup-location" className="text-lg font-medium">
+            Pick-up Location{" "}
             <span className="text-gray-500 text-sm font-normal">+ 400฿</span>
           </label>
           <input
-            id="location"
+            id="pickup-location"
             type="text"
-            {...register("location")}
+            {...register("pickupLocation")}
             className="w-full h-[50px] border-[1px] rounded-sm pl-2"
             placeholder="Pick-up location"
           />
         </div>
-        <div>
-          <label htmlFor="time" className="text-lg font-medium">
-            Time
+        <div className="flex flex-col items-start gap-2">
+          <label htmlFor="pickup-time" className="text-lg font-medium">
+            Pick-up Time
           </label>
           <input
-            id="time"
+            id="pickup-time"
             type="time"
-            {...register("time")}
+            {...register("pickupTime")}
+            className="w-full h-[50px] border-[1px] rounded-sm pl-2"
+          />
+        </div>
+        <div className="flex flex-col items-start gap-2">
+          <label htmlFor="dropoff-location" className="text-lg font-medium">
+            Drop-off Location{" "}
+            <span className="text-gray-500 text-sm font-normal">+ 400฿</span>
+          </label>
+          <input
+            id="dropoff-location"
+            type="text"
+            {...register("dropoffLocation")}
+            className="w-full h-[50px] border-[1px] rounded-sm pl-2"
+            placeholder="Drop-off location"
+          />
+        </div>
+        <div className="flex flex-col items-start gap-2">
+          <label htmlFor="dropoff-time" className="text-lg font-medium">
+            Drop-off Time
+          </label>
+          <input
+            id="dropoff-time"
+            type="time"
+            {...register("dropoffTime")}
             className="w-full h-[50px] border-[1px] rounded-sm pl-2"
           />
         </div>

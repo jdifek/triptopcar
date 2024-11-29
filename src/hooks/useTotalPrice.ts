@@ -8,6 +8,6 @@ export function useTotalPrice({
   car: any;
 }) {
   return isPremium
-    ? daysQuantity * (car.pricePerDay + 400) + 400
-    : daysQuantity * car.pricePerDay + car.deposit + 400;
+    ? daysQuantity * (car.pricePerDay + 400) + 800
+    : daysQuantity * car.pricePerDay + car.deposit + 800;
 }
