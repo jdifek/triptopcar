@@ -40,6 +40,14 @@ const CarCatalog: FC = () => {
   const [carTypesFilter, setCarTypesFilter] = useState<CarBodyType[]>([]);
   const [sort, setSort] = useState<Option | null>(defaultSort);
 
+  const carsForRender = cars
+    .filter(
+      (car) =>
+        carTypesFilter.length === 0 ||
+        carTypesFilter.includes(car.carBodyType as any)
+    )
+    .toSorted(sortHandlers[sort?.value || "price-high-to-low"]);
+
   const toggleCarType = (type: CarBodyType) => {
     setCarTypesFilter((prev) =>
       prev.includes(type)
@@ -51,11 +59,11 @@ const CarCatalog: FC = () => {
   return (
     <>
       <div className="rounded-2xl bg-white p-3">
-        <ul className="flex gap-4 max-xl:gap-2 font-bold uppercase *:grid *:basis-full *:place-items-center *:rounded-sm *:border *:border-tertiary-gray *:p-2 max-md:grid max-md:grid-cols-3 max-md:place-items-center max-[420px]:grid-cols-2">
+        <ul className="flex gap-10 max-xl:gap-2 font-bold uppercase *:grid *:basis-full *:place-items-center *:rounded-sm *:border *:border-tertiary-gray *:p-2 max-[600px]:grid max-[600px]:grid-cols-3 max-[600px]:px-20 max-[500px]:px-0 max-[425px]:grid-cols-3">
           <li
             className={clsx(
               carTypesFilter.length === 0 && "bg-tertiary-gray",
-              "max-xl:scale-90 max-md:w-full max-md:h-full"
+              "max-xl:scale-90"
             )}
           >
             <button
@@ -75,10 +83,10 @@ const CarCatalog: FC = () => {
               )}
             >
               <button
-                className="w-full h-full aspect-square justify-center flex items-center gap-10 flex-col text-slate-800"
+                className="w-full h-full aspect-square justify-center flex items-center gap-4 flex-col text-slate-800"
                 onClick={() => toggleCarType(carType.name as any)}
               >
-                {carType.name}
+                <span className="max-md:text-xs">{carType.name}</span>
                 {carType.icon}
               </button>
             </li>
@@ -101,21 +109,12 @@ const CarCatalog: FC = () => {
           onChange={setSort}
           value={sort}
         />
+        <span>{carsForRender.length} cars found</span>
       </div>
-      <div className="space-y-4 h-full bg-white flex flex-col w-full gap-14">
-        {cars
-          .filter(
-            (car) =>
-              carTypesFilter.length === 0 ||
-              carTypesFilter.includes(car.carBodyType as any)
-          )
-          .toSorted(sortHandlers[sort?.value || "price-high-to-low"])
-          .map((car, index) => (
-            <div key={car.id}>
-              <CarCard car={car} />
-              {cars.length !== index + 1 && <hr className="h-[2px]" />}
-            </div>
-          ))}
+      <div className="space-y-4 h-full flex flex-col w-full gap-14">
+        {carsForRender.map((car) => (
+          <CarCard key={car.id} car={car} className="bg-white" />
+        ))}
       </div>
     </>
   );

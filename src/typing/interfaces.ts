@@ -13,7 +13,7 @@ export interface Car {
   pricePerDay: number;
   engineCapacity: number;
   year: number;
-  fuelType: "Gasoline" | "Diesel" | "Electric";
+  fuelType: "Gasoline A95" | "Diesel" | "Electric";
   seatsQuantity: number;
   transmissionType: "Automatic" | "Manual";
   reviews?: Review[];

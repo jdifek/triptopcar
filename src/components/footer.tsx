@@ -72,7 +72,7 @@ const Footer = () => {
         <div className="mt-5 w-full">
           <hr />
           <p className="text-gray-500 text-center mt-3 mx-auto max-[440px]:text-sm">
-            © Copyright 2024. All Rights Reserved.
+            © Copyright 2013 - 2025. All Rights Reserved.
           </p>
         </div>
       </div>

@@ -1,9 +1,8 @@
 import Link from "next/link";
-import { Fragment } from "react";
 
 interface BreadcrumbsProps {
   pathname: string;
-  className?: string
+  className?: string;
 }
 
 const Breadcrumbs: React.FC<BreadcrumbsProps> = ({ pathname, className }) => {
@@ -53,6 +52,15 @@ const Breadcrumbs: React.FC<BreadcrumbsProps> = ({ pathname, className }) => {
             {index < breadcrumbs.length - 1 && <span>{">"}</span>}
           </div>
         ))}
+        {pathname.includes("booking") && (
+          <li className="flex items-center gap-2">
+            <span className="-translate-x-3">{">"}</span>
+            <div className="p-3 rounded-full bg-white text-brand-base aspect-square flex items-center justify-center w-10 h-10">
+              {3}
+            </div>
+            <span>Checkout Details</span>
+          </li>
+        )}
       </ul>
     </nav>
   );

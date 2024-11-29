@@ -9,27 +9,29 @@ export default async function HomePage() {
       <SearchForm />
       <section className="container mx-auto mb-4 mt-8 flex gap-4 min-h-[70vh] max-md:px-4">
         <aside className="basis-1/4 max-xl:basis-1/3 rounded-2xl text-center max-lg:hidden sticky top-5">
-          <div className="w-full rounded-2xl bg-white p-4">
+          <div className="w-full rounded-2xl bg-white">
             <Image
               src="/banner.jpeg"
               alt="medical insurance"
               width={500}
               height={500}
-              className="rounded-2xl"
+              className="w-full rounded-t-2xl"
             />
-            <div className="relative w-full h-full py-4">
-              <div className="h-full flex items-center flex-col justify-center">
+            <div className="relative w-full h-full p-4 flex flex-col items-end">
+              <div className="h-full w-full text-justify">
                 Medical insurance to Thailand and 21 other countries with
                 insurance coverage of USD 100,000 for only USD 300 per year.
                 Your reliable protection against accidents and illnesses abroad
+              </div>
+              <button className="bg-brand-base text-white rounded-md">
                 <Link
                   target="_blank"
                   href="https://wa.me/+66659769300"
-                  className="text-blue-400 underline underline-offset-4 mt-2"
+                  className="w-full h-full px-4 py-2 block"
                 >
-                  Learn more
+                  Details
                 </Link>
-              </div>
+              </button>
             </div>
           </div>
         </aside>

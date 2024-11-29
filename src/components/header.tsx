@@ -24,15 +24,15 @@ const Header: FC = () => {
 
   return (
     <header className="bg-brand-base px-8 py-4 pb-20 max-sm:px-2">
-      <div className="container mx-auto flex items-center justify-between max-md:w-full">
-        <div className="flex items-center gap-10">
+      <div className="container mx-auto flex items-end justify-between max-md:w-full">
+        <div className="flex gap-10 items-end">
           <Link href="/">
             <Logo />
           </Link>
           {breadCrumbsPaths.some((breadcrumb) =>
             pathname.includes(breadcrumb)
           ) ? (
-            <Breadcrumbs pathname={pathname} className="max-sm:hidden" />
+            <Breadcrumbs pathname={pathname} className="max-lg:hidden" />
           ) : (
             <nav className="flex items-center justify-between">
               <ul className="flex flex-col items-center justify-center gap-8 sm:flex-row max-md:hidden">

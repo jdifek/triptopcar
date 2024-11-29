@@ -1,11 +1,16 @@
 import clsx from "clsx";
+import { SetStateAction } from "react";
 
 interface StandartConditionsProps {
   className?: string;
+  isPremium: boolean;
+  setIsPremium: React.Dispatch<SetStateAction<boolean>>;
 }
 
 const StandartConditions: React.FC<StandartConditionsProps> = ({
   className,
+  isPremium,
+  setIsPremium
 }) => {
   return (
     <div
@@ -18,8 +23,12 @@ const StandartConditions: React.FC<StandartConditionsProps> = ({
         <input
           type="checkbox"
           className="w-5 h-5 mr-2"
-          checked
-          disabled
+          checked={!isPremium}
+          onChange={(e) => {
+            if(e.target.checked && isPremium) {
+              setIsPremium(false);
+            }
+          }}
         />{" "}
         Standart Conditions {"("}included{")"}
       </h2>
