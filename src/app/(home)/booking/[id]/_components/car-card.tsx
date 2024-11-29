@@ -1,11 +1,11 @@
 import CalendarIcon from "@/components/icons/calendar-days-icon";
+import CheckIcon from "@/components/icons/check";
 import EngineIcon from "@/components/icons/engine-icon";
 import FuelIcon from "@/components/icons/fuel-icon";
 import SeatIcon from "@/components/icons/seat-icon";
 import TransmissionIcon from "@/components/icons/transmission-icon";
 import { Car } from "@/typing/interfaces";
 import clsx from "clsx";
-import { CheckCircle2 } from "lucide-react";
 import Image from "next/image";
 import React from "react";
 
@@ -65,27 +65,27 @@ const CarCard: React.FC<CarCardProps> = ({ className, car }) => {
           <h4 className="text-lg font-bold text-slate-700">Rental includes</h4>
           <div className="grid grid-cols-2 grid-rows-3 mt-3 gap-x-24 gap-y-3 max-[350px]:text-sm max-2xl:grid-cols-1">
             <div className="flex items-center gap-3 text-base-black-secondary">
-              <CheckCircle2 className="aspect-square" />
+              <CheckIcon className="aspect-square" />
               <span>Confirmed within 48 hours</span>
             </div>
             <div className="flex items-center gap-3 text-base-black-secondary">
-              <CheckCircle2 className="aspect-square" />
+              <CheckIcon className="aspect-square" />
               <span>Add 1 driver free</span>
             </div>
             <div className="flex items-center gap-3 text-base-black-secondary">
-              <CheckCircle2 className="aspect-square" />
+              <CheckIcon className="aspect-square" />
               <span>Full to Full</span>
             </div>
             <div className="flex items-center gap-3 text-base-black-secondary">
-              <CheckCircle2 className="aspect-square" />
+              <CheckIcon className="aspect-square" />
               <span>Time-Limited Free Cancellation</span>
             </div>
             <div className="flex items-center gap-3 text-base-black-secondary">
-              <CheckCircle2 className="aspect-square" />
+              <CheckIcon className="aspect-square" />
               <span>Include Third Party Liability</span>
             </div>
             <div className="flex items-center gap-3 text-base-black-secondary">
-              <CheckCircle2 className="aspect-square" />
+              <CheckIcon className="aspect-square" />
               <span>Unlimited Mileage</span>
             </div>
           </div>

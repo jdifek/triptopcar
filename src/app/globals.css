@@ -11,7 +11,7 @@
 @layer base {
   html,
   body {
-    @apply min-h-full min-h-svh;
+    @apply min-h-full;
   }
 
   body {

@@ -1,10 +1,10 @@
 "use client";
 
+import Loader from "@/components/icons/loader";
 import { useBookCar } from "@/hooks/useTelegram";
 import { useTotalPrice } from "@/hooks/useTotalPrice";
 import { Car } from "@/typing/interfaces";
 import clsx from "clsx";
-import { LoaderIcon } from "lucide-react";
 import { useSearchParams } from "next/navigation";
 import { useEffect, useState } from "react";
 import { useForm } from "react-hook-form";
@@ -120,7 +120,7 @@ const BookCar: React.FC<BookCarProps> = ({ className, car }) => {
         <div className="flex flex-col items-start gap-2">
           <label htmlFor="pickup-location" className="text-lg font-medium">
             Pick-up Location{" "}
-            <span className="text-gray-500 text-sm font-normal">+ 400฿</span>
+            <span className="text-gray-500 text-sm font-normal">+ 250฿</span>
           </label>
           <input
             id="pickup-location"
@@ -144,7 +144,7 @@ const BookCar: React.FC<BookCarProps> = ({ className, car }) => {
         <div className="flex flex-col items-start gap-2">
           <label htmlFor="dropoff-location" className="text-lg font-medium">
             Drop-off Location{" "}
-            <span className="text-gray-500 text-sm font-normal">+ 400฿</span>
+            <span className="text-gray-500 text-sm font-normal">+ 250฿</span>
           </label>
           <input
             id="dropoff-location"
@@ -195,7 +195,7 @@ const BookCar: React.FC<BookCarProps> = ({ className, car }) => {
             className="w-full h-12 bg-brand-base text-white rounded-lg mt-4 hover:border-brand-base hover:bg-white hover:text-brand-base duration-300 border-2 border-transparent hover:font-semibold flex items-center gap-4 justify-center"
           >
             Book now
-            {isPending && <LoaderIcon className="animate-spin" />}
+            {isPending && <Loader className="animate-spin" />}
           </button>
           <p className="mt-5 text-center">
             By proceeding, I acknowledge that I have read and agree to Ulethai`s{" "}

@@ -1,6 +1,8 @@
+import StarIcon from "@/components/icons/star";
+import StarFullIcon from "@/components/icons/star-full";
+import UserBestIcon from "@/components/icons/user-icon";
 import { Car, Review } from "@/typing/interfaces";
 import clsx from "clsx";
-import { StarIcon, User2Icon } from "lucide-react";
 
 interface ReviewsProps {
   className?: string;
@@ -27,17 +29,13 @@ const ReviewBlock = ({ review }: { review: Review }) => {
     <div className="flex flex-col items-start gap-3">
       <div className="flex items-center gap-3">
         <div className="rounded-full bg-brand-base flex items-center justify-center p-2">
-          <User2Icon color="#fff" size={30} />
+          <UserBestIcon className="text-white w-7 h-7" />
         </div>
         <div className="flex flex-col items-start gap-2">
           <div className="flex items-center gap-1">
             {[...Array(5)].map((_, index) => (
               <span key={index}>
-                <StarIcon
-                  color="rgb(253, 176, 34)"
-                  fill={review.rating > index ? "rgb(253, 176, 34)" : "transparent"}
-                  size={20}
-                />
+                {review.rating > index ? <StarFullIcon className="w-5 h-5" /> : <StarIcon className="w-5 h-5" />}
               </span>
             ))}
           </div>

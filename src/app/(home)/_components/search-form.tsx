@@ -7,7 +7,6 @@ import "react-date-picker/dist/DatePicker.css";
 import "react-calendar/dist/Calendar.css";
 import { Controller, useForm } from "react-hook-form";
 import { z } from "zod";
-import { Search } from "lucide-react";
 import { zodResolver } from "@hookform/resolvers/zod";
 import dynamic from "next/dynamic";
 import { useSearchParams } from "next/navigation";
@@ -108,7 +107,8 @@ const SearchForm: FC = () => {
           type="submit"
           className="whitespace-nowrap rounded-lg bg-brand-base p-4 text-white h-full max-h-[50px] flex gap-2 items-center justify-center max-md:absolute max-md:w-full max-md:top-[110%] max-md:h-14"
         >
-          <Search className="inline" /> Search
+          {" "}
+          Search
         </button>
       </form>
     </section>

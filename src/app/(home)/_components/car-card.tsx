@@ -1,7 +1,6 @@
 "use client";
 
 import Link from "next/link";
-import { CheckCircle2Icon, ChevronRight } from "lucide-react";
 import { FC, useCallback, useState } from "react";
 import TransmissionIcon from "@/components/icons/transmission-icon";
 import { Car } from "@/typing/interfaces";
@@ -14,6 +13,7 @@ import { useSearchParams } from "next/navigation";
 import CalendarIcon from "@/components/icons/calendar-days-icon";
 import FuelIcon from "@/components/icons/fuel-icon";
 import clsx from "clsx";
+import CheckIcon from "@/components/icons/check";
 
 const CarCard: FC<{ car: Car; className?: string }> = ({ car, className }) => {
   const [isPremium, setIsPremium] = useState<boolean>(false);
@@ -78,7 +78,7 @@ const CarCard: FC<{ car: Car; className?: string }> = ({ car, className }) => {
               <EngineIcon className="w-6 h-6" /> {car.engineCapacity}L
             </span>
             <span className="flex items-center gap-1">
-              <CheckCircle2Icon className="w-6 h-6" />A / C
+              <CheckIcon className="w-6 h-6" />A / C
             </span>
           </div>
         </div>
@@ -119,7 +119,7 @@ const CarCard: FC<{ car: Car; className?: string }> = ({ car, className }) => {
             href={getCarBookingLink()}
             className="ml-auto max-md:mx-auto max-xl:m-[0_auto_0_0] flex w-min items-center rounded-lg bg-brand-base px-4 py-2 text-white"
           >
-            Book <ChevronRight size={20} className="m-auto inline" />
+            Book <span className="text-lg ml-2">{">"}</span>
           </Link>
         </div>
       </div>
