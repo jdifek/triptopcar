@@ -25,34 +25,17 @@ const Breadcrumbs: React.FC<BreadcrumbsProps> = ({ pathname, className }) => {
           </Link>
           <span>{">"}</span>
         </li>
-        {breadcrumbs.map((breadcrumb, index) => (
-          <div key={index} className="flex items-center gap-2">
-            <li className="flex items-center gap-3">
-              <div className="p-3 rounded-full bg-white text-brand-base aspect-square flex items-center justify-center w-10 h-10">
-                {index + 2}
-              </div>
-              {index >= breadcrumbs.length - 1 ? (
-                <span>
-                  {breadcrumb
-                    .split("-")
-                    .filter((b) => b.trim().length !== 0)
-                    .map((b) => b[0]?.toUpperCase() + b.substring(1))
-                    .join(" ")}
-                </span>
-              ) : (
-                <Link href={`${breadcrumb}`}>
-                  {breadcrumb
-                    .split("-")
-                    .filter((b) => b.trim().length !== 0)
-                    .map((b) => b[0]?.toUpperCase() + b.substring(1))
-                    .join(" ")}
-                </Link>
-              )}
-            </li>
-            {index < breadcrumbs.length - 1 && <span>{">"}</span>}
-          </div>
-        ))}
-        {pathname.includes("booking") && (
+        {pathname.includes("booking") || pathname.includes("checkout") ? (
+          <li className="flex items-center gap-2">
+            <div className="p-3 rounded-full bg-white text-brand-base aspect-square flex items-center justify-center w-10 h-10">
+              {2}
+            </div>
+            <span>Booking</span>
+          </li>
+        ) : (
+          <></>
+        )}
+        {pathname.includes("booking") || pathname.includes("checkout") ? (
           <li className="flex items-center gap-2">
             <span className="-translate-x-3">{">"}</span>
             <div className="p-3 rounded-full bg-white text-brand-base aspect-square flex items-center justify-center w-10 h-10">
@@ -60,6 +43,8 @@ const Breadcrumbs: React.FC<BreadcrumbsProps> = ({ pathname, className }) => {
             </div>
             <span>Checkout Details</span>
           </li>
+        ) : (
+          <></>
         )}
       </ul>
     </nav>

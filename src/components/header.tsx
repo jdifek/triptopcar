@@ -17,7 +17,7 @@ const links: { name: string; path: string }[] = [
   { name: "Contact Us", path: "/contact-us" },
 ];
 
-const breadCrumbsPaths = ["/booking"];
+const breadCrumbsPaths = ["/booking", "/checkout"];
 
 const Header: FC = () => {
   const pathname = usePathname();

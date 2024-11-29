@@ -5,7 +5,7 @@ import { useBookCar } from "@/hooks/useTelegram";
 import { useTotalPrice } from "@/hooks/useTotalPrice";
 import { Car } from "@/typing/interfaces";
 import clsx from "clsx";
-import { useSearchParams } from "next/navigation";
+import { useRouter, useSearchParams } from "next/navigation";
 import { useEffect, useState } from "react";
 import { useForm } from "react-hook-form";
 import toast from "react-hot-toast";
@@ -42,12 +42,12 @@ const BookCar: React.FC<BookCarProps> = ({ className, car }) => {
     isPremium,
   });
 
-  const [loadingToastId, setLoadingToastId] = useState<string | null>(null);
+  const { push } = useRouter();
+
   const {
     mutateAsync: createBooking,
     isPending,
     isSuccess,
-    isError,
   } = useBookCar();
   const { register, handleSubmit } = useForm<Form>({ shouldFocusError: true });
 
@@ -83,6 +83,10 @@ const BookCar: React.FC<BookCarProps> = ({ className, car }) => {
         } ฿\nInsurance: ${
           isPremium ? "Full" : "Standart"
         }\n${fullName} ${phone}\n`
+        
+      );
+      push(
+        `/checkout?carId=${car.id}&isPremium=${isPremium}&startDate=${startDate}&endDate=${endDate}&dropoffLocation=${dropoffLocation}&dropoffTime=${dropoffTime}&pickupLocation=${pickupLocation}&pickupTime=${pickupTime}&fullName=${fullName}&phone=${phone}`
       );
     } else {
       toast.error("Please fill all the fields correctly.");
@@ -90,18 +94,10 @@ const BookCar: React.FC<BookCarProps> = ({ className, car }) => {
   };
 
   useEffect(() => {
-    if (isPending) {
-      const loadingToastId = toast.loading("Sending Request...");
-      setLoadingToastId(loadingToastId);
-    }
     if (isSuccess) {
-      loadingToastId && loadingToastId && toast.dismiss(loadingToastId);
       toast.success("Request sent successfully!");
     }
-    if (isError) {
-      loadingToastId && loadingToastId && toast.dismiss(loadingToastId);
-    }
-  }, [isPending, isSuccess, isError]);
+  }, [isSuccess]);
 
   return (
     <div
