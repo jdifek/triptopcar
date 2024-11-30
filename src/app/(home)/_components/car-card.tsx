@@ -22,12 +22,12 @@ const CarCard: FC<{ car: Car; className?: string }> = ({ car, className }) => {
   const endDate =
     Number(params.get("endDate")) ??
     new Date().getTime() + 3 * 24 * 60 * 60 * 1000;
-
+  const locationFrom = Number(params.get("locationFrom")) ?? 1;
+  const locationTo = Number(params.get("locationTo")) ?? 1;
   const daysQuantity = Math.ceil((endDate - startDate) / (1000 * 60 * 60 * 24));
-
   const getCarBookingLink = useCallback(() => {
-    return `/booking/${car.id}?startDate=${startDate}&endDate=${endDate}&isPremium=${isPremium}`;
-  }, [isPremium, startDate, endDate]);
+    return `/booking/${car.id}?startDate=${startDate}&endDate=${endDate}&isPremium=${isPremium}&locationFrom=${locationFrom}&locationTo=${locationTo}`;
+  }, [isPremium, startDate, endDate, locationFrom, locationTo]);
 
   return (
     <article>
@@ -78,7 +78,7 @@ const CarCard: FC<{ car: Car; className?: string }> = ({ car, className }) => {
               <EngineIcon className="w-6 h-6" /> {car.engineCapacity}L
             </span>
             <span className="flex items-center gap-1">
-            <SnowflakeIcon className="w-6 h-6" />A / C
+              <SnowflakeIcon className="w-6 h-6" />A / C
             </span>
           </div>
         </div>

@@ -23,7 +23,7 @@ const CarCard: React.FC<CarCardProps> = ({ className, car }) => {
         className
       )}
     >
-      <header className="flex items-center max-md:mx-auto gap-3">
+      <header className="grid grid-cols-2 max-md:mx-auto gap-3">
         <h3>
           <span className="bg-base-bg-blue mr-4 rounded-sm px-2 py-1.5 text-base">
             {car.carBodyType.toUpperCase()}
@@ -31,7 +31,7 @@ const CarCard: React.FC<CarCardProps> = ({ className, car }) => {
           <span className="text-lg">{car.name}</span>
         </h3>
       </header>
-      <main className="flex items-start w-full gap-24 max-md:gap-8 max-xl:gap-5 max-md:flex-col max-md:items-center max-md:text-center">
+      <main className="flex items-start w-full gap-12 max-md:flex-col max-md:items-center max-md:text-center">
         <div className="flex flex-col w-2/3 max-sm:w-full items-start max-md:items-center mt-8">
           <Image
             src={car.imageUrl}
@@ -64,7 +64,7 @@ const CarCard: React.FC<CarCardProps> = ({ className, car }) => {
             </li>
           </ul>
         </div>
-        <div className="flex flex-col items-start my-auto w-1/2 max-sm:w-full">
+        <div className="flex flex-col items-start my-auto w-full max-sm:w-full">
           <h4 className="text-lg font-bold text-slate-700">Rental includes</h4>
           <div className="grid grid-cols-2 grid-rows-3 mt-3 gap-x-24 gap-y-3 max-[350px]:text-sm max-2xl:grid-cols-1">
             <div className="flex items-center gap-3 text-base-black-secondary">
