@@ -175,8 +175,8 @@ const SearchForm: FC = () => {
           {" "}
           Search
         </button>
-        <p className="text-sm mb-2 text-gray-500">Minimum rental period is three days</p>
       </form>
+      <p className="text-sm mb-2 text-gray-500">Minimum rental period is three days</p>
     </section>
   );
 };
