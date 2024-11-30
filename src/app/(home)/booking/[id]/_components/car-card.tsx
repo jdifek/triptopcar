@@ -3,6 +3,7 @@ import CheckIcon from "@/components/icons/check";
 import EngineIcon from "@/components/icons/engine-icon";
 import FuelIcon from "@/components/icons/fuel-icon";
 import SeatIcon from "@/components/icons/seat-icon";
+import SnowflakeIcon from "@/components/icons/snowflake";
 import TransmissionIcon from "@/components/icons/transmission-icon";
 import { Car } from "@/typing/interfaces";
 import clsx from "clsx";
@@ -58,7 +59,7 @@ const CarCard: React.FC<CarCardProps> = ({ className, car }) => {
               {car.fuelType}
             </li>
             <li className="flex items-center gap-3 text-lg mt-4 max-[380px]:justify-self-end">
-              <CheckIcon className="w-7 h-7 [&>circle]:stroke-black [&>rect]:stroke-black" />
+              <SnowflakeIcon className="w-7 h-7" />
               A/C
             </li>
           </ul>

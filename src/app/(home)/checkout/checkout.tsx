@@ -19,9 +19,7 @@ const Checkout: React.FC<CheckoutProps> = ({ className }) => {
     new Date(Number(searchParams.get("startDate"))) ?? new Date();
   const endDate = new Date(Number(searchParams.get("endDate"))) ?? new Date();
   const dropoffLocation = searchParams.get("dropoffLocation");
-  const dropoffTime = searchParams.get("dropoffTime");
   const pickupLocation = searchParams.get("pickupLocation");
-  const pickupTime = searchParams.get("pickupTime");
   const fullName = searchParams.get("fullName");
   const phone = searchParams.get("phone");
 
@@ -33,9 +31,7 @@ const Checkout: React.FC<CheckoutProps> = ({ className }) => {
       !startDate ||
       !endDate ||
       !dropoffLocation ||
-      !dropoffTime ||
       !pickupLocation ||
-      !pickupTime ||
       !fullName ||
       !phone
     )
@@ -47,9 +43,7 @@ const Checkout: React.FC<CheckoutProps> = ({ className }) => {
     startDate,
     endDate,
     dropoffLocation,
-    dropoffTime,
     pickupLocation,
-    pickupTime,
     fullName,
     phone,
   ]);
@@ -61,8 +55,6 @@ const Checkout: React.FC<CheckoutProps> = ({ className }) => {
         <li>Car: {car?.name}</li>
         <li>Pickup Location: {pickupLocation}</li>
         <li>Dropoff Location: {dropoffLocation}</li>
-        <li>Pickup Time: {pickupTime}</li>
-        <li>Dropoff Time: {dropoffTime}</li>
         <li>Insurance: {isPremium ? "Full" : "Standart"}</li>
         <li>Days: {Math.ceil((endDate.getTime() - startDate.getTime()) / 86400000)}</li>
         <li>Start Date: {startDate.toLocaleDateString()}</li>

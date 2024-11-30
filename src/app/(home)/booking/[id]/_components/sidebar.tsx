@@ -1,9 +1,11 @@
 "use client";
 
+import { areas } from "@/app/(home)/_data/areas.data";
 import { useTotalPrice } from "@/hooks/useTotalPrice";
 import { Car } from "@/typing/interfaces";
 import clsx from "clsx";
 import dynamic from "next/dynamic";
+import Link from "next/link";
 import { notFound, useSearchParams } from "next/navigation";
 import { useEffect } from "react";
 
@@ -14,6 +16,14 @@ interface BookingSidebarProps {
 
 const BookingSidebar: React.FC<BookingSidebarProps> = ({ className, car }) => {
   const searchParams = useSearchParams();
+  const locationFrom =
+    Number(searchParams.get("locationFrom")) !== 0
+      ? Number(searchParams.get("locationFrom"))
+      : 1;
+  const locationTo =
+    Number(searchParams.get("locationTo")) !== 0
+      ? Number(searchParams.get("locationTo"))
+      : 1;
   const startDate =
     Number(searchParams.get("startDate")) !== 0
       ? Number(searchParams.get("startDate"))
@@ -37,7 +47,50 @@ const BookingSidebar: React.FC<BookingSidebarProps> = ({ className, car }) => {
   }, [startDate, endDate]);
 
   return (
-    <aside className={clsx("w-full h-full flex flex-col gap-6 sticky top-5", className)}>
+    <aside
+      className={clsx(
+        "w-full h-full flex flex-col gap-6 sticky top-5",
+        className
+      )}
+    >
+      <div className="flex flex-col w-full bg-white rounded-lg p-[20px_10px_20px_10px]">
+        <div className="w-full flex">
+          <div className="basis-1/6 flex items-center flex-col">
+            <div className="h-[60%] relative flex items-center flex-col translate-y-2">
+              <div className="absolute w-2 aspect-square rounded-full bg-tertiary-gray z-[2]" />
+              <hr className="h-full w-0.5 bg-tertiary-gray" />
+              <div className="absolute bottom-0 w-2 aspect-square rounded-full bg-tertiary-gray z-[2]" />
+            </div>
+          </div>
+          <div className="flex flex-col ">
+            <div className="mb-5">
+              <h4 className="font-bold text-2xl text-slate-700 mb-4">
+                Pick-up
+              </h4>
+              <p className="text-slate-800">
+                {new Date(startDate).toLocaleDateString()}
+                <br />
+                {areas.find((area) => area.id === Number(locationFrom))?.name}
+              </p>
+            </div>
+            <div>
+              <h4 className="font-bold text-2xl text-slate-700 mb-4">
+                Drop-off
+              </h4>
+              <p className="text-slate-800">
+                {new Date(endDate).toLocaleDateString()}
+                <br />
+                {areas.find((area) => area.id === Number(locationTo))?.name}
+              </p>
+            </div>
+          </div>
+        </div>
+        <button className="bg-brand-base rounded-md text-white mx-auto mt-5">
+          <Link className="px-4 py-2 block" href="/">
+            Change Date
+          </Link>
+        </button>
+      </div>
       <div className="w-full bg-white rounded-lg p-5">
         <h3 className="font-bold text-2xl text-slate-700">Price Details</h3>
         <div className="flex w-full items-start justify-between gap-3 mt-4">
@@ -49,7 +102,11 @@ const BookingSidebar: React.FC<BookingSidebarProps> = ({ className, car }) => {
                   style: "currency",
                   minimumFractionDigits: 0,
                   currency: "THB",
-                }).format(isPremium ? car.pricePerDay + 400 * daysQuantity : car.pricePerDay * daysQuantity);
+                }).format(
+                  isPremium
+                    ? car.pricePerDay + 400 * daysQuantity
+                    : car.pricePerDay * daysQuantity
+                );
               })()}
             </span>
             <p className="text-gray-500 text-sm">

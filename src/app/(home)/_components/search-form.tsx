@@ -2,17 +2,21 @@
 
 import { FC, useEffect } from "react";
 import DatePicker from "react-date-picker";
-
-import "react-date-picker/dist/DatePicker.css";
-import "react-calendar/dist/Calendar.css";
 import { Controller, useForm } from "react-hook-form";
 import { z } from "zod";
 import { zodResolver } from "@hookform/resolvers/zod";
 import dynamic from "next/dynamic";
 import { useSearchParams } from "next/navigation";
 import CalendarIcon from "@/components/icons/calendar-days-icon";
+import Select from "react-select";
+
+import "react-date-picker/dist/DatePicker.css";
+import "react-calendar/dist/Calendar.css";
+import { areas } from "../_data/areas.data";
 
 const searchFormSchema = z.object({
+  locationTo: z.number(),
+  locationFrom: z.number(),
   startDate: z.date(),
   endDate: z.date(),
 });
@@ -22,6 +26,8 @@ const SearchForm: FC = () => {
   const form = useForm<z.infer<typeof searchFormSchema>>({
     resolver: zodResolver(searchFormSchema),
     defaultValues: {
+      locationTo: 1,
+      locationFrom: 1,
       startDate: new Date(),
       endDate: searchParams.get("endDate")
         ? new Date(Number(searchParams.get("endDate")))
@@ -31,6 +37,8 @@ const SearchForm: FC = () => {
 
   useEffect(() => {
     form.reset({
+      locationTo: Number(searchParams.get("locationTo")) || 1,
+      locationFrom: Number(searchParams.get("locationFrom")) || 1,
       startDate: searchParams.get("startDate")
         ? new Date(Number(searchParams.get("startDate")))
         : new Date(),
@@ -52,6 +60,8 @@ const SearchForm: FC = () => {
 
   const submitHandler = async (values: z.infer<typeof searchFormSchema>) => {
     const url = new URL(window.location.href);
+    url.searchParams.set("locationTo", String(values.locationTo));
+    url.searchParams.set("locationFrom", String(values.locationFrom));
     url.searchParams.set("startDate", String(values.startDate.getTime()));
     url.searchParams.set("endDate", String(values.endDate.getTime()));
     window.history.pushState({}, "", url.toString());
@@ -63,6 +73,35 @@ const SearchForm: FC = () => {
         onSubmit={form.handleSubmit(submitHandler)}
         className="flex items-end justify-between gap-2 max-md:grid-cols-2 max-md:relative max-md:mb-20 max-md:gap-y-10 max-[450px]:flex-col"
       >
+        <div className="w-full h-full">
+          <p className="text-sm mb-2 text-gray-500">Pick-up Location</p>
+          <Select
+            className="w-full h-[50px]"
+            classNamePrefix="react-select"
+            placeholder="Pick-up location"
+            options={areas.map((area) => ({
+              label: area.name,
+              value: area.id,
+            }))}
+            theme={(theme) => ({
+              ...theme,
+              colors: {
+                ...theme.colors,
+                primary: "var(--brand-base)",
+              },
+              borderRadius: 4,
+            })}
+            onChange={(value) =>
+              form.setValue("locationFrom", value?.value ?? 0)
+            }
+            value={{
+              label: areas.find(
+                (area) => area.id === form.watch("locationFrom")
+              )?.name,
+              value: form.watch("locationFrom"),
+            }}
+          />
+        </div>
         <div className="w-full h-full">
           <p className="text-sm mb-2 text-gray-500">Pick-up Date</p>
           <Controller
@@ -82,6 +121,32 @@ const SearchForm: FC = () => {
                 value={field.value}
               />
             )}
+          />
+        </div>
+        <div className="w-full h-full">
+          <p className="text-sm mb-2 text-gray-500">Drop-off Location</p>
+          <Select
+            classNamePrefix="react-select"
+            className="w-full h-[50px]"
+            placeholder="Drop-off location"
+            options={areas.map((area) => ({
+              label: area.name,
+              value: area.id,
+            }))}
+            theme={(theme) => ({
+              ...theme,
+              colors: {
+                ...theme.colors,
+                primary: "var(--brand-base)",
+              },
+              borderRadius: 4,
+            })}
+            onChange={(value) => form.setValue("locationTo", value?.value || 0)}
+            value={{
+              label: areas.find((area) => area.id === form.watch("locationTo"))
+                ?.name,
+              value: form.watch("locationTo"),
+            }}
           />
         </div>
         <div className="w-full h-full">

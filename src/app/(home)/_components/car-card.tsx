@@ -13,7 +13,7 @@ import { useSearchParams } from "next/navigation";
 import CalendarIcon from "@/components/icons/calendar-days-icon";
 import FuelIcon from "@/components/icons/fuel-icon";
 import clsx from "clsx";
-import CheckIcon from "@/components/icons/check";
+import SnowflakeIcon from "@/components/icons/snowflake";
 
 const CarCard: FC<{ car: Car; className?: string }> = ({ car, className }) => {
   const [isPremium, setIsPremium] = useState<boolean>(false);
@@ -61,7 +61,7 @@ const CarCard: FC<{ car: Car; className?: string }> = ({ car, className }) => {
               </Link>
             </h3>
           </div>
-          <div className="mt-6 gap-6 flex flex-wrap max-xl:grid max-xl:grid-cols-2 max-xl:gap-x-10 max-md:items-center max-md:mx-auto text-nowrap max-[375px]:gap-x-0">
+          <div className="mt-6 grid grid-cols-2 gap-2 max-md:mx-auto">
             <span className="flex items-center gap-1">
               <TransmissionIcon className="w-6 h-6" /> {car.transmissionType}
             </span>
@@ -78,7 +78,7 @@ const CarCard: FC<{ car: Car; className?: string }> = ({ car, className }) => {
               <EngineIcon className="w-6 h-6" /> {car.engineCapacity}L
             </span>
             <span className="flex items-center gap-1">
-              <CheckIcon className="w-6 h-6" />A / C
+            <SnowflakeIcon className="w-6 h-6" />A / C
             </span>
           </div>
         </div>
