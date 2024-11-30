@@ -31,37 +31,39 @@ const CarCard: React.FC<CarCardProps> = ({ className, car }) => {
         </h3>
       </header>
       <main className="flex items-start w-full gap-24 max-md:gap-8 max-xl:gap-5 max-md:flex-col max-md:items-center max-md:text-center">
-        <div className="flex flex-col items-start max-md:items-center mt-8">
+        <div className="flex flex-col w-2/3 max-sm:w-full items-start max-md:items-center mt-8">
           <Image
             src={car.imageUrl}
             alt={`${car.name} Image`}
             width={250}
             height={250}
           />
-          <ul className="flex items-center justify-between gap-4">
+          <ul className="grid grid-cols-2 gap-4 gap-x-6 place-items-start [&>li_svg]:max-[380px]:w-6 max-[380px]:gap-x-3 [&>li]:max-[380px]:gap-x-1">
             <li className="flex items-center gap-3 text-lg">
               <SeatIcon className="w-7 h-7" />
               {car.seatsQuantity}
             </li>
-            <li className="flex items-center gap-3 text-lg">
+            <li className="flex items-center gap-3 text-lg max-[380px]:justify-self-end">
               <CalendarIcon className="w-7 h-7" /> {car.year}
             </li>
-            <li className="flex items-center gap-3 text-lg">
+            <li className="flex items-center gap-3 text-lg self-end">
               <EngineIcon className="w-7 h-7" /> {car.engineCapacity}L
             </li>
-          </ul>
-          <div className="flex items-center gap-8 max-[400px]:flex-col max-[400px]:gap-2">
-            <div className="flex items-center gap-4 text-lg mt-4">
+            <li className="flex items-center gap-3 text-lg mt-4 max-[380px]:justify-self-end">
               <TransmissionIcon className="w-7 h-7" />
               {car.transmissionType}
-            </div>
-            <div className="flex items-center gap-4 text-lg mt-4 text-nowrap">
+            </li>
+            <li className="flex items-center gap-3 text-lg mt-4 text-nowrap">
               <FuelIcon className="w-7 h-7" />
               {car.fuelType}
-            </div>
-          </div>
+            </li>
+            <li className="flex items-center gap-3 text-lg mt-4 max-[380px]:justify-self-end">
+              <CheckIcon className="w-7 h-7 [&>circle]:stroke-black [&>rect]:stroke-black" />
+              A/C
+            </li>
+          </ul>
         </div>
-        <div className="flex flex-col items-start my-auto">
+        <div className="flex flex-col items-start my-auto w-1/2 max-sm:w-full">
           <h4 className="text-lg font-bold text-slate-700">Rental includes</h4>
           <div className="grid grid-cols-2 grid-rows-3 mt-3 gap-x-24 gap-y-3 max-[350px]:text-sm max-2xl:grid-cols-1">
             <div className="flex items-center gap-3 text-base-black-secondary">

@@ -5,10 +5,13 @@ import { useBookCar } from "@/hooks/useTelegram";
 import { useTotalPrice } from "@/hooks/useTotalPrice";
 import { Car } from "@/typing/interfaces";
 import clsx from "clsx";
+import dynamic from "next/dynamic";
+import Link from "next/link";
 import { useRouter, useSearchParams } from "next/navigation";
-import { useEffect, useState } from "react";
+import { useEffect } from "react";
 import { useForm } from "react-hook-form";
 import toast from "react-hot-toast";
+import Select from "react-select";
 
 interface BookCarProps {
   className?: string;
@@ -25,6 +28,33 @@ interface Form {
 }
 
 const BookCar: React.FC<BookCarProps> = ({ className, car }) => {
+  const timeOptions: { label: string; value: string }[] = [
+    { label: "00:00", value: "00:00" },
+    { label: "1:00", value: "1:00" },
+    { label: "2:00", value: "2:00" },
+    { label: "3:00", value: "3:00" },
+    { label: "4:00", value: "4:00" },
+    { label: "5:00", value: "5:00" },
+    { label: "6:00", value: "6:00" },
+    { label: "7:00", value: "7:00" },
+    { label: "8:00", value: "8:00" },
+    { label: "9:00", value: "9:00" },
+    { label: "10:00", value: "10:00" },
+    { label: "11:00", value: "11:00" },
+    { label: "12:00", value: "12:00" },
+    { label: "13:00", value: "13:00" },
+    { label: "14:00", value: "14:00" },
+    { label: "15:00", value: "15:00" },
+    { label: "16:00", value: "16:00" },
+    { label: "17:00", value: "17:00" },
+    { label: "18:00", value: "18:00" },
+    { label: "19:00", value: "19:00" },
+    { label: "20:00", value: "20:00" },
+    { label: "21:00", value: "21:00" },
+    { label: "22:00", value: "22:00" },
+    { label: "23:00", value: "23:00" },
+  ];
+
   const searchParams = useSearchParams();
   const startDate =
     Number(searchParams.get("startDate")) !== 0
@@ -44,12 +74,14 @@ const BookCar: React.FC<BookCarProps> = ({ className, car }) => {
 
   const { push } = useRouter();
 
-  const {
-    mutateAsync: createBooking,
-    isPending,
-    isSuccess,
-  } = useBookCar();
-  const { register, handleSubmit } = useForm<Form>({ shouldFocusError: true });
+  const { mutateAsync: createBooking, isPending, isSuccess } = useBookCar();
+  const { register, handleSubmit, setValue, watch } = useForm<Form>({
+    shouldFocusError: true,
+    defaultValues: {
+      dropoffTime: "10:00",
+      pickupTime: "10:00",
+    },
+  });
 
   const submitHandler = async ({
     fullName,
@@ -83,7 +115,6 @@ const BookCar: React.FC<BookCarProps> = ({ className, car }) => {
         } ฿\nInsurance: ${
           isPremium ? "Full" : "Standart"
         }\n${fullName} ${phone}\n`
-        
       );
       push(
         `/checkout?carId=${car.id}&isPremium=${isPremium}&startDate=${startDate}&endDate=${endDate}&dropoffLocation=${dropoffLocation}&dropoffTime=${dropoffTime}&pickupLocation=${pickupLocation}&pickupTime=${pickupTime}&fullName=${fullName}&phone=${phone}`
@@ -102,13 +133,18 @@ const BookCar: React.FC<BookCarProps> = ({ className, car }) => {
   return (
     <div
       className={clsx(
-        "bg-white rounded-lg flex flex-col items-start p-5",
+        "bg-white rounded-lg flex flex-col items-start p-5 relative",
         className
       )}
     >
       <h2 className="text-slate-700 text-2xl font-bold text-center mx-auto">
         User Information
       </h2>
+      <button className="bg-brand-base rounded-md text-white absolute right-5 top-5 max-sm:static max-sm:mx-auto max-sm:mt-5">
+        <Link className="px-4 py-2 block" href="/">
+          Change Date
+        </Link>
+      </button>
       <form
         className="mt-10 w-full grid grid-cols-2 flex-col gap-5 relative pb-40 max-sm:grid-cols-1 max-sm:pb-0"
         onSubmit={handleSubmit(submitHandler)}
@@ -130,11 +166,25 @@ const BookCar: React.FC<BookCarProps> = ({ className, car }) => {
           <label htmlFor="pickup-time" className="text-lg font-medium">
             Pick-up Time
           </label>
-          <input
+          <Select
             id="pickup-time"
-            type="time"
-            {...register("pickupTime")}
-            className="w-full h-[50px] border-[1px] rounded-sm pl-2"
+            defaultValue={{ label: "10:00", value: "10:00" }}
+            onChange={(value) =>
+              setValue("pickupTime", value?.value ?? "10:00")
+            }
+            value={{ label: watch("pickupTime"), value: watch("pickupTime") }}
+            classNamePrefix="react-select"
+            placeholder="Pick-up Time"
+            options={timeOptions}
+            theme={(theme) => ({
+              ...theme,
+              colors: {
+                ...theme.colors,
+                primary: "var(--brand-base)",
+              },
+              borderRadius: 4,
+            })}
+            className="w-full h-[50px] rounded-sm"
           />
         </div>
         <div className="flex flex-col items-start gap-2">
@@ -154,11 +204,25 @@ const BookCar: React.FC<BookCarProps> = ({ className, car }) => {
           <label htmlFor="dropoff-time" className="text-lg font-medium">
             Drop-off Time
           </label>
-          <input
+          <Select
             id="dropoff-time"
-            type="time"
-            {...register("dropoffTime")}
-            className="w-full h-[50px] border-[1px] rounded-sm pl-2"
+            defaultValue={{ label: "10:00", value: "10:00" }}
+            onChange={(value) =>
+              setValue("dropoffTime", value?.value ?? "10:00")
+            }
+            value={{ label: watch("dropoffTime"), value: watch("dropoffTime") }}
+            classNamePrefix="react-select"
+            placeholder="Drop-off Time"
+            options={timeOptions}
+            theme={(theme) => ({
+              ...theme,
+              colors: {
+                ...theme.colors,
+                primary: "var(--brand-base)",
+              },
+              borderRadius: 4,
+            })}
+            className="w-full h-[50px] rounded-sm"
           />
         </div>
         <div className="flex flex-col items-start gap-2">
@@ -204,4 +268,4 @@ const BookCar: React.FC<BookCarProps> = ({ className, car }) => {
   );
 };
 
-export default BookCar;
+export default dynamic(() => Promise.resolve(BookCar), { ssr: false });
