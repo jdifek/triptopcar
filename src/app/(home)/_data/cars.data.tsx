@@ -90,7 +90,6 @@ export const cars: Car[] = [
         review:
           "We were thrilled with the Chevrolet Captiva! It's spacious, perfect for family trips around Phuket. It glides smoothly over bumpy roads, and we enjoyed traveling comfortably on both beaches and mountain roads. I definitely recommend it for rental.",
         rating: 5,
-        phone: "+1 234 5678",
       },
     ],
   },
