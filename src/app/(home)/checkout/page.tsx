@@ -1,11 +1,14 @@
-import Checkout from './checkout'
+import { Suspense } from "react";
+import Checkout from "./checkout";
 
 const CheckoutPage: React.FC = () => {
-    return (
-        <div>
-            <Checkout />
-        </div>
-    );
+  return (
+    <div>
+      <Suspense>
+        <Checkout />
+      </Suspense>
+    </div>
+  );
 };
 
 export default CheckoutPage;
