@@ -20,7 +20,6 @@ export const cars: Car[] = [
         review:
           "The Toyota Fortuner is a gem for traveling around Phuket! We rented this SUV for a week, and it handled every road perfectly—from beaches to mountain trails. The cabin is very comfortable, and the engine has enough power for any conditions.",
         rating: 5,
-        phone: "+1 234 5678",
       },
       {
         id: 2,
@@ -28,7 +27,6 @@ export const cars: Car[] = [
         review:
           "We were thrilled with the Toyota Fortuner! It's spacious, perfect for family trips around Phuket. It glides smoothly over bumpy roads, and we enjoyed traveling comfortably on both beaches and mountain roads. I definitely recommend it for rental.",
         rating: 5,
-        phone: "+1 234 5678",
       },
     ],
   },
@@ -51,7 +49,6 @@ export const cars: Car[] = [
         review:
           "The Toyota Yaris Ativ is a gem for traveling around Phuket! We rented this hatchback for a week, and it handled every road perfectly—from beaches to mountain trails. The cabin is very comfortable, and the engine has enough power for any conditions.",
         rating: 4,
-        phone: "+1 234 5678",
       },
       {
         id: 2,
@@ -59,7 +56,6 @@ export const cars: Car[] = [
         review:
           "We were thrilled with the Toyota Yaris Ativ! It's spacious, perfect for family trips around Phuket. It glides smoothly over bumpy roads, and we enjoyed traveling comfortably on both beaches and mountain roads. I definitely recommend it for rental.",
         rating: 5,
-        phone: "+1 234 5678",
       },
     ],
   },
@@ -82,7 +78,6 @@ export const cars: Car[] = [
         review:
           "The Chevrolet Captiva is a gem for traveling around Phuket! We rented this SUV for a week, and it handled every road perfectly—from beaches to mountain trails. The cabin is very comfortable, and the engine has enough power for any conditions.",
         rating: 5,
-        phone: "+1 234 5678",
       },
       {
         id: 2,

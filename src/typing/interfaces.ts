@@ -22,7 +22,6 @@ export interface Car {
 export interface Review {
   id: number;
   name: string;
-  phone: string;
   review: string;
   rating: 0 | 1 | 2 | 3 | 4 | 5;
 }
