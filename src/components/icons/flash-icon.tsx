@@ -16,4 +16,5 @@ const FlashIcon = ({ className }: { className?: string }) => (
 		></path>
 	</svg>
 );
+
 export default FlashIcon;
