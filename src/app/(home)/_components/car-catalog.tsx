@@ -111,7 +111,7 @@ const CarCatalog: FC = () => {
         />
         <span>{carsForRender.length} cars found</span>
       </div>
-      <div className="space-y-4 h-full flex flex-col w-full gap-14">
+      <div className="space-y-4 h-full flex flex-col w-full">
         {carsForRender.map((car) => (
           <CarCard key={car.id} car={car} className="bg-white" />
         ))}
