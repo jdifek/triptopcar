@@ -3,11 +3,11 @@ import { Toaster } from "react-hot-toast";
 
 export async function generateMetadata(): Promise<Metadata> {
   return {
-    title: "Car rental in Phuket at the lowest prices from owners",
-    description: "Honest. Transparent. No hidden fees.",
+    title: "Best car rental conditions in Phuket. Only we have full insurance for all cars without deductible, deposit and hidden commissions.",
+    description: "Book a car and get the best prices and rental conditions on the whole island of Phuket. Call now: +66659769300",
     openGraph: {
-      title: "Car rental in Phuket at the lowest prices from owners",
-      description: "Honest. Transparent. No hidden fees.",
+      title: "Best car rental conditions in Phuket. Only we have full insurance for all cars without deductible, deposit and hidden commissions.",
+      description: "Book a car and get the best prices and rental conditions on the whole island of Phuket. Call now: +66659769300",
     },
   };
 }
