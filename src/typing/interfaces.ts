@@ -1,3 +1,5 @@
+import { ReactElement } from "react";
+
 export interface Area {
   id: number;
   name: string;
@@ -29,6 +31,6 @@ export interface Review {
 export interface CarBodyType {
   id: number;
   name: "Sedan" | "Hatchback" | "SUV" | "Van" | "Pickup";
-  icon: JSX.Element;
+  icon: ReactElement;
   startPrice: number;
 }
