@@ -8,6 +8,7 @@ import dynamic from "next/dynamic";
 import Link from "next/link";
 import { notFound, useSearchParams } from "next/navigation";
 import { useEffect } from "react";
+import BookCar from "./bookCar";
 
 interface BookingSidebarProps {
   className?: string;
@@ -167,6 +168,8 @@ const BookingSidebar: React.FC<BookingSidebarProps> = ({ className, car }) => {
           </div>
         </div>
       </div>
+      <BookCar car={car} />
+
     </aside>
   );
 };

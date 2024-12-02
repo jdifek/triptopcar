@@ -24,11 +24,13 @@ const CarCard: React.FC<CarCardProps> = ({ className, car }) => {
       )}
     >
       <header className="grid grid-cols-2 max-md:mx-auto gap-3">
-        <h3>
+        <h3 className="flex items-center">
           <span className="bg-base-bg-blue mr-4 rounded-sm px-2 py-1.5 text-base">
-            {car.carBodyType.toUpperCase()}
+            HATCHBACK
           </span>
-          <span className="text-lg">{car.name}</span>
+          <span className="text-lg font-semibold whitespace-nowrap">
+            Toyota Yaris Ativ
+          </span>
         </h3>
       </header>
       <main className="flex items-start w-full gap-12 max-md:flex-col max-md:items-center max-md:text-center">
@@ -52,7 +54,7 @@ const CarCard: React.FC<CarCardProps> = ({ className, car }) => {
               <SnowflakeIcon className="w-7 h-7" />
               A/C
             </li>
-          
+
             <li className="flex items-center gap-3 text-lg">
               <SeatIcon className="w-7 h-7" />
               {car.seatsQuantity}

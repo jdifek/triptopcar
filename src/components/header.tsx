@@ -26,9 +26,7 @@ const Header: FC = () => {
     <header className="bg-brand-base px-8 py-4 pb-20 max-sm:px-2">
       <div className="container mx-auto flex items-end justify-between max-md:w-full">
         <div className="flex gap-10 items-end">
-          <Link href="/">
-            <Logo />
-          </Link>
+          <Link href="/" className="font-semibold text-white">TripTopCar </Link>
           {breadCrumbsPaths.some((breadcrumb) =>
             pathname.includes(breadcrumb)
           ) ? (
@@ -38,10 +36,7 @@ const Header: FC = () => {
               <ul className="flex flex-col items-center justify-center gap-8 sm:flex-row max-md:hidden">
                 {links.map((link, index) => (
                   <li key={index}>
-                    <Link
-                      href={link.path}
-                      className="font-semibold text-white"
-                    >
+                    <Link href={link.path} className="font-semibold text-white">
                       {link.name}
                     </Link>
                   </li>

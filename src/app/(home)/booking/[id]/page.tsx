@@ -21,7 +21,6 @@ export default async function BookingId({
           <main className="flex basis-3/4 max-xl:basis-2/3 flex-col gap-4 h-full">
             <CarCard car={car} />
             {/* <PhotoCar car={car} /> */}
-            <BookCar car={car} />
             <Reviews car={car} />
           </main>
           <BookingSidebar car={car} className="basis-1/4 max-xl:basis-1/3" />
