@@ -35,9 +35,12 @@ const BookingSidebar: React.FC<BookingSidebarProps> = ({ className, car }) => {
   const daysQuantity = Math.ceil((endDate - startDate) / (1000 * 60 * 60 * 24));
   const isPremium = searchParams.get("isPremium") === "true";
   const totalPrice = useTotalPrice({
-    car,
-    daysQuantity,
     isPremium,
+    daysQuantity,
+    car,
+    startDate: new Date(startDate),
+    endDate: new Date(endDate),
+    includeChildSeat: false,
   });
 
   useEffect(() => {

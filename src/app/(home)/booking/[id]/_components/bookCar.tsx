@@ -56,6 +56,9 @@ const BookCar: React.FC<BookCarProps> = ({ className, car }) => {
     car,
     daysQuantity,
     isPremium,
+    startDate: new Date(startDate),
+    endDate: new Date(endDate),
+    includeChildSeat: false,
   });
 
   const { push } = useRouter();
