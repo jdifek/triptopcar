@@ -37,11 +37,7 @@ const CarCard: FC<{ car: Car; className?: string }> = ({ car, className }) => {
           className
         )}
       >
-        <Link
-          href={getCarBookingLink()}
-          target="_blank"
-          className="row-span-3 relative w-[400px] max-md:w-full max-md:h-[300px] max-xl:w-full max-[500px]:h-[200px]"
-        >
+        <div className="row-span-3 relative w-[400px] max-md:w-full max-md:h-[300px] max-xl:w-full max-[500px]:h-[200px]">
           <Image
             src={car.imageUrl}
             alt={`${car.name} Image`}
@@ -49,7 +45,7 @@ const CarCard: FC<{ car: Car; className?: string }> = ({ car, className }) => {
             sizes="100%, 100%"
             fill
           />
-        </Link>
+        </div>
         <div className="flex flex-col items-start md:py-8">
           <div className="col-span-2 flex items-center justify-between max-md:mx-auto">
             <h3>
@@ -69,16 +65,16 @@ const CarCard: FC<{ car: Car; className?: string }> = ({ car, className }) => {
               <FuelIcon className="w-6 h-6" /> {car.fuelType}
             </span>
             <span className="flex items-center gap-1">
-              <SeatIcon className="w-6 h-6" /> {car.seatsQuantity}
+              <SnowflakeIcon className="w-6 h-6" />A / C
             </span>
             <span className="flex items-center gap-1">
-              <CalendarIcon className="w-6 h-6" /> {car.year}
+              <SeatIcon className="w-6 h-6" /> {car.seatsQuantity}
             </span>
             <span className="flex items-center gap-1">
               <EngineIcon className="w-6 h-6" /> {car.engineCapacity}L
             </span>
             <span className="flex items-center gap-1">
-              <SnowflakeIcon className="w-6 h-6" />A / C
+              <CalendarIcon className="w-6 h-6" /> {car.year}
             </span>
           </div>
         </div>

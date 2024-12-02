@@ -48,13 +48,12 @@ const CarCatalog: FC = () => {
     )
     .toSorted(sortHandlers[sort?.value || "price-high-to-low"]);
 
-  const toggleCarType = (type: CarBodyType) => {
-    setCarTypesFilter((prev) =>
-      prev.includes(type)
-        ? prev.filter((carType) => carType !== type)
-        : [...prev, type]
-    );
-  };
+    const toggleCarType = (type: CarBodyType) => {
+      setCarTypesFilter((prev) =>
+        prev.includes(type) ? [] : [type]  // Если тип уже выбран, сбрасываем фильтр, иначе выбираем новый тип
+      );
+    };
+    
 
   return (
     <>
@@ -62,7 +61,6 @@ const CarCatalog: FC = () => {
         <ul className="flex gap-10 max-xl:gap-2 font-bold uppercase *:grid *:basis-full *:place-items-center *:rounded-sm *:border *:border-tertiary-gray *:p-2 max-[600px]:grid max-[600px]:grid-cols-3 max-[600px]:px-20 max-[500px]:px-0 max-[425px]:grid-cols-3">
           <li
             className={clsx(
-              carTypesFilter.length === 0 && "bg-tertiary-gray",
               "max-xl:scale-90"
             )}
           >

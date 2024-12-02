@@ -57,44 +57,45 @@ const BookingSidebar: React.FC<BookingSidebarProps> = ({ className, car }) => {
         className
       )}
     >
-      <div className="flex flex-col w-full bg-white rounded-lg p-[20px_10px_20px_10px]">
-        <div className="w-full flex">
-          <div className="basis-1/6 flex items-center flex-col">
-            <div className="h-[60%] relative flex items-center flex-col translate-y-2">
-              <div className="absolute w-2 aspect-square rounded-full bg-tertiary-gray z-[2]" />
-              <hr className="h-full w-0.5 bg-tertiary-gray" />
-              <div className="absolute bottom-0 w-2 aspect-square rounded-full bg-tertiary-gray z-[2]" />
-            </div>
-          </div>
-          <div className="flex flex-col ">
-            <div className="mb-5">
-              <h4 className="font-bold text-2xl text-slate-700 mb-4">
-                Pick-up
-              </h4>
-              <p className="text-slate-800">
-                {new Date(startDate).toLocaleDateString()}
-                <br />
-                {areas.find((area) => area.id === Number(locationFrom))?.name}
-              </p>
-            </div>
-            <div>
-              <h4 className="font-bold text-2xl text-slate-700 mb-4">
-                Drop-off
-              </h4>
-              <p className="text-slate-800">
-                {new Date(endDate).toLocaleDateString()}
-                <br />
-                {areas.find((area) => area.id === Number(locationTo))?.name}
-              </p>
-            </div>
-          </div>
+     <div className="flex flex-col w-full bg-white rounded-lg p-[20px_10px_80px_10px] relative">
+  <div className="w-full flex flex-col justify-between h-full">
+    <div className="flex">
+      <div className="basis-1/6 flex items-center flex-col">
+        <div className="h-[60%] relative flex items-center flex-col translate-y-2">
+          <div className="absolute w-2 aspect-square rounded-full bg-tertiary-gray z-[2]" />
+          <hr className="h-full w-0.5 bg-tertiary-gray" />
+          <div className="absolute bottom-0 w-2 aspect-square rounded-full bg-tertiary-gray z-[2]" />
         </div>
-        <button className="bg-brand-base rounded-md text-white mx-auto mt-5">
-          <Link className="px-4 py-2 block" href="/">
-            Change Date
-          </Link>
-        </button>
       </div>
+      <div className="flex flex-col">
+        <div className="mb-5">
+          <h4 className="font-bold text-2xl text-slate-700 mb-4">Pick-up</h4>
+          <p className="text-slate-800">
+            {new Date(startDate).toLocaleDateString()}
+            <br />
+            {areas.find((area) => area.id === Number(locationFrom))?.name}
+          </p>
+        </div>
+        <div>
+          <h4 className="font-bold text-2xl text-slate-700 mb-4">Drop-off</h4>
+          <p className="text-slate-800">
+            {new Date(endDate).toLocaleDateString()}
+            <br />
+            {areas.find((area) => area.id === Number(locationTo))?.name}
+          </p>
+        </div>
+      </div>
+    </div>
+    {/* Вставляем ссылку внизу */}
+    <Link
+      href="/"
+      className="absolute bottom-4 right-4 bg-brand-base text-white rounded-md px-4 py-2"
+    >
+      Change Date
+    </Link>
+  </div>
+</div>
+
       <div className="w-full bg-white rounded-lg p-5">
         <h3 className="font-bold text-2xl text-slate-700">Price Details</h3>
         <div className="flex w-full items-start justify-between gap-3 mt-4">
