@@ -26,10 +26,10 @@ const CarCard: React.FC<CarCardProps> = ({ className, car }) => {
       <header className="grid grid-cols-2 max-md:mx-auto gap-3">
         <h3 className="flex items-center">
           <span className="bg-base-bg-blue mr-4 rounded-sm px-2 py-1.5 text-base">
-            HATCHBACK
+            {car.carBodyType}
           </span>
           <span className="text-lg font-semibold whitespace-nowrap">
-            Toyota Yaris Ativ
+            {car.name}
           </span>
         </h3>
       </header>
