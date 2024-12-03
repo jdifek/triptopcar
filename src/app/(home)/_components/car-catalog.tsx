@@ -36,7 +36,7 @@ const sortHandlers: Record<SortOption, SortHandler> = {
   "price-high-to-low": (a: Car, b: Car) => b.pricePerDay - a.pricePerDay,
 };
 
-const CarCatalog: FC = () => {
+const CarCatalog = () => {
   const [carTypesFilter, setCarTypesFilter] = useState<CarBodyType[]>([]);
   const [sort, setSort] = useState<Option | null>(defaultSort);
 
@@ -58,7 +58,7 @@ const CarCatalog: FC = () => {
   return (
     <>
       <div className="rounded-2xl bg-white p-3">
-        <ul className="flex gap-10 max-xl:gap-2 font-bold uppercase *:grid *:basis-full *:place-items-center *:rounded-sm *:border *:border-tertiary-gray *:p-2 max-[600px]:grid max-[600px]:grid-cols-3 max-[600px]:px-20 max-[500px]:px-0 max-[425px]:grid-cols-3">
+        <ul className="flex gap-8 max-xl:gap-2 font-bold uppercase *:grid *:basis-full *:place-items-center *:rounded-sm *:border *:border-tertiary-gray *:p-2 max-[600px]:grid max-[600px]:grid-cols-3 max-[600px]:px-20 max-[500px]:px-0 max-[425px]:grid-cols-3">
           <li
             className={clsx(
               "max-xl:scale-90"

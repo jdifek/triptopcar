@@ -13,6 +13,9 @@ const Checkout: React.FC<CheckoutProps> = ({ className }) => {
   const searchParams = useSearchParams();
 
   const carId = searchParams.get("carId");
+  const timeStart = searchParams.get("timeStart") ?? "10:00";
+  const timeEnd = searchParams.get("timeEnd") ?? "10:30";
+
   const car = cars.find((car) => car.id === Number(carId));
   const isPremium = searchParams.get("isPremium") === "true";
   const startDate =
@@ -33,9 +36,12 @@ const Checkout: React.FC<CheckoutProps> = ({ className }) => {
       !dropoffLocation ||
       !pickupLocation ||
       !fullName ||
-      !phone
-    )
+      !phone ||
+      !timeStart ||
+      !timeEnd
+    ) {
       notFound();
+    }
   }, [
     car,
     carId,
@@ -46,23 +52,58 @@ const Checkout: React.FC<CheckoutProps> = ({ className }) => {
     pickupLocation,
     fullName,
     phone,
+    timeStart,
+    timeEnd,
   ]);
 
   return (
-    <div className={clsx("bg-white py-5 min-h-[75vh]", className)}>
-      <h2 className="text-center text-3xl font-bold text-slate-700 mb-5">Checkout Details</h2>
-      <ul className="flex items-center flex-col list-disc gap-3 mx-auto">
-        <li>Car: {car?.name}</li>
-        <li>Pickup Location: {pickupLocation}</li>
-        <li>Dropoff Location: {dropoffLocation}</li>
-        <li>Insurance: {isPremium ? "Full" : "Standart"}</li>
-        <li>Days: {Math.ceil((endDate.getTime() - startDate.getTime()) / 86400000)}</li>
-        <li>Start Date: {startDate.toLocaleDateString()}</li>
-        <li>End Date: {endDate.toLocaleDateString()}</li>
-        <li>Full Name: {fullName}</li>
-        <li>Phone: {phone}</li>
-      </ul>
-      <p className="text-center mt-10">Await for confirmation. Thanks for using our service!</p>
+    <div className="bg-[#f4f7fa] min-h-[60vh] flex items-center justify-center flex-col gap-8 m-8">
+      <div
+        className={clsx(
+          "bg-white py-5 px-8 rounded-lg shadow-lg w-full max-w-3xl",
+          className
+        )}
+      >
+        <h2 className=" text-3xl font-bold text-slate-700 mb-5">
+          Checkout Details
+        </h2>
+        <ul className="flex flex-col list-disc gap-3 mx-auto ml-[1rem]">
+          <li>Car: {car?.name}</li>
+          <li>Pickup Location: {pickupLocation}</li>
+          <li>Dropoff Location: {dropoffLocation}</li>
+          <li>Insurance: {isPremium ? "Full" : "Standard"}</li>
+          <li>
+            Days:{" "}
+            {Math.ceil((endDate.getTime() - startDate.getTime()) / 86400000)}
+          </li>
+          <li>Start Date: {startDate.toLocaleDateString()}</li>
+          <li>Start Time: {timeStart}</li> {/* Добавлено */}
+          <li>End Date: {endDate.toLocaleDateString()}</li>
+          <li>End Time: {timeEnd}</li> {/* Добавлено */}
+          <li>Full Name: {fullName}</li>
+          <li>Phone: {phone}</li>
+        </ul>
+
+        <p className="mt-10">
+          Await confirmation. Thanks for using our service!
+        </p>
+      </div>
+      <div
+        className={clsx(
+          "bg-white py-5 px-8 rounded-lg shadow-lg w-full max-w-3xl",
+          className
+        )}
+      >
+        <h2 className=" text-3xl font-bold text-slate-700 mb-5">
+          Useful information
+        </h2>
+        <p>
+          Lorem ipsum dolor sit amet consectetur adipisicing elit. Doloremque
+          nobis blanditiis ullam animi earum nesciunt veniam, perspiciatis
+          laborum consectetur vitae nihil reprehenderit enim est tempore
+          perferendis temporibus nemo culpa cumque.
+        </p>
+      </div>
     </div>
   );
 };
