@@ -26,13 +26,13 @@ const Footer = () => {
             <h2 className="text-xl font-bold text-slate-700">About Us</h2>
             <ul className="flex flex-col gap-2">
               <li className="text-gray-500">
-                <Link href="#">Mission</Link>
+                <Link href="/mission">Mission</Link>
               </li>
               <li className="text-gray-500">
-                <Link href="#">Who we are</Link>
+                <Link href="/who-we-are">Who we are</Link>
               </li>
               <li className="text-gray-500">
-                <Link href="#">What are we for</Link>
+                <Link href="/what-are-we-for">What are we for</Link>
               </li>
             </ul>
           </div>
@@ -40,10 +40,10 @@ const Footer = () => {
             <h2 className="text-xl font-bold text-slate-700">Info</h2>
             <ul className="flex flex-col gap-2">
               <li className="text-gray-500">
-                <Link href="#">Routes</Link>
+                <Link href="/routes">Routes</Link>
               </li>
               <li className="text-gray-500">
-                <Link href="#">Blog</Link>
+                <Link href="/blog">Blog</Link>
               </li>
             </ul>
           </div>
@@ -51,10 +51,10 @@ const Footer = () => {
             <h2 className="text-xl font-bold text-slate-700">Conditions</h2>
             <ul className="flex flex-col gap-2">
               <li className="text-gray-500">
-                <Link href="#">Rental Conditions</Link>
+                <Link href="/rental-conditions">Rental Conditions</Link>
               </li>
               <li className="text-gray-500">
-                <Link href="#">Pay</Link>
+                <Link href="/pay">Pay</Link>
               </li>
             </ul>
           </div>
