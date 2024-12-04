@@ -138,7 +138,7 @@ const SearchForm: FC = () => {
               {" "}
               <select
                 aria-label="End time"
-                className="_select_gfr0g_161"
+                className="_select_gfr0g_161 react-date-picker__wrapper"
                 name="endTime"
                 onChange={(e) => form.setValue("startTime", e.target.value)}
                 value={form.watch("startTime")} // Это значение будет "10:00" по умолчанию
@@ -241,7 +241,7 @@ const SearchForm: FC = () => {
               onChange={(date) => form.setValue("endDate", date as Date)}
               value={form.watch("endDate")}
             />{" "}
-            <div className="_select-wrapper_gfr0g_161">
+            <div className="_select-wrapper_gfr0g_161 react-date-picker__wrapper">
               <select
                 aria-label="End time"
                 className="_select_gfr0g_161"
