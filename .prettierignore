@@ -1,0 +1,7 @@
+# Ignore artifacts:
+.next
+public
+.husky
+.prettierignore
+package-lock.json
+yarn.lock

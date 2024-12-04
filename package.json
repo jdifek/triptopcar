@@ -6,7 +6,8 @@
     "dev": "next dev --turbopack",
     "build": "next build",
     "start": "next start",
-    "lint": "next lint"
+    "lint": "next lint",
+    "cs:fix": "prettier --write ./src/**/*.{ts,css,tsx}"
   },
   "dependencies": {
     "@hookform/resolvers": "^3.9.1",
@@ -15,9 +16,9 @@
     "clsx": "^2.1.1",
     "date-fns": "^4.1.0",
     "next": "15.0.3",
-    "react": "^18.3.1",
+    "react": "18.3.1",
     "react-date-picker": "^11.0.0",
-    "react-dom": "^18.3.1",
+    "react-dom": "18.3.1",
     "react-hook-form": "^7.53.2",
     "react-hot-toast": "^2.4.1",
     "react-select": "^5.8.3",
@@ -29,6 +30,7 @@
     "@types/react": "^18",
     "@types/react-dom": "^18",
     "postcss": "^8",
+    "prettier": "^3.4.1",
     "tailwindcss": "^3.4.1",
     "typescript": "^5"
   }
