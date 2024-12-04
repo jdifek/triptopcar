@@ -7,7 +7,7 @@ export async function generateMetadata(): Promise<Metadata> {
     description: "Book a car and get the best prices and rental conditions on the whole island of Phuket. Call now: +66659769300",
     openGraph: {
       title: "Best car rental conditions in Phuket. Only we have full insurance for all cars without deductible, deposit and hidden commissions.",
-      description: "Book a car and get the best prices and rental conditions on the whole island of Phuket. Call now: +66659769300",
+      description: "Book a car and get the best prices and rental conditions on the whole island of Phuket.",
     },
   };
 }
