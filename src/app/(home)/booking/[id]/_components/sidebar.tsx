@@ -59,8 +59,6 @@ const BookingSidebar: React.FC<BookingSidebarProps> = ({ className, car }) => {
     });
   }, [car]);
 
-
-  
   useEffect(() => {
     if (!(startDate.getTime() + 1) || !(endDate.getTime() + 1)) {
       notFound();
