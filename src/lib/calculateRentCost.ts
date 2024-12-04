@@ -163,16 +163,20 @@ export function calculateRentCost(startDate: Date, endDate: Date, dailyRate: num
     for (let d = new Date(startDate); d < endDate; d.setDate(d.getDate() + 1)) {
         const currentDate = new Date(d);
         const coefficient = getSeasonCoefficient(currentDate);
+        console.log(`Дата: ${currentDate.toLocaleDateString()} - Коэффициент: ${coefficient}`);
 
         totalCost += dailyRate * coefficient;
     }
 
     const durationCoefficient = getDurationCoefficient(differenceInDays(endDate, startDate));
+    console.log(`Коэффициент продолжительности: ${durationCoefficient}`);
 
     totalCost = roundUpToHundredThousand(totalCost * durationCoefficient);
 
     if (includeChildSeat) {
       const childSeatCost = calculateChildSeatPrice(startDate, endDate);
+      console.log(`Стоимость детского кресла: ${childSeatCost}`);
+
       totalCost += childSeatCost;
     }
 

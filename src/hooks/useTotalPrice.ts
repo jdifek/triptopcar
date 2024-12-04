@@ -29,6 +29,8 @@ export function useTotalPrice({
 
   // Премиальная страховка (опционально)
   const insuranceFee = isPremium ? 400 * daysQuantity : 0;
+  console.log(`Стоимость страховки: ${insuranceFee}`);
+
 
   // Прочие сборы
   const serviceFee = 500;
