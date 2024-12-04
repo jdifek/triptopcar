@@ -2,6 +2,7 @@ import SearchForm from "./_components/search-form";
 import CarCatalog from "./_components/car-catalog";
 import Link from "next/link";
 import Image from "next/image";
+import StillQuestions from "./_components/still-questions";
 
 export default async function HomePage() {
   return (
@@ -37,6 +38,7 @@ export default async function HomePage() {
         </aside>
         <main className="flex basis-3/4 max-xl:basis-2/3 flex-col gap-4 h-full max-lg:basis-full">
           <CarCatalog />
+          <StillQuestions />
         </main>
       </section>
     </>

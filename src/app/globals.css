@@ -46,7 +46,7 @@
     --chart-4: 43 74% 66%;
     --chart-5: 27 87% 67%;
 
-    --brand-base: #2346ff;
+    --brand-base: #3291ff;
     --brand-blue: #3264ff;
     --brand-secondary: #4978ce;
 
@@ -129,3 +129,7 @@
 .react-date-picker__button svg {
   @apply stroke-black/50;
 }
+.react-date-picker__inputGroup {
+    padding: 0 15px;
+}
+

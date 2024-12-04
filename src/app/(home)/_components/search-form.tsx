@@ -19,6 +19,8 @@ const searchFormSchema = z.object({
   locationFrom: z.number(),
   startDate: z.date(),
   endDate: z.date(),
+  startTime: z.string(),
+  endTime: z.string(),
 });
 
 const SearchForm: FC = () => {
@@ -32,6 +34,8 @@ const SearchForm: FC = () => {
       endDate: searchParams.get("endDate")
         ? new Date(Number(searchParams.get("endDate")))
         : new Date(new Date().getTime() + 3 * 24 * 60 * 60 * 1000),
+      startTime: "10:00",
+      endTime: "10:30",
     },
   });
 
@@ -45,6 +49,8 @@ const SearchForm: FC = () => {
       endDate: searchParams.get("endDate")
         ? new Date(Number(searchParams.get("endDate")))
         : new Date(new Date().getTime() + 3 * 24 * 60 * 60 * 1000),
+      startTime: searchParams.get("startTime") || "10:00", // Reset start time
+      endTime: searchParams.get("endTime") || "10:30", // Reset end time
     });
   }, [searchParams, form]);
 
@@ -64,6 +70,8 @@ const SearchForm: FC = () => {
     url.searchParams.set("locationFrom", String(values.locationFrom));
     url.searchParams.set("startDate", String(values.startDate.getTime()));
     url.searchParams.set("endDate", String(values.endDate.getTime()));
+    url.searchParams.set("startTime", values.startTime); // Set start time in URL
+    url.searchParams.set("endTime", values.endTime); // Set end time in URL
     window.history.pushState({}, "", url.toString());
   };
 
@@ -71,7 +79,7 @@ const SearchForm: FC = () => {
     <section className="container mx-auto -mt-6 rounded-2xl bg-white p-4 ">
       <form
         onSubmit={form.handleSubmit(submitHandler)}
-        className="flex items-end justify-between gap-2 max-md:grid-cols-2 max-md:relative max-md:mb-20 max-md:gap-y-10 max-[450px]:flex-col"
+        className="flex items-end justify-between gap-2 max-md:grid-cols-2 max-md:relative max-md:mb-20  max-[450px]:flex-col"
       >
         <div className="w-full h-full">
           <p className="text-sm mb-2 text-gray-500">Pick-up Location</p>
@@ -104,24 +112,89 @@ const SearchForm: FC = () => {
         </div>
         <div className="w-full h-full">
           <p className="text-sm mb-2 text-gray-500">Pick-up Date</p>
-          <Controller
-            name="startDate"
-            control={form.control}
-            render={({ field }) => (
-              <DatePicker
-                {...field}
-                calendarIcon={<CalendarIcon />}
-                className="w-full h-[50px]"
-                calendarProps={{
-                  minDate: new Date(),
-                }}
-                onChange={(date) =>
-                  form.setValue("startDate", date ? (date as Date) : new Date())
-                }
-                value={field.value}
-              />
-            )}
-          />
+          <div className="flex items-center  gap-3">
+            <Controller
+              name="startDate"
+              control={form.control}
+              render={({ field }) => (
+                <DatePicker
+                  {...field}
+                  calendarIcon={<CalendarIcon />}
+                  className="w-full h-[50px]"
+                  calendarProps={{
+                    minDate: new Date(),
+                  }}
+                  onChange={(date) =>
+                    form.setValue(
+                      "startDate",
+                      date ? (date as Date) : new Date()
+                    )
+                  }
+                  value={field.value}
+                />
+              )}
+            />
+            <div className="_select-wrapper_gfr0g_161">
+              {" "}
+              <select
+                aria-label="End time"
+                className="_select_gfr0g_161"
+                name="endTime"
+                onChange={(e) => form.setValue("startTime", e.target.value)}
+                value={form.watch("startTime")} // Это значение будет "10:00" по умолчанию
+                >
+                {" "}
+                <option value="00:00">00:00</option>
+                <option value="00:30">00:30</option>
+                <option value="01:00">01:00</option>
+                <option value="01:30">01:30</option>
+                <option value="02:00">02:00</option>
+                <option value="02:30">02:30</option>
+                <option value="03:00">03:00</option>
+                <option value="03:30">03:30</option>
+                <option value="04:00">04:00</option>
+                <option value="04:30">04:30</option>
+                <option value="05:00">05:00</option>
+                <option value="05:30">05:30</option>
+                <option value="06:00">06:00</option>
+                <option value="06:30">06:30</option>
+                <option value="07:00">07:00</option>
+                <option value="07:30">07:30</option>
+                <option value="08:00">08:00</option>
+                <option value="08:30">08:30</option>
+                <option value="09:00">09:00</option>
+                <option value="09:30">09:30</option>
+                <option value="10:00">10:00</option>
+                <option value="10:30">10:30</option>
+                <option value="11:00">11:00</option>
+                <option value="11:30">11:30</option>
+                <option value="12:00">12:00</option>
+                <option value="12:30">12:30</option>
+                <option value="13:00">13:00</option>
+                <option value="13:30">13:30</option>
+                <option value="14:00">14:00</option>
+                <option value="14:30">14:30</option>
+                <option value="15:00">15:00</option>
+                <option value="15:30">15:30</option>
+                <option value="16:00">16:00</option>
+                <option value="16:30">16:30</option>
+                <option value="17:00">17:00</option>
+                <option value="17:30">17:30</option>
+                <option value="18:00">18:00</option>
+                <option value="18:30">18:30</option>
+                <option value="19:00">19:00</option>
+                <option value="19:30">19:30</option>
+                <option value="20:00">20:00</option>
+                <option value="20:30">20:30</option>
+                <option value="21:00">21:00</option>
+                <option value="21:30">21:30</option>
+                <option value="22:00">22:00</option>
+                <option value="22:30">22:30</option>
+                <option value="23:00">23:00</option>
+                <option value="23:30">23:30</option>{" "}
+              </select>{" "}
+            </div>
+          </div>
         </div>
         <div className="w-full h-full">
           <p className="text-sm mb-2 text-gray-500">Drop-off Location</p>
@@ -151,22 +224,83 @@ const SearchForm: FC = () => {
         </div>
         <div className="w-full h-full">
           <p className="text-sm mb-2 text-gray-500">Drop-off Date</p>
-          <DatePicker
-            className="w-full h-[50px] [&_.react-date-picker\_\_clear-button]:hidden"
-            calendarIcon={<CalendarIcon />}
-            calendarProps={{
-              minDate: new Date(
-                (form.watch("startDate") ?? new Date()).getTime() +
-                  3 * 24 * 60 * 60 * 1000
-              ),
-              maxDate: new Date(
-                (form.watch("startDate") ?? new Date()).getTime() +
-                  61 * 24 * 60 * 60 * 1000
-              ),
-            }}
-            onChange={(date) => form.setValue("endDate", date as Date)}
-            value={form.watch("endDate")}
-          />
+          <div className="flex items-center  gap-3">
+            <DatePicker
+              className="w-full h-[50px] [&_.react-date-picker\_\_clear-button]:hidden"
+              calendarIcon={<CalendarIcon />}
+              calendarProps={{
+                minDate: new Date(
+                  (form.watch("startDate") ?? new Date()).getTime() +
+                    3 * 24 * 60 * 60 * 1000
+                ),
+                maxDate: new Date(
+                  (form.watch("startDate") ?? new Date()).getTime() +
+                    61 * 24 * 60 * 60 * 1000
+                ),
+              }}
+              onChange={(date) => form.setValue("endDate", date as Date)}
+              value={form.watch("endDate")}
+            />{" "}
+            <div className="_select-wrapper_gfr0g_161">
+              <select
+                aria-label="End time"
+                className="_select_gfr0g_161"
+                name="endTime"
+                onChange={(e) => form.setValue("endTime", e.target.value)}
+                value={form.watch("endTime")}
+              >
+                {" "}
+                <option value="00:00">00:00</option>
+                <option value="00:30">00:30</option>
+                <option value="01:00">01:00</option>
+                <option value="01:30">01:30</option>
+                <option value="02:00">02:00</option>
+                <option value="02:30">02:30</option>
+                <option value="03:00">03:00</option>
+                <option value="03:30">03:30</option>
+                <option value="04:00">04:00</option>
+                <option value="04:30">04:30</option>
+                <option value="05:00">05:00</option>
+                <option value="05:30">05:30</option>
+                <option value="06:00">06:00</option>
+                <option value="06:30">06:30</option>
+                <option value="07:00">07:00</option>
+                <option value="07:30">07:30</option>
+                <option value="08:00">08:00</option>
+                <option value="08:30">08:30</option>
+                <option value="09:00">09:00</option>
+                <option value="09:30">09:30</option>
+                <option value="10:00">10:00</option>
+                <option value="10:30">10:30</option>
+                <option value="11:00">11:00</option>
+                <option value="11:30">11:30</option>
+                <option value="12:00">12:00</option>
+                <option value="12:30">12:30</option>
+                <option value="13:00">13:00</option>
+                <option value="13:30">13:30</option>
+                <option value="14:00">14:00</option>
+                <option value="14:30">14:30</option>
+                <option value="15:00">15:00</option>
+                <option value="15:30">15:30</option>
+                <option value="16:00">16:00</option>
+                <option value="16:30">16:30</option>
+                <option value="17:00">17:00</option>
+                <option value="17:30">17:30</option>
+                <option value="18:00">18:00</option>
+                <option value="18:30">18:30</option>
+                <option value="19:00">19:00</option>
+                <option value="19:30">19:30</option>
+                <option value="20:00">20:00</option>
+                <option value="20:30">20:30</option>
+                <option value="21:00">21:00</option>
+                <option value="21:30">21:30</option>
+                <option value="22:00">22:00</option>
+                <option value="22:30">22:30</option>
+                <option value="23:00">23:00</option>
+                <option value="23:30">23:30</option>{" "}
+              </select>{" "}
+            </div>
+          </div>
         </div>
         <button
           type="submit"
@@ -176,7 +310,9 @@ const SearchForm: FC = () => {
           Search
         </button>
       </form>
-      <p className="text-sm mb-2 text-gray-500">Minimum rental period is three days</p>
+      <p className="text-sm mb-2 text-gray-500">
+        Minimum rental period is three days
+      </p>
     </section>
   );
 };

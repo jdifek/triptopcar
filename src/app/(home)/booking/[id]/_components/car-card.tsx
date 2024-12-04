@@ -24,11 +24,13 @@ const CarCard: React.FC<CarCardProps> = ({ className, car }) => {
       )}
     >
       <header className="grid grid-cols-2 max-md:mx-auto gap-3">
-        <h3>
+        <h3 className="flex items-center">
           <span className="bg-base-bg-blue mr-4 rounded-sm px-2 py-1.5 text-base">
-            {car.carBodyType.toUpperCase()}
+            {car.carBodyType}
           </span>
-          <span className="text-lg">{car.name}</span>
+          <span className="text-lg font-semibold whitespace-nowrap">
+            {car.name}
+          </span>
         </h3>
       </header>
       <main className="flex items-start w-full gap-12 max-md:flex-col max-md:items-center max-md:text-center">
@@ -40,16 +42,6 @@ const CarCard: React.FC<CarCardProps> = ({ className, car }) => {
             height={250}
           />
           <ul className="grid grid-cols-2 gap-4 gap-x-6 place-items-start [&>li_svg]:max-[380px]:w-6 max-[380px]:gap-x-3 [&>li]:max-[380px]:gap-x-1">
-            <li className="flex items-center gap-3 text-lg">
-              <SeatIcon className="w-7 h-7" />
-              {car.seatsQuantity}
-            </li>
-            <li className="flex items-center gap-3 text-lg max-[380px]:justify-self-end">
-              <CalendarIcon className="w-7 h-7" /> {car.year}
-            </li>
-            <li className="flex items-center gap-3 text-lg self-end">
-              <EngineIcon className="w-7 h-7" /> {car.engineCapacity}L
-            </li>
             <li className="flex items-center gap-3 text-lg mt-4 max-[380px]:justify-self-end">
               <TransmissionIcon className="w-7 h-7" />
               {car.transmissionType}
@@ -58,9 +50,20 @@ const CarCard: React.FC<CarCardProps> = ({ className, car }) => {
               <FuelIcon className="w-7 h-7" />
               {car.fuelType}
             </li>
-            <li className="flex items-center gap-3 text-lg mt-4 max-[380px]:justify-self-end">
+            <li className="flex items-center gap-3 text-lg max-[380px]:justify-self-end">
               <SnowflakeIcon className="w-7 h-7" />
               A/C
+            </li>
+
+            <li className="flex items-center gap-3 text-lg">
+              <SeatIcon className="w-7 h-7" />
+              {car.seatsQuantity}
+            </li>
+            <li className="flex items-center gap-3 text-lg self-end">
+              <EngineIcon className="w-7 h-7" /> {car.engineCapacity}L
+            </li>
+            <li className="flex items-center gap-3 text-lg max-[380px]:justify-self-end">
+              <CalendarIcon className="w-7 h-7" /> {car.year}
             </li>
           </ul>
         </div>
