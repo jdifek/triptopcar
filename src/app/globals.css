@@ -133,3 +133,9 @@
     padding: 0 15px;
 }
 
+
+select {
+    background: white; /* Белый фон */
+    appearance: none;
+    -webkit-appearance: none;
+  }

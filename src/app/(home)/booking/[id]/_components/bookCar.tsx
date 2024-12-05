@@ -29,7 +29,7 @@ interface Form {
 const BookCar: React.FC<BookCarProps> = ({ className, car }) => {
   const searchParams = useSearchParams();
   const timeStart = searchParams.get("timeStart") ?? "10:00";
-  const timeEnd = searchParams.get("timeEnd") ?? "10:30";
+  const timeEnd = searchParams.get("timeEnd") ?? "10:00";
   const locationFrom = areas.find(
     (area) =>
       area.id ===

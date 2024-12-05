@@ -24,7 +24,7 @@ const CarCard: FC<{ car: Car; className?: string }> = ({ car, className }) => {
   const locationTo = Number(params.get("locationTo")) ?? 1;
   const daysQuantity = Math.ceil((endDate - startDate) / (1000 * 60 * 60 * 24));
   const [timeStart, setTimeStart] = useState<string>(params.get("timeStart") ?? "10:00");
-  const [timeEnd, setTimeEnd] = useState<string>(params.get("timeEnd") ?? "10:30");
+  const [timeEnd, setTimeEnd] = useState<string>(params.get("timeEnd") ?? "10:00");
 
   const getCarBookingLink = useCallback(() => {
     return `/booking/${car.id}?startDate=${startDate}&endDate=${endDate}&timeStart=${timeStart}&timeEnd=${timeEnd}&isPremium=${isPremium}&locationFrom=${locationFrom}&locationTo=${locationTo}`;

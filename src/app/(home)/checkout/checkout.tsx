@@ -14,7 +14,7 @@ const Checkout: React.FC<CheckoutProps> = ({ className }) => {
 
   const carId = searchParams.get("carId");
   const timeStart = searchParams.get("timeStart") ?? "10:00";
-  const timeEnd = searchParams.get("timeEnd") ?? "10:30";
+  const timeEnd = searchParams.get("timeEnd") ?? "10:00";
 
   const car = cars.find((car) => car.id === Number(carId));
   const isPremium = searchParams.get("isPremium") === "true";
