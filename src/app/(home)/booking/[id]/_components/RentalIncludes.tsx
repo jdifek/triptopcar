@@ -8,7 +8,7 @@ const RentalIncludes = () => {
   const premium = params.get("isPremium") === "true"; // Проверяем строку 'true'
 
   return (
-    <div className="flex flex-col items-start my-auto w-full max-sm:w-full">
+    <div className="flex flex-col items-start mt-[1rem] w-full max-sm:w-full">
       <h4 className="text-xl font-bold text-slate-700">Rental includes</h4>
       {!premium ? (
         <ul className="list-disc text-slate-700 pl-5 font-medium mt-5 text-[16px]">
