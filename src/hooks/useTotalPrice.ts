@@ -36,7 +36,7 @@ export function useTotalPrice({
   const serviceFee = 500;
 
   // Итоговая стоимость
-  const totalPrice = baseRentalFee + insuranceFee + deposit + serviceFee;
+  const totalPrice = baseRentalFee + insuranceFee + serviceFee;
   console.log("Вызов useTotalPrice", { isPremium, daysQuantity, car, startDate, endDate, includeChildSeat });
   console.log("totalPrice", Math.round(totalPrice));
 
