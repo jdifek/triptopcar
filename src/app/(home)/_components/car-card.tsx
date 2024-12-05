@@ -73,18 +73,9 @@ const CarCard: FC<{ car: Car; className?: string }> = ({ car, className }) => {
             </span>
           </div>
         </div>
-      </div>
-      <div className="grid grid-cols-[1fr_1px_1fr] rounded-b-2xl mx-auto w-full pl-10 bg-white max-sm:grid-cols-1 max-sm:pl-0 max-sm:mx-auto border-t">
-        <StandartConditions isPremium={isPremium} setIsPremium={setIsPremium} />
-        <hr className="h-full w-full bg-tertiary-gray" />
-        <PremiumConditions
-          isChoosed={isPremium}
-          onCancel={() => setIsPremium(false)}
-          onChoose={() => setIsPremium(true)}
-        />
 
-        <div className="space-y-2 md:py-8 max-md:mb-4">
-          <p className="text-base-black-secondary flex items-center justify-start max-xl:justify-start gap-2 text-sm text-nowrap">
+        <div className="space-y-2 md:py-8 max-md:mb-4 flex flex-col items-end max-md:hidden sm:flex">
+        <p className="text-base-black-secondary flex items-center justify-end gap-2 text-sm text-nowrap">
             <span className="text-base-black text-2xl font-bold">
               {(() => {
                 return new Intl.NumberFormat("th-TH", {
@@ -96,7 +87,7 @@ const CarCard: FC<{ car: Car; className?: string }> = ({ car, className }) => {
             </span>
             <span>per day</span>
           </p>
-          <p className="text-base-black-secondary flex items-center justify-start max-xl:justify-start gap-2 text-sm text-nowrap -translate-y-2">
+          <p className="text-base-black-secondary flex items-center justify-end gap-2 text-sm text-nowrap -translate-y-2">
             <span>
               Total:{" "}
               {(() => {
@@ -115,7 +106,56 @@ const CarCard: FC<{ car: Car; className?: string }> = ({ car, className }) => {
           </p>
           <Link
             href={getCarBookingLink()}
-            className=" max-xl:m-[0_auto_0_0] flex w-min items-center rounded-lg bg-brand-base px-4 py-2 text-white"
+            className="flex w-min items-center rounded-lg bg-brand-base px-4 py-2 text-white ml-auto"
+          >
+            Book <span className="text-lg ml-2">{">"}</span>
+          </Link>
+        </div>
+      </div>
+      <div className="grid grid-cols-[1fr_1px_1fr] rounded-b-2xl mx-auto w-full pl-10 bg-white max-sm:grid-cols-1 max-sm:pl-0 max-sm:mx-auto border-t">
+        <StandartConditions isPremium={isPremium} setIsPremium={setIsPremium} />
+        <hr className="h-full w-full bg-tertiary-gray" />
+        <PremiumConditions
+          isChoosed={isPremium}
+          onCancel={() => setIsPremium(false)}
+          onChoose={() => setIsPremium(true)}
+        />
+
+        <div className=" pl-10 pr-10 max-md:flex sm:hidden gap-4 justify-between items-start space-y-2 md:py-8 max-md:mb-4">
+          <div className="flex flex-col">
+            <p className="text-base-black-secondary flex items-center justify-start max-xl:justify-start gap-2 text-sm text-nowrap">
+              <span className="text-base-black text-2xl font-bold">
+                {(() => {
+                  return new Intl.NumberFormat("th-TH", {
+                    style: "currency",
+                    currency: "THB",
+                    minimumFractionDigits: 0,
+                  }).format(isPremium ? (car.pricePerDay + 400) * 1 : car.pricePerDay * 1);
+                })()}
+              </span>
+              <span>per day</span>
+            </p>
+            <p className="text-base-black-secondary flex items-center justify-start max-xl:justify-start gap-2 text-sm text-nowrap -translate-y-2">
+              <span>
+                Total:{" "}
+                {(() => {
+                  return new Intl.NumberFormat("th-TH", {
+                    style: "currency",
+                    currency: "THB",
+                    minimumFractionDigits: 0,
+                  }).format(
+                    isPremium
+                      ? (car.pricePerDay + 400) * (daysQuantity !== 0 ? daysQuantity : 3)
+                      : car.pricePerDay * (daysQuantity !== 0 ? daysQuantity : 3),
+                  );
+                })()}{" "}
+                for {daysQuantity !== 0 ? daysQuantity : 3} days
+              </span>
+            </p>
+          </div>
+          <Link
+            href={getCarBookingLink()}
+            className="flex w-min items-center rounded-lg bg-brand-base px-4 py-2 text-white ml-auto"
           >
             Book <span className="text-lg ml-2">{">"}</span>
           </Link>
