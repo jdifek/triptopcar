@@ -77,239 +77,235 @@ const SearchForm: FC = () => {
 
   return (
     <section className="container mx-auto -mt-6 rounded-2xl bg-white p-4 ">
-      <form
-        onSubmit={form.handleSubmit(submitHandler)}
-        className="flex items-end justify-between gap-2 max-md:grid-cols-2 max-md:relative max-md:mb-20  max-[450px]:flex-col"
-      >
-        <div className="w-full h-full">
-          <p className="text-sm mb-2 text-gray-500">Pick-up Location</p>
-          <Select
-            className="w-full h-[50px]"
-            classNamePrefix="react-select"
-            placeholder="Pick-up location"
-            options={areas.map((area) => ({
-              label: area.name,
-              value: area.id,
-            }))}
-            theme={(theme) => ({
-              ...theme,
-              colors: {
-                ...theme.colors,
-                primary: "var(--brand-base)",
-              },
-              borderRadius: 4,
-            })}
-            onChange={(value) =>
-              form.setValue("locationFrom", value?.value ?? 0)
+    <form
+  onSubmit={form.handleSubmit(submitHandler)}
+  className="flex flex-wrap items-end justify-between gap-2 max-md:grid-cols-2 max-md:relative max-md:mb-20 max-[450px]:flex-col"
+>
+  <div className="w-full sm:w-auto">
+    <p className="text-sm mb-2 text-gray-500">Pick-up Location</p>
+    <Select
+      className="w-full sm:w-[250px] h-[50px]"
+      classNamePrefix="react-select"
+      placeholder="Pick-up location"
+      options={areas.map((area) => ({
+        label: area.name,
+        value: area.id,
+      }))}
+      theme={(theme) => ({
+        ...theme,
+        colors: {
+          ...theme.colors,
+          primary: "var(--brand-base)",
+        },
+        borderRadius: 4,
+      })}
+      onChange={(value) =>
+        form.setValue("locationFrom", value?.value ?? 0)
+      }
+      value={{
+        label: areas.find(
+          (area) => area.id === form.watch("locationFrom")
+        )?.name,
+        value: form.watch("locationFrom"),
+      }}
+    />
+  </div>
+  <div className="w-full sm:w-auto">
+    <p className="text-sm mb-2 text-gray-500">Pick-up Date</p>
+    <div className="flex items-center gap-3">
+      <Controller
+        name="startDate"
+        control={form.control}
+        render={({ field }) => (
+          <DatePicker
+            {...field}
+            calendarIcon={<CalendarIcon />}
+            className="w-full sm:w-[250px] h-[50px]"
+            calendarProps={{
+              minDate: new Date(),
+            }}
+            onChange={(date) =>
+              form.setValue("startDate", date ? (date as Date) : new Date())
             }
-            value={{
-              label: areas.find(
-                (area) => area.id === form.watch("locationFrom")
-              )?.name,
-              value: form.watch("locationFrom"),
-            }}
+            value={field.value}
           />
-        </div>
-        <div className="w-full h-full">
-          <p className="text-sm mb-2 text-gray-500">Pick-up Date</p>
-          <div className="flex items-center  gap-3">
-            <Controller
-              name="startDate"
-              control={form.control}
-              render={({ field }) => (
-                <DatePicker
-                  {...field}
-                  calendarIcon={<CalendarIcon />}
-                  className="w-full h-[50px]"
-                  calendarProps={{
-                    minDate: new Date(),
-                  }}
-                  onChange={(date) =>
-                    form.setValue(
-                      "startDate",
-                      date ? (date as Date) : new Date()
-                    )
-                  }
-                  value={field.value}
-                />
-              )}
-            />
-            <div className="_select-wrapper_gfr0g_161">
-              {" "}
-              <select
-                aria-label="End time"
-                className="_select_gfr0g_161 react-date-picker__wrapper"
-                name="endTime"
-                onChange={(e) => form.setValue("startTime", e.target.value)}
-                value={form.watch("startTime")} // Это значение будет "10:00" по умолчанию
-                >
-                {" "}
-                <option value="00:00">00:00</option>
-                <option value="00:30">00:30</option>
-                <option value="01:00">01:00</option>
-                <option value="01:30">01:30</option>
-                <option value="02:00">02:00</option>
-                <option value="02:30">02:30</option>
-                <option value="03:00">03:00</option>
-                <option value="03:30">03:30</option>
-                <option value="04:00">04:00</option>
-                <option value="04:30">04:30</option>
-                <option value="05:00">05:00</option>
-                <option value="05:30">05:30</option>
-                <option value="06:00">06:00</option>
-                <option value="06:30">06:30</option>
-                <option value="07:00">07:00</option>
-                <option value="07:30">07:30</option>
-                <option value="08:00">08:00</option>
-                <option value="08:30">08:30</option>
-                <option value="09:00">09:00</option>
-                <option value="09:30">09:30</option>
-                <option value="10:00">10:00</option>
-                <option value="10:30">10:30</option>
-                <option value="11:00">11:00</option>
-                <option value="11:30">11:30</option>
-                <option value="12:00">12:00</option>
-                <option value="12:30">12:30</option>
-                <option value="13:00">13:00</option>
-                <option value="13:30">13:30</option>
-                <option value="14:00">14:00</option>
-                <option value="14:30">14:30</option>
-                <option value="15:00">15:00</option>
-                <option value="15:30">15:30</option>
-                <option value="16:00">16:00</option>
-                <option value="16:30">16:30</option>
-                <option value="17:00">17:00</option>
-                <option value="17:30">17:30</option>
-                <option value="18:00">18:00</option>
-                <option value="18:30">18:30</option>
-                <option value="19:00">19:00</option>
-                <option value="19:30">19:30</option>
-                <option value="20:00">20:00</option>
-                <option value="20:30">20:30</option>
-                <option value="21:00">21:00</option>
-                <option value="21:30">21:30</option>
-                <option value="22:00">22:00</option>
-                <option value="22:30">22:30</option>
-                <option value="23:00">23:00</option>
-                <option value="23:30">23:30</option>{" "}
-              </select>{" "}
-            </div>
-          </div>
-        </div>
-        <div className="w-full h-full">
-          <p className="text-sm mb-2 text-gray-500">Drop-off Location</p>
-          <Select
-            classNamePrefix="react-select"
-            className="w-full h-[50px]"
-            placeholder="Drop-off location"
-            options={areas.map((area) => ({
-              label: area.name,
-              value: area.id,
-            }))}
-            theme={(theme) => ({
-              ...theme,
-              colors: {
-                ...theme.colors,
-                primary: "var(--brand-base)",
-              },
-              borderRadius: 4,
-            })}
-            onChange={(value) => form.setValue("locationTo", value?.value || 0)}
-            value={{
-              label: areas.find((area) => area.id === form.watch("locationTo"))
-                ?.name,
-              value: form.watch("locationTo"),
-            }}
-          />
-        </div>
-        <div className="w-full h-full">
-          <p className="text-sm mb-2 text-gray-500">Drop-off Date</p>
-          <div className="flex items-center  gap-3">
-            <DatePicker
-              className="w-full h-[50px] [&_.react-date-picker\_\_clear-button]:hidden"
-              calendarIcon={<CalendarIcon />}
-              calendarProps={{
-                minDate: new Date(
-                  (form.watch("startDate") ?? new Date()).getTime() +
-                    3 * 24 * 60 * 60 * 1000
-                ),
-                maxDate: new Date(
-                  (form.watch("startDate") ?? new Date()).getTime() +
-                    61 * 24 * 60 * 60 * 1000
-                ),
-              }}
-              onChange={(date) => form.setValue("endDate", date as Date)}
-              value={form.watch("endDate")}
-            />{" "}
-            <div className="_select-wrapper_gfr0g_161 react-date-picker__wrapper">
-              <select
-                aria-label="End time"
-                className="_select_gfr0g_161"
-                name="endTime"
-                onChange={(e) => form.setValue("endTime", e.target.value)}
-                value={form.watch("endTime")}
-              >
-                {" "}
-                <option value="00:00">00:00</option>
-                <option value="00:30">00:30</option>
-                <option value="01:00">01:00</option>
-                <option value="01:30">01:30</option>
-                <option value="02:00">02:00</option>
-                <option value="02:30">02:30</option>
-                <option value="03:00">03:00</option>
-                <option value="03:30">03:30</option>
-                <option value="04:00">04:00</option>
-                <option value="04:30">04:30</option>
-                <option value="05:00">05:00</option>
-                <option value="05:30">05:30</option>
-                <option value="06:00">06:00</option>
-                <option value="06:30">06:30</option>
-                <option value="07:00">07:00</option>
-                <option value="07:30">07:30</option>
-                <option value="08:00">08:00</option>
-                <option value="08:30">08:30</option>
-                <option value="09:00">09:00</option>
-                <option value="09:30">09:30</option>
-                <option value="10:00">10:00</option>
-                <option value="10:30">10:30</option>
-                <option value="11:00">11:00</option>
-                <option value="11:30">11:30</option>
-                <option value="12:00">12:00</option>
-                <option value="12:30">12:30</option>
-                <option value="13:00">13:00</option>
-                <option value="13:30">13:30</option>
-                <option value="14:00">14:00</option>
-                <option value="14:30">14:30</option>
-                <option value="15:00">15:00</option>
-                <option value="15:30">15:30</option>
-                <option value="16:00">16:00</option>
-                <option value="16:30">16:30</option>
-                <option value="17:00">17:00</option>
-                <option value="17:30">17:30</option>
-                <option value="18:00">18:00</option>
-                <option value="18:30">18:30</option>
-                <option value="19:00">19:00</option>
-                <option value="19:30">19:30</option>
-                <option value="20:00">20:00</option>
-                <option value="20:30">20:30</option>
-                <option value="21:00">21:00</option>
-                <option value="21:30">21:30</option>
-                <option value="22:00">22:00</option>
-                <option value="22:30">22:30</option>
-                <option value="23:00">23:00</option>
-                <option value="23:30">23:30</option>{" "}
-              </select>{" "}
-            </div>
-          </div>
-        </div>
-        <button
-          type="submit"
-          className="whitespace-nowrap rounded-lg bg-brand-base p-4 text-white h-full max-h-[50px] flex gap-2 items-center justify-center max-md:absolute max-md:w-full max-md:top-[110%] max-md:h-14"
+        )}
+      />
+      <div className="w-full sm:w-auto">
+        <select
+          aria-label="Start time"
+          className="_select-wrapper_gfr0g_161 react-date-picker__wrapper w-full sm:w-[150px] h-[50px] border-gray-300 rounded-lg"
+          name="startTime"
+          onChange={(e) => form.setValue("startTime", e.target.value)}
+          value={form.watch("startTime")}
         >
-          {" "}
-          Search
-        </button>
-      </form>
+          <option value="00:00">00:00</option>
+          <option value="00:30">00:30</option>
+          <option value="01:00">01:00</option>
+          <option value="01:30">01:30</option>
+          <option value="02:00">02:00</option>
+          <option value="02:30">02:30</option>
+          <option value="03:00">03:00</option>
+          <option value="03:30">03:30</option>
+          <option value="04:00">04:00</option>
+          <option value="04:30">04:30</option>
+          <option value="05:00">05:00</option>
+          <option value="05:30">05:30</option>
+          <option value="06:00">06:00</option>
+          <option value="06:30">06:30</option>
+          <option value="07:00">07:00</option>
+          <option value="07:30">07:30</option>
+          <option value="08:00">08:00</option>
+          <option value="08:30">08:30</option>
+          <option value="09:00">09:00</option>
+          <option value="09:30">09:30</option>
+          <option value="10:00">10:00</option>
+          <option value="10:30">10:30</option>
+          <option value="11:00">11:00</option>
+          <option value="11:30">11:30</option>
+          <option value="12:00">12:00</option>
+          <option value="12:30">12:30</option>
+          <option value="13:00">13:00</option>
+          <option value="13:30">13:30</option>
+          <option value="14:00">14:00</option>
+          <option value="14:30">14:30</option>
+          <option value="15:00">15:00</option>
+          <option value="15:30">15:30</option>
+          <option value="16:00">16:00</option>
+          <option value="16:30">16:30</option>
+          <option value="17:00">17:00</option>
+          <option value="17:30">17:30</option>
+          <option value="18:00">18:00</option>
+          <option value="18:30">18:30</option>
+          <option value="19:00">19:00</option>
+          <option value="19:30">19:30</option>
+          <option value="20:00">20:00</option>
+          <option value="20:30">20:30</option>
+          <option value="21:00">21:00</option>
+          <option value="21:30">21:30</option>
+          <option value="22:00">22:00</option>
+          <option value="22:30">22:30</option>
+          <option value="23:00">23:00</option>
+          <option value="23:30">23:30</option>
+        </select>
+      </div>
+    </div>
+  </div>
+  <div className="w-full sm:w-auto">
+    <p className="text-sm mb-2 text-gray-500">Drop-off Location</p>
+    <Select
+      className="w-full sm:w-[250px] h-[50px]"
+      classNamePrefix="react-select"
+      placeholder="Drop-off location"
+      options={areas.map((area) => ({
+        label: area.name,
+        value: area.id,
+      }))}
+      theme={(theme) => ({
+        ...theme,
+        colors: {
+          ...theme.colors,
+          primary: "var(--brand-base)",
+        },
+        borderRadius: 4,
+      })}
+      onChange={(value) => form.setValue("locationTo", value?.value || 0)}
+      value={{
+        label: areas.find((area) => area.id === form.watch("locationTo"))
+          ?.name,
+        value: form.watch("locationTo"),
+      }}
+    />
+  </div>
+  <div className="w-full sm:w-auto">
+    <p className="text-sm mb-2 text-gray-500">Drop-off Date</p>
+    <div className="flex items-center gap-3">
+      <DatePicker
+        className="w-full sm:w-[250px] h-[50px]"
+        calendarIcon={<CalendarIcon />}
+        calendarProps={{
+          minDate: new Date(
+            (form.watch("startDate") ?? new Date()).getTime() +
+              3 * 24 * 60 * 60 * 1000
+          ),
+          maxDate: new Date(
+            (form.watch("startDate") ?? new Date()).getTime() +
+              61 * 24 * 60 * 60 * 1000
+          ),
+        }}
+        onChange={(date) => form.setValue("endDate", date as Date)}
+        value={form.watch("endDate")}
+      />
+      <div className="w-full sm:w-auto">
+        <select
+          aria-label="End time"
+          className="_select-wrapper_gfr0g_161 react-date-picker__wrapper w-full sm:w-[150px] h-[50px] border-gray-300 rounded-lg"
+          name="endTime"
+          onChange={(e) => form.setValue("endTime", e.target.value)}
+          value={form.watch("endTime")}
+        >
+          <option value="00:00">00:00</option>
+          <option value="00:30">00:30</option>
+          <option value="01:00">01:00</option>
+          <option value="01:30">01:30</option>
+          <option value="02:00">02:00</option>
+          <option value="02:30">02:30</option>
+          <option value="03:00">03:00</option>
+          <option value="03:30">03:30</option>
+          <option value="04:00">04:00</option>
+          <option value="04:30">04:30</option>
+          <option value="05:00">05:00</option>
+          <option value="05:30">05:30</option>
+          <option value="06:00">06:00</option>
+          <option value="06:30">06:30</option>
+          <option value="07:00">07:00</option>
+          <option value="07:30">07:30</option>
+          <option value="08:00">08:00</option>
+          <option value="08:30">08:30</option>
+          <option value="09:00">09:00</option>
+          <option value="09:30">09:30</option>
+          <option value="10:00">10:00</option>
+          <option value="10:30">10:30</option>
+          <option value="11:00">11:00</option>
+          <option value="11:30">11:30</option>
+          <option value="12:00">12:00</option>
+          <option value="12:30">12:30</option>
+          <option value="13:00">13:00</option>
+          <option value="13:30">13:30</option>
+          <option value="14:00">14:00</option>
+          <option value="14:30">14:30</option>
+          <option value="15:00">15:00</option>
+          <option value="15:30">15:30</option>
+          <option value="16:00">16:00</option>
+          <option value="16:30">16:30</option>
+          <option value="17:00">17:00</option>
+          <option value="17:30">17:30</option>
+          <option value="18:00">18:00</option>
+          <option value="18:30">18:30</option>
+          <option value="19:00">19:00</option>
+          <option value="19:30">19:30</option>
+          <option value="20:00">20:00</option>
+          <option value="20:30">20:30</option>
+          <option value="21:00">21:00</option>
+          <option value="21:30">21:30</option>
+          <option value="22:00">22:00</option>
+          <option value="22:30">22:30</option>
+          <option value="23:00">23:00</option>
+          <option value="23:30">23:30</option>
+        </select>
+      </div>
+    </div>
+  </div>
+  <div className="flex justify-center w-full">
+    <button
+      type="submit"
+      className="bg-brand-base text-white h-[50px] px-6 rounded-lg w-full sm:w-auto"
+    >
+      Find a vehicle
+    </button>
+  </div>
+</form>
+
       <p className="text-sm mb-2 text-gray-500">
         Minimum rental period is three days
       </p>
