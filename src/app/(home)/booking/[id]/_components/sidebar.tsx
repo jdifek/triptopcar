@@ -7,7 +7,7 @@ import clsx from "clsx";
 import dynamic from "next/dynamic";
 import Link from "next/link";
 import { notFound, useSearchParams } from "next/navigation";
-import { useEffect, useMemo, useState } from "react";
+import React, { useEffect, useMemo, useState } from "react";
 import BookCar from "./bookCar";
 
 interface BookingSidebarProps {
@@ -15,34 +15,24 @@ interface BookingSidebarProps {
   car: Car;
 }
 
-const BookingSidebar: React.FC<BookingSidebarProps> = ({ className, car }) => {
+const BookingSidebar: React.FC<BookingSidebarProps> = React.memo(({ className, car }) => {
   const searchParams = useSearchParams();
 
-  const locationFrom =
-    Number(searchParams.get("locationFrom")) !== 0
-      ? Number(searchParams.get("locationFrom"))
-      : 1;
+  const locationFrom = Number(searchParams.get("locationFrom")) !== 0 ? Number(searchParams.get("locationFrom")) : 1;
 
-  const locationTo =
-    Number(searchParams.get("locationTo")) !== 0
-      ? Number(searchParams.get("locationTo"))
-      : 1;
+  const locationTo = Number(searchParams.get("locationTo")) !== 0 ? Number(searchParams.get("locationTo")) : 1;
 
   const startDate = new Date(
-    Number(searchParams.get("startDate")) !== 0
-      ? Number(searchParams.get("startDate"))
-      : new Date().getTime()
+    Number(searchParams.get("startDate")) !== 0 ? Number(searchParams.get("startDate")) : new Date().getTime(),
   );
 
   const endDate = new Date(
     Number(searchParams.get("endDate")) !== 0
       ? Number(searchParams.get("endDate"))
-      : new Date().getTime() + 3 * 24 * 60 * 60 * 1000
+      : new Date().getTime() + 3 * 24 * 60 * 60 * 1000,
   );
 
-  const daysQuantity = Math.ceil(
-    (endDate.getTime() - startDate.getTime()) / (1000 * 60 * 60 * 24)
-  );
+  const daysQuantity = Math.ceil((endDate.getTime() - startDate.getTime()) / (1000 * 60 * 60 * 24));
 
   const isPremium = searchParams.get("isPremium") === "true";
 
@@ -57,7 +47,7 @@ const BookingSidebar: React.FC<BookingSidebarProps> = ({ className, car }) => {
       endDate,
       includeChildSeat,
     });
-  }, [car]);
+  }, [car.id]);
 
   useEffect(() => {
     if (!(startDate.getTime() + 1) || !(endDate.getTime() + 1)) {
@@ -65,12 +55,7 @@ const BookingSidebar: React.FC<BookingSidebarProps> = ({ className, car }) => {
     }
   }, [startDate, endDate]);
   return (
-    <aside
-      className={clsx(
-        "w-full h-full flex flex-col gap-6 sticky top-5",
-        className
-      )}
-    >
+    <aside className={clsx("w-full h-full flex flex-col gap-6 sticky top-5", className)}>
       <div className="flex flex-col w-full bg-white rounded-lg p-[20px_10px_80px_10px] relative">
         <div className="w-full flex flex-col justify-between h-full">
           <div className="flex">
@@ -83,9 +68,7 @@ const BookingSidebar: React.FC<BookingSidebarProps> = ({ className, car }) => {
             </div>
             <div className="flex flex-col">
               <div className="mb-5">
-                <h4 className="font-bold text-2xl text-slate-700 mb-4">
-                  Pick-up
-                </h4>
+                <h4 className="font-bold text-2xl text-slate-700 mb-4">Pick-up</h4>
                 <p className="text-slate-800">
                   {new Date(startDate).toLocaleDateString()}
                   <br />
@@ -93,9 +76,7 @@ const BookingSidebar: React.FC<BookingSidebarProps> = ({ className, car }) => {
                 </p>
               </div>
               <div>
-                <h4 className="font-bold text-2xl text-slate-700 mb-4">
-                  Drop-off
-                </h4>
+                <h4 className="font-bold text-2xl text-slate-700 mb-4">Drop-off</h4>
                 <p className="text-slate-800">
                   {new Date(endDate).toLocaleDateString()}
                   <br />
@@ -105,10 +86,7 @@ const BookingSidebar: React.FC<BookingSidebarProps> = ({ className, car }) => {
             </div>
           </div>
           {/* Вставляем ссылку внизу */}
-          <Link
-            href="/"
-            className="absolute bottom-4 right-4 bg-brand-base text-white rounded-md px-4 py-2"
-          >
+          <Link href="/" className="absolute bottom-4 right-4 bg-brand-base text-white rounded-md px-4 py-2">
             Change Date
           </Link>
         </div>
@@ -125,11 +103,7 @@ const BookingSidebar: React.FC<BookingSidebarProps> = ({ className, car }) => {
                   style: "currency",
                   minimumFractionDigits: 0,
                   currency: "THB",
-                }).format(
-                  isPremium
-                    ? car.pricePerDay + 400 * daysQuantity
-                    : car.pricePerDay * daysQuantity
-                );
+                }).format(isPremium ? car.pricePerDay + 400 * daysQuantity : car.pricePerDay * daysQuantity);
               })()}
             </span>
             <p className="text-gray-500 text-sm">
@@ -150,18 +124,12 @@ const BookingSidebar: React.FC<BookingSidebarProps> = ({ className, car }) => {
           <li>Unlimited Mileage</li>
           <li>Full to Full</li>
           <li>
-            Taxed and fees {"("}including airport tax, customer facility fee,
-            tourism tax, and sales tax{")"}
+            Taxed and fees {"("}including airport tax, customer facility fee, tourism tax, and sales tax{")"}
           </li>
           <li>Basic Rental Fee</li>
         </ul>
         <div className="w-full border-t-2 mt-5 pt-5 border-dashed border-tertiary-gray">
-          <div
-            className={clsx(
-              "flex items-start justify-between gap-4",
-              isPremium && "line-through"
-            )}
-          >
+          <div className={clsx("flex items-start justify-between gap-4", isPremium && "line-through")}>
             <h4 className="text-gray-500">Refundable Deposit</h4>
             <h4 className="text-gray-500">
               {(() => {
@@ -190,6 +158,6 @@ const BookingSidebar: React.FC<BookingSidebarProps> = ({ className, car }) => {
       <BookCar car={car} />
     </aside>
   );
-};
+});
 
 export default dynamic(() => Promise.resolve(BookingSidebar), { ssr: false });

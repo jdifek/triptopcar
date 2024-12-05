@@ -2,7 +2,7 @@
 import { differenceInDays } from "date-fns";
 
 function roundUpToHundredThousand(value: number): number {
-  return Math.ceil(value / 100000) * 100000;
+    return value; // Убираем округление
 }
 
 type Season = {
