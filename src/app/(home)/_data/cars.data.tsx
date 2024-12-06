@@ -9,8 +9,8 @@ export const cars: Car[] = [
     pricePerDay: 2000,
     engineCapacity: 2.4,
     fuelType: "Diesel",
-    seatsQuantity: 7,
-    deposit: 15000, 
+    seatsQuantity: 7,  //fdf
+    deposit: 15000,
     year: 2023,
     transmissionType: "Automatic",
     reviews: [

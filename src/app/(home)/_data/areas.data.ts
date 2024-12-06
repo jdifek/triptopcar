@@ -1,6 +1,5 @@
 import { Area } from "@/typing/interfaces";
 
-
 export const areas: Area[] = [
   {
     deliveryPrice: 600,
