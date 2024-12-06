@@ -3,15 +3,15 @@ import { Car } from "@/typing/interfaces";
 export const cars: Car[] = [
   {
     id: 1,
-    imageUrl: "/toyota-vios.png",
-    name: "Toyota Vios",
-    carBodyType: "Sedan",
-    pricePerDay: 600,
-    engineCapacity: 1.5,
-    fuelType: "Gasoline A95",
-    seatsQuantity: "5 seats",
-    deposit: 5000, 
-    year: 2021,
+    imageUrl: "/toyota-fortuner.png",
+    name: "Toyota Fortuner",
+    carBodyType: "SUV",
+    pricePerDay: 2000,
+    engineCapacity: 2.4,
+    fuelType: "Diesel",
+    seatsQuantity: 7,  //fdf
+    deposit: 15000,
+    year: 2023,
     transmissionType: "Automatic",
     reviews: [
       {
