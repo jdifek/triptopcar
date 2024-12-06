@@ -2,12 +2,10 @@
 
 import { usePathname } from "next/navigation";
 import { FC } from "react";
-import Logo from "./ui/logo";
 import { TELEGRAM_LINK, WHATSAPP_LINK } from "@/lib/config";
 import TelegramIcon from "./icons/telegram-icon";
 import WhatsAppIcon from "./icons/whats-app-icon";
 import Link from "next/link";
-import clsx from "clsx";
 import Breadcrumbs from "./breadcrumbs";
 
 const links: { name: string; path: string }[] = [
@@ -21,15 +19,17 @@ const breadCrumbsPaths = ["/booking", "/checkout"];
 
 const Header: FC = () => {
   const pathname = usePathname();
+  const isBookingPage = pathname.startsWith("/booking");
 
   return (
-    <header className="bg-brand-base px-8 py-4 pb-20 max-sm:px-2">
+    <header className={`bg-brand-base px-8 py-4 ${isBookingPage ? "pb-[3rem]" : "pb-20"} max-sm:px-2`}>
+      {" "}
       <div className="container mx-auto flex items-end justify-between max-md:w-full">
         <div className="flex gap-10 items-end">
-          <Link href="/" className="font-semibold text-white">TripTopCar </Link>
-          {breadCrumbsPaths.some((breadcrumb) =>
-            pathname.includes(breadcrumb)
-          ) ? (
+          <Link href="/" className="font-semibold text-white">
+            TripTopCar{" "}
+          </Link>
+          {breadCrumbsPaths.some((breadcrumb) => pathname.includes(breadcrumb)) ? (
             <Breadcrumbs pathname={pathname} className="max-lg:hidden" />
           ) : (
             <nav className="flex items-center justify-between">

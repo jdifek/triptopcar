@@ -40,12 +40,14 @@ const BookingSidebar: React.FC<BookingSidebarProps> = React.memo(({ className, c
 
   const totalPrice = useMemo(() => {
     return useTotalPrice({
-      isPremium,
-      daysQuantity,
       car,
-      startDate,
-      endDate,
-      includeChildSeat,
+      daysQuantity,
+      isPremium,
+      startDate: new Date(startDate),
+      endDate: new Date(endDate),
+      includeChildSeat: false,
+      pickupLocationId: Number(searchParams.get("locationFrom")) || 1, // ID пункта выдачи
+      dropoffLocationId: Number(searchParams.get("locationTo")) || 1, // ID пункта возврата
     });
   }, [car.id]);
 
@@ -86,7 +88,10 @@ const BookingSidebar: React.FC<BookingSidebarProps> = React.memo(({ className, c
             </div>
           </div>
           {/* Вставляем ссылку внизу */}
-          <Link href="https://th.trip.com/?locale=th-th" className="absolute bottom-4 right-4 bg-brand-base text-white rounded-md px-4 py-2">
+          <Link
+            href="https://th.trip.com/?locale=th-th"
+            className="absolute bottom-4 right-4 bg-brand-base text-white rounded-md px-4 py-2"
+          >
             Change Date
           </Link>
         </div>

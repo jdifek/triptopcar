@@ -1,3 +1,4 @@
+import { areas } from "@/app/(home)/_data/areas.data";
 import { calculateRentCost } from "@/lib/calculateRentCost";
 import { Car } from "@/typing/interfaces";
 
@@ -8,6 +9,8 @@ export function useTotalPrice({
   startDate,
   endDate,
   includeChildSeat,
+  pickupLocationId,
+  dropoffLocationId,
 }: {
   isPremium: boolean;
   daysQuantity: number;
@@ -15,31 +18,29 @@ export function useTotalPrice({
   startDate: Date;
   endDate: Date;
   includeChildSeat: boolean;
+  pickupLocationId: number;
+  dropoffLocationId: number;
 }) {
   const dailyRate = car.pricePerDay; // Базовая стоимость за день
   const deposit = car.deposit; // Возвратный депозит
 
   // Вычисляем стоимость аренды
-  const baseRentalFee = calculateRentCost(
-    startDate,
-    endDate,
-    dailyRate,
-    includeChildSeat
-  );
+  const baseRentalFee = calculateRentCost(startDate, endDate, dailyRate, includeChildSeat);
 
   // Премиальная страховка (опционально)
   const insuranceFee = isPremium ? 400 * daysQuantity : 0;
-  console.log(`Стоимость страховки: ${insuranceFee}`);
 
-
-  // Прочие сборы
-  const serviceFee = 500;
+  // Стоимость доставки за пункты выдачи и возврата
+  const pickupLocation = areas.find((area) => area.id === pickupLocationId);
+  const dropoffLocation = areas.find((area) => area.id === dropoffLocationId);
+  const deliveryFee = (pickupLocation?.deliveryPrice || 0) + (dropoffLocation?.deliveryPrice || 0);
 
   // Итоговая стоимость
-  const totalPrice = baseRentalFee + insuranceFee + deposit + serviceFee;
-  console.log("Вызов useTotalPrice", { isPremium, daysQuantity, car, startDate, endDate, includeChildSeat });
-  console.log("totalPrice", Math.round(totalPrice));
+  const totalPrice = baseRentalFee + insuranceFee + deposit + deliveryFee;
 
+  // Логирование для отладки
+  console.log("Вызов useTotalPrice", { isPremium, daysQuantity, car, startDate, endDate, includeChildSeat, pickupLocation, dropoffLocation });
+  console.log("totalPrice", Math.round(totalPrice));
 
   return Math.round(totalPrice);
 }
