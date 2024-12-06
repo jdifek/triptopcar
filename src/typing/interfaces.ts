@@ -16,7 +16,7 @@ export interface Car {
   engineCapacity: number;
   year: number;
   fuelType: "Gasoline A95" | "Diesel" | "Electric";
-  seatsQuantity: number;
+  seatsQuantity: number; // Тип должен быть числом
   transmissionType: "Automatic" | "Manual";
   reviews?: Review[];
 }
