@@ -27,6 +27,9 @@ const BookingSidebar: React.FC<BookingSidebarProps> = React.memo(({ className, c
     Number(searchParams.get("startDate")) !== 0 ? Number(searchParams.get("startDate")) : new Date().getTime(),
   );
 
+  const [timeStart, setTimeStart] = useState<string>(searchParams.get("timeStart") ?? "10:00");
+  const [timeEnd, setTimeEnd] = useState<string>(searchParams.get("timeEnd") ?? "10:00");
+
   const endDate = new Date(
     Number(searchParams.get("endDate")) !== 0
       ? Number(searchParams.get("endDate"))
@@ -80,7 +83,7 @@ const BookingSidebar: React.FC<BookingSidebarProps> = React.memo(({ className, c
               <div className="mb-5">
                 <h4 className="font-bold text-2xl text-slate-700 mb-4">Pick-up</h4>
                 <p className="text-slate-800">
-                  {new Date(startDate).toLocaleDateString()}
+                  {new Date(startDate).toLocaleDateString()} {timeStart}
                   <br />
                   {areas.find((area) => area.id === Number(locationFrom))?.name}
                 </p>
@@ -88,7 +91,7 @@ const BookingSidebar: React.FC<BookingSidebarProps> = React.memo(({ className, c
               <div>
                 <h4 className="font-bold text-2xl text-slate-700 mb-4">Drop-off</h4>
                 <p className="text-slate-800">
-                  {new Date(endDate).toLocaleDateString()}
+                  {new Date(endDate).toLocaleDateString()} {timeEnd}
                   <br />
                   {areas.find((area) => area.id === Number(locationTo))?.name}
                 </p>
@@ -97,9 +100,9 @@ const BookingSidebar: React.FC<BookingSidebarProps> = React.memo(({ className, c
           </div>
           {/* Вставляем ссылку внизу */}
           <Link
-            href="https://th.trip.com/?locale=th-th"
-            className="absolute bottom-4 right-4 bg-brand-base text-white rounded-md px-4 py-2"
-          >
+            href="/"
+            className="absolute bottom-4 right-4 rounded-md px-4 py-2 text-blue-500"
+            >
             Change Date
           </Link>
         </div>
