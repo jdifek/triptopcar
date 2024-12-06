@@ -9,6 +9,7 @@ import Link from "next/link";
 import { notFound, useSearchParams } from "next/navigation";
 import React, { useEffect, useMemo, useState } from "react";
 import BookCar from "./bookCar";
+import { calculateDailyCost } from "@/hooks/useTotalPriceDay";
 
 interface BookingSidebarProps {
   className?: string;
@@ -37,6 +38,7 @@ const BookingSidebar: React.FC<BookingSidebarProps> = React.memo(({ className, c
   const isPremium = searchParams.get("isPremium") === "true";
 
   const [includeChildSeat, setIncludeChildSeat] = useState(false);
+  const [dayTotal, setDayTotal] = useState(0);
 
   const totalPrice = useMemo(() => {
     return useTotalPrice({
@@ -56,6 +58,12 @@ const BookingSidebar: React.FC<BookingSidebarProps> = React.memo(({ className, c
       notFound();
     }
   }, [startDate, endDate]);
+
+  useEffect(() => {
+    // Ensure calculateDailyCost returns a number
+    const calculatedPrice = calculateDailyCost(startDate ? new Date(startDate) : new Date(), car.pricePerDay, false);
+    setDayTotal(calculatedPrice);
+  }, [car.pricePerDay, startDate]); // Depend on car.pricePerDay and startDate
   return (
     <aside className={clsx("w-full h-full flex flex-col gap-6 sticky top-5", className)}>
       <div className="flex flex-col w-full bg-white rounded-lg p-[20px_10px_80px_10px] relative">
@@ -108,7 +116,7 @@ const BookingSidebar: React.FC<BookingSidebarProps> = React.memo(({ className, c
                   style: "currency",
                   minimumFractionDigits: 0,
                   currency: "THB",
-                }).format(isPremium ? car.pricePerDay + 400 * daysQuantity : car.pricePerDay * daysQuantity);
+                }).format(Math.round(dayTotal * 3 / 10) * 10);
               })()}
             </span>
             <p className="text-gray-500 text-sm">
@@ -118,7 +126,7 @@ const BookingSidebar: React.FC<BookingSidebarProps> = React.memo(({ className, c
                   style: "currency",
                   currency: "THB",
                   minimumFractionDigits: 0,
-                }).format(isPremium ? car.pricePerDay + 400 : car.pricePerDay);
+                }).format(Math.round(dayTotal / 10) * 10);
               })()}
               x{daysQuantity} days
             </p>
