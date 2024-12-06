@@ -1,7 +1,7 @@
 "use client";
 
 import Link from "next/link";
-import { FC, useCallback, useState } from "react";
+import { FC, useCallback, useEffect, useState } from "react";
 import TransmissionIcon from "@/components/icons/transmission-icon";
 import { Car } from "@/typing/interfaces";
 import SeatIcon from "@/components/icons/seat-icon";
@@ -14,6 +14,7 @@ import CalendarIcon from "@/components/icons/calendar-days-icon";
 import FuelIcon from "@/components/icons/fuel-icon";
 import clsx from "clsx";
 import SnowflakeIcon from "@/components/icons/snowflake";
+import { calculateDailyCost } from "@/hooks/useTotalPriceDay";
 
 const CarCard: FC<{ car: Car; className?: string }> = ({ car, className }) => {
   const [isPremium, setIsPremium] = useState<boolean>(false);
@@ -25,11 +26,17 @@ const CarCard: FC<{ car: Car; className?: string }> = ({ car, className }) => {
   const daysQuantity = Math.ceil((endDate - startDate) / (1000 * 60 * 60 * 24));
   const [timeStart, setTimeStart] = useState<string>(params.get("timeStart") ?? "10:00");
   const [timeEnd, setTimeEnd] = useState<string>(params.get("timeEnd") ?? "10:00");
+  const [dayTotal, setDayTotal] = useState(0);
 
   const getCarBookingLink = useCallback(() => {
     return `/booking/${car.id}?startDate=${startDate}&endDate=${endDate}&timeStart=${timeStart}&timeEnd=${timeEnd}&isPremium=${isPremium}&locationFrom=${locationFrom}&locationTo=${locationTo}`;
   }, [isPremium, startDate, endDate, timeStart, timeEnd, locationFrom, locationTo]);
 
+  useEffect(() => {
+    // Ensure calculateDailyCost returns a number
+    const calculatedPrice = calculateDailyCost(startDate ? new Date(startDate) : new Date(), car.pricePerDay, false);
+    setDayTotal(calculatedPrice);
+  }, [car.pricePerDay, startDate]); // Depend on car.pricePerDay and startDate
   return (
     <article>
       <div
@@ -52,7 +59,7 @@ const CarCard: FC<{ car: Car; className?: string }> = ({ car, className }) => {
               </Link>
             </h3>
           </div>
-          <div className="mt-6 grid grid-cols-2 gap-2 max-md:mx-auto">
+          <div className="mt-6 mb-4 grid grid-cols-2 gap-2 max-md:mx-auto">
             <span className="flex items-center gap-1">
               <TransmissionIcon className="w-6 h-6" /> {car.transmissionType}
             </span>
@@ -60,7 +67,7 @@ const CarCard: FC<{ car: Car; className?: string }> = ({ car, className }) => {
               <FuelIcon className="w-6 h-6" /> {car.fuelType}
             </span>
             <span className="flex items-center gap-1">
-              <SnowflakeIcon className="w-6 h-6" />A / C
+              <SnowflakeIcon className="w-6 h-6" /> Air Condition
             </span>
             <span className="flex items-center gap-1">
               <SeatIcon className="w-6 h-6" /> {car.seatsQuantity}
@@ -75,14 +82,14 @@ const CarCard: FC<{ car: Car; className?: string }> = ({ car, className }) => {
         </div>
 
         <div className="space-y-2 md:py-8 max-md:mb-4 flex flex-col items-end max-md:hidden sm:flex">
-        <p className="text-base-black-secondary flex items-center justify-end gap-2 text-sm text-nowrap">
+          <p className="text-base-black-secondary flex items-center justify-end gap-2 text-sm text-nowrap">
             <span className="text-base-black text-2xl font-bold">
               {(() => {
                 return new Intl.NumberFormat("th-TH", {
                   style: "currency",
                   currency: "THB",
                   minimumFractionDigits: 0,
-                }).format(isPremium ? (car.pricePerDay + 400) * 1 : car.pricePerDay * 1);
+                }).format(Math.round(dayTotal / 10) * 10);
               })()}
             </span>
             <span>per day</span>
@@ -95,11 +102,7 @@ const CarCard: FC<{ car: Car; className?: string }> = ({ car, className }) => {
                   style: "currency",
                   currency: "THB",
                   minimumFractionDigits: 0,
-                }).format(
-                  isPremium
-                    ? (car.pricePerDay + 400) * (daysQuantity !== 0 ? daysQuantity : 3)
-                    : car.pricePerDay * (daysQuantity !== 0 ? daysQuantity : 3),
-                );
+                }).format(Math.round((dayTotal * 3) / 10) * 10);
               })()}{" "}
               for {daysQuantity !== 0 ? daysQuantity : 3} days
             </span>
@@ -130,7 +133,7 @@ const CarCard: FC<{ car: Car; className?: string }> = ({ car, className }) => {
                     style: "currency",
                     currency: "THB",
                     minimumFractionDigits: 0,
-                  }).format(isPremium ? (car.pricePerDay + 400) * 1 : car.pricePerDay * 1);
+                  }).format(Math.round(dayTotal / 10) * 10);
                 })()}
               </span>
               <span>per day</span>
@@ -143,11 +146,7 @@ const CarCard: FC<{ car: Car; className?: string }> = ({ car, className }) => {
                     style: "currency",
                     currency: "THB",
                     minimumFractionDigits: 0,
-                  }).format(
-                    isPremium
-                      ? (car.pricePerDay + 400) * (daysQuantity !== 0 ? daysQuantity : 3)
-                      : car.pricePerDay * (daysQuantity !== 0 ? daysQuantity : 3),
-                  );
+                  }).format(Math.round((dayTotal * 3) / 10) * 10);
                 })()}{" "}
                 for {daysQuantity !== 0 ? daysQuantity : 3} days
               </span>

@@ -61,7 +61,10 @@ const BookCar: React.FC<BookCarProps> = ({ className, car }) => {
     startDate: new Date(startDate),
     endDate: new Date(endDate),
     includeChildSeat: false,
+    pickupLocationId: Number(searchParams.get("locationFrom")) || 1, // ID пункта выдачи
+    dropoffLocationId: Number(searchParams.get("locationTo")) || 1, // ID пункта возврата
   });
+
 
   const { push } = useRouter();
 

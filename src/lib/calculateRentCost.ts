@@ -104,7 +104,7 @@ function isDateInSeason(
 }
 
 // Функция для получения коэффициента сезона для конкретной даты
-function getSeasonCoefficient(date: Date): number {
+export function getSeasonCoefficient(date: Date): number {
     for (const season of seasons) {
         if (isDateInSeason(date, season.start, season.end)) {
             return season.coefficient;
@@ -123,7 +123,7 @@ function getDurationCoefficient(duration: number): number {
     throw new Error("Продолжительность для данной даты не найдена");
 }
 
-function getDurationChildSeatPricePerDay(duration: number): number {
+export function getDurationChildSeatPricePerDay(duration: number): number {
     for (const d of childSeatDurations) {
         if (d.start <= duration && d.end >= duration) {
             return d.pricePerDay;
