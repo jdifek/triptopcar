@@ -36,7 +36,7 @@ export function useTotalPrice({
   const deliveryFee = (pickupLocation?.deliveryPrice || 0) + (dropoffLocation?.deliveryPrice || 0);
 
   // Итоговая стоимость
-  const totalPrice = baseRentalFee + insuranceFee + deposit + deliveryFee;
+  const totalPrice = baseRentalFee + insuranceFee + deliveryFee;
 
   // Логирование для отладки
   console.log("Вызов useTotalPrice", { isPremium, daysQuantity, car, startDate, endDate, includeChildSeat, pickupLocation, dropoffLocation });
