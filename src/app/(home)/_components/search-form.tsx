@@ -78,8 +78,8 @@ const SearchForm: FC = () => {
         className="lg:grid-cols-4 grid grid-cols-1 sm:grid-cols-2 gap-6 max-md:grid-cols-1 max-md:relative max-md:mb-20"
       >
         <div className="flex flex-col w-full">
-          <p className="text-[0.775rem] leading-[1.25rem] mb-2 text-gray-500">Pick-up Location</p>
-          <Select
+        <p className="text-[0.675rem] sm:text-[0.775rem] leading-[1.25rem] mb-2 text-gray-500">Pick-up Location</p>
+        <Select
             className="w-full sm:w-[250px] h-[50px]"
             classNamePrefix="react-select"
             placeholder="Pick-up location"
@@ -104,8 +104,8 @@ const SearchForm: FC = () => {
         </div>
 
         <div className="flex flex-col w-full">
-          <p className="text-[0.775rem] leading-[1.25rem] mb-2 text-gray-500">Pick-up Date</p>
-          <div className="flex items-center gap-3">
+        <p className="text-[0.675rem] sm:text-[0.775rem] leading-[1.25rem] mb-2 text-gray-500">Pick-up Location</p>
+        <div className="flex items-center gap-3">
             <Controller
               name="startDate"
               control={form.control}
@@ -142,8 +142,8 @@ const SearchForm: FC = () => {
         </div>
 
         <div className="flex flex-col w-full">
-          <p className="text-[0.775rem] leading-[1.25rem] mb-2 text-gray-500">Drop-off Location</p>
-          <Select
+        <p className="text-[0.675rem] sm:text-[0.775rem] leading-[1.25rem] mb-2 text-gray-500">Pick-up Location</p>
+        <Select
             className="w-full sm:w-[250px] h-[50px]"
             classNamePrefix="react-select"
             placeholder="Drop-off location"
@@ -168,8 +168,8 @@ const SearchForm: FC = () => {
         </div>
 
         <div className="flex flex-col w-full">
-          <p className="text-[0.775rem] leading-[1.25rem] mb-2 text-gray-500">Drop-off Date</p>
-          <div className="flex items-center gap-3">
+        <p className="text-[0.675rem] sm:text-[0.775rem] leading-[1.25rem] mb-2 text-gray-500">Pick-up Location</p>
+        <div className="flex items-center gap-3">
             <DatePicker
               className="w-full sm:w-[250px] h-[50px]"
               calendarIcon={<CalendarIcon />}
@@ -206,8 +206,8 @@ const SearchForm: FC = () => {
         </div>
       </form>
 
-      <p className="text-[0.775rem] leading-[1.25rem] mb-2 text-gray-500">Minimum rental period is three days</p>
-    </section>
+      <p className="text-[0.675rem] sm:text-[0.775rem] leading-[1.25rem] mb-2 text-gray-500">Pick-up Location</p>
+      </section>
   );
 };
 
