@@ -226,6 +226,20 @@ const BookingSidebar: React.FC<BookingSidebarProps> = React.memo(({ className, c
             </h4>
           </div>
 
+          {/* Tax */}
+          <div className={clsx("flex items-start justify-between gap-4", isPremium && "line-through")}>
+            <h4 className="text-gray-500">Tax fee (7%)</h4>
+            <h4 className="text-gray-500">
+              {(() => {
+                return new Intl.NumberFormat("th-TH", {
+                  style: "currency",
+                  currency: "THB",
+                  minimumFractionDigits: 0,
+                }).format(totalPrice * 0.07);
+              })()}
+            </h4>
+          </div>
+
           <div className="flex items-start justify-between gap-4">
             <h4 className="font-bold text-xl text-slate-700">Total</h4>
             <h4 className="text-slate-700 font-bold text-xl">
