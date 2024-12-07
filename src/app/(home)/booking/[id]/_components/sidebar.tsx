@@ -64,7 +64,12 @@ const BookingSidebar: React.FC<BookingSidebarProps> = React.memo(({ className, c
 
   useEffect(() => {
     // Ensure calculateDailyCost returns a number
-    const calculatedPrice = calculateDailyCost(startDate ? new Date(startDate) : new Date(), car.pricePerDay, false);
+    const calculatedPrice = calculateDailyCost(
+      startDate ? new Date(startDate) : new Date(),
+      car.pricePerDay,
+      false,
+      isPremium,
+    );
     setDayTotal(calculatedPrice);
   }, [car.pricePerDay, startDate]); // Depend on car.pricePerDay and startDate
   return (
@@ -99,10 +104,7 @@ const BookingSidebar: React.FC<BookingSidebarProps> = React.memo(({ className, c
             </div>
           </div>
           {/* Вставляем ссылку внизу */}
-          <Link
-            href="/"
-            className="absolute bottom-4 right-4 rounded-md px-4 py-2 text-blue-500"
-            >
+          <Link href="/" className="absolute bottom-4 right-4 rounded-md px-4 py-2 text-blue-500">
             Change Date
           </Link>
         </div>
@@ -119,7 +121,7 @@ const BookingSidebar: React.FC<BookingSidebarProps> = React.memo(({ className, c
                   style: "currency",
                   minimumFractionDigits: 0,
                   currency: "THB",
-                }).format(Math.round(dayTotal * 3 / 10) * 10);
+                }).format(Math.round((dayTotal * 3) / 10) * 10);
               })()}
             </span>
             <p className="text-gray-500 text-sm">
