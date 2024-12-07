@@ -221,10 +221,10 @@ const SearchForm: FC = () => {
             </button>
           </div>
         </div>
-        <div className="flex justify-center w-full col-span-2 lg:col-span-4 mt-4"></div>
+        {/*<div className="flex justify-center w-full col-span-2 lg:col-span-4 mt-4"></div>*/}
       </form>
 
-      <p className="text-[0.675rem] sm:text-[0.775rem] leading-[1.25rem] mb-2 text-gray-500">
+      <p className="text-[0.675rem] sm:text-[0.775rem] leading-[1.25rem] text-gray-500">
           The minimum rental period is 3 days.
       </p>
     </section>
