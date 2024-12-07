@@ -34,9 +34,9 @@ const CarCard: FC<{ car: Car; className?: string }> = ({ car, className }) => {
 
   useEffect(() => {
     // Ensure calculateDailyCost returns a number
-    const calculatedPrice = calculateDailyCost(startDate ? new Date(startDate) : new Date(), car.pricePerDay, false);
+    const calculatedPrice = calculateDailyCost(startDate ? new Date(startDate) : new Date(), car.pricePerDay, false, isPremium);
     setDayTotal(calculatedPrice);
-  }, [car.pricePerDay, startDate]); // Depend on car.pricePerDay and startDate
+  }, [car.pricePerDay, startDate, isPremium]); // Depend on car.pricePerDay and startDate
   return (
     <article>
       <div
