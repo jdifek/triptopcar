@@ -48,7 +48,7 @@ const SearchForm: FC = () => {
         ? new Date(Number(searchParams.get("endDate")))
         : new Date(new Date().getTime() + 3 * 24 * 60 * 60 * 1000),
       startTime: searchParams.get("startTime") || "10:00", // Reset start time
-      endTime: searchParams.get("endTime") || "10:30", // Reset end time
+      endTime: searchParams.get("endTime") || "10:00", // Reset end time
     });
   }, [searchParams, form]);
 
@@ -71,143 +71,148 @@ const SearchForm: FC = () => {
     window.history.pushState({}, "", url.toString());
   };
 
+  const generateTimeOptions = () => {
+    const options = [];
+    for (let hour = 7; hour <= 23; hour++) {
+      const timeString = `${hour.toString().padStart(2, "0")}:00`;
+      options.push({
+        label: timeString,
+        value: timeString,
+      });
+    }
+    return options;
+  };
+
   return (
     <section className="container mx-auto -mt-6 rounded-2xl bg-white p-4 ">
-      <form
-        onSubmit={form.handleSubmit(submitHandler)}
-        className="lg:grid-cols-4 grid grid-cols-1 sm:grid-cols-2 gap-6 max-md:grid-cols-1 max-md:relative max-md:mb-20"
-      >
-        <div className="flex flex-col w-full">
-        <p className="text-[0.675rem] sm:text-[0.775rem] leading-[1.25rem] mb-2 text-gray-500">Pick-up Location</p>
-        <Select
-            className="w-full sm:w-[250px] h-[50px]"
-            classNamePrefix="react-select"
-            placeholder="Pick-up location"
-            options={areas.map((area) => ({
-              label: area.name,
-              value: area.id,
-            }))}
-            theme={(theme) => ({
-              ...theme,
-              colors: {
-                ...theme.colors,
-                primary: "var(--brand-base)",
-              },
-              borderRadius: 4,
-            })}
-            onChange={(value) => form.setValue("locationFrom", value?.value ?? 0)}
-            value={{
-              label: areas.find((area) => area.id === form.watch("locationFrom"))?.name,
-              value: form.watch("locationFrom"),
-            }}
-          />
-        </div>
-
-        <div className="flex flex-col w-full">
-        <p className="text-[0.675rem] sm:text-[0.775rem] leading-[1.25rem] mb-2 text-gray-500">Pick-up Location</p>
-        <div className="flex items-center gap-3">
-            <Controller
-              name="startDate"
-              control={form.control}
-              render={({ field }) => (
-                <DatePicker
-                  {...field}
-                  calendarIcon={<CalendarIcon />}
-                  className="w-full sm:w-[250px] h-[50px]"
-                  calendarProps={{
-                    minDate: new Date(),
-                  }}
-                  onChange={(date) => form.setValue("startDate", date ? (date as Date) : new Date())}
-                  value={field.value}
-                />
-              )}
-            />
-            <select
-              aria-label="Start time"
-              className=" border-gray-500 [border-width:thin] w-full sm:w-[150px] h-[50px] rounded-md"
-              name="startTime"
-              onChange={(e) => form.setValue("startTime", e.target.value)}
-              value={form.watch("startTime")}
-            >
-              {Array.from({ length: 24 }, (_, index) => {
-                const hour = String(index).padStart(2, "0");
-                return (
-                  <option key={hour} value={`${hour}:00`}>
-                    {`${hour}:00`}
-                  </option>
-                );
+      <form onSubmit={form.handleSubmit(submitHandler)}>
+        <div className="flex flex-col gap-6 sm:flex-row">
+          <div className="flex flex-col">
+            <p className="text-[0.675rem] sm:text-[0.775rem] leading-[1.25rem] mb-2 text-gray-500">Pick-up Location</p>
+            <Select
+              className="w-full sm:w-[180px] h-[50px]"
+              classNamePrefix="react-select"
+              placeholder="Pick-up location"
+              options={areas.map((area) => ({
+                label: area.name,
+                value: area.id,
+              }))}
+              theme={(theme) => ({
+                ...theme,
+                colors: {
+                  ...theme.colors,
+                  primary: "var(--brand-base)",
+                },
+                borderRadius: 4,
               })}
-            </select>
-          </div>
-        </div>
-
-        <div className="flex flex-col w-full">
-        <p className="text-[0.675rem] sm:text-[0.775rem] leading-[1.25rem] mb-2 text-gray-500">Pick-up Location</p>
-        <Select
-            className="w-full sm:w-[250px] h-[50px]"
-            classNamePrefix="react-select"
-            placeholder="Drop-off location"
-            options={areas.map((area) => ({
-              label: area.name,
-              value: area.id,
-            }))}
-            theme={(theme) => ({
-              ...theme,
-              colors: {
-                ...theme.colors,
-                primary: "var(--brand-base)",
-              },
-              borderRadius: 4,
-            })}
-            onChange={(value) => form.setValue("locationTo", value?.value || 0)}
-            value={{
-              label: areas.find((area) => area.id === form.watch("locationTo"))?.name,
-              value: form.watch("locationTo"),
-            }}
-          />
-        </div>
-
-        <div className="flex flex-col w-full">
-        <p className="text-[0.675rem] sm:text-[0.775rem] leading-[1.25rem] mb-2 text-gray-500">Pick-up Location</p>
-        <div className="flex items-center gap-3">
-            <DatePicker
-              className="w-full sm:w-[250px] h-[50px]"
-              calendarIcon={<CalendarIcon />}
-              calendarProps={{
-                minDate: new Date((form.watch("startDate") ?? new Date()).getTime() + 3 * 24 * 60 * 60 * 1000),
-                maxDate: new Date((form.watch("startDate") ?? new Date()).getTime() + 61 * 24 * 60 * 60 * 1000),
+              onChange={(value) => form.setValue("locationFrom", value?.value ?? 0)}
+              value={{
+                label: areas.find((area) => area.id === form.watch("locationFrom"))?.name,
+                value: form.watch("locationFrom"),
               }}
-              onChange={(date) => form.setValue("endDate", date as Date)}
-              value={form.watch("endDate")}
             />
-            <select
-              aria-label="End time"
-              className=" border-gray-500 [border-width:thin] w-full sm:w-[150px] h-[50px] rounded-md"
-              name="endTime"
-              onChange={(e) => form.setValue("endTime", e.target.value)}
-              value={form.watch("endTime")}
-            >
-              {Array.from({ length: 24 }, (_, index) => {
-                const hour = String(index).padStart(2, "0");
-                return (
-                  <option key={hour} value={`${hour}:00`}>
-                    {`${hour}:00`}
-                  </option>
-                );
+          </div>
+
+          <div className="flex flex-col">
+            <p className="text-[0.675rem] sm:text-[0.775rem] leading-[1.25rem] mb-2 text-gray-500">Pick-up Location</p>
+            <div className="flex items-center gap-3">
+              <Controller
+                name="startDate"
+                control={form.control}
+                render={({ field }) => (
+                  <DatePicker
+                    {...field}
+                    calendarIcon={<CalendarIcon />}
+                    className="w-full sm:w-[180px] h-[50px]"
+                    calendarProps={{
+                      minDate: new Date(),
+                    }}
+                    onChange={(date) => form.setValue("startDate", date ? (date as Date) : new Date())}
+                    value={field.value}
+                  />
+                )}
+              />
+              <Select
+                aria-label="Start time"
+                className="w-full sm:w-[110px] h-[50px]"
+                classNamePrefix="react-select"
+                name="startTime"
+                onChange={(value) => form.setValue("startTime", value?.value ?? "")}
+                value={{
+                  label: form.watch("startTime"),
+                  value: form.watch("startTime"),
+                }}
+                options={generateTimeOptions()}
+              />
+            </div>
+          </div>
+
+          <div className="flex flex-col">
+            <p className="text-[0.675rem] sm:text-[0.775rem] leading-[1.25rem] mb-2 text-gray-500">Pick-up Location</p>
+            <Select
+              className="w-full sm:w-[180px] h-[50px]"
+              classNamePrefix="react-select"
+              placeholder="Drop-off location"
+              options={areas.map((area) => ({
+                label: area.name,
+                value: area.id,
+              }))}
+              theme={(theme) => ({
+                ...theme,
+                colors: {
+                  ...theme.colors,
+                  primary: "var(--brand-base)",
+                },
+                borderRadius: 4,
               })}
-            </select>
+              onChange={(value) => form.setValue("locationTo", value?.value || 0)}
+              value={{
+                label: areas.find((area) => area.id === form.watch("locationTo"))?.name,
+                value: form.watch("locationTo"),
+              }}
+            />
+          </div>
+
+          <div className="flex flex-col">
+            <p className="text-[0.675rem] sm:text-[0.775rem] leading-[1.25rem] mb-2 text-gray-500">Pick-up Location</p>
+            <div className="flex items-center gap-3">
+              <DatePicker
+                className="w-full sm:w-[180px] h-[50px]"
+                calendarIcon={<CalendarIcon />}
+                calendarProps={{
+                  minDate: new Date((form.watch("startDate") ?? new Date()).getTime() + 3 * 24 * 60 * 60 * 1000),
+                  maxDate: new Date((form.watch("startDate") ?? new Date()).getTime() + 61 * 24 * 60 * 60 * 1000),
+                }}
+                onChange={(date) => form.setValue("endDate", date as Date)}
+                value={form.watch("endDate")}
+              />
+              <Select
+                aria-label="End time"
+                className="w-full sm:w-[110px] h-[50px]"
+                classNamePrefix="react-select"
+                name="endTime"
+                onChange={(value) => form.setValue("endTime", value?.value ?? "")}
+                value={{
+                  label: form.watch("endTime"),
+                  value: form.watch("endTime"),
+                }}
+                options={generateTimeOptions()}
+              />
+            </div>
+          </div>
+
+          <div>
+            <p className="text-[0.675rem] sm:text-[0.775rem] leading-[1.25rem] mb-2 text-gray-500">&nbsp;</p>
+            <button type="submit" className="bg-brand-base text-white h-[50px] px-6 rounded-lg w-full sm:w-auto">
+              Search
+            </button>
           </div>
         </div>
-
-        <div className="flex justify-center w-full col-span-2 lg:col-span-4 mt-4">
-          <button type="submit" className="bg-brand-base text-white h-[50px] px-6 rounded-lg w-full sm:w-auto">
-            Find a vehicle
-          </button>
-        </div>
+        <div className="flex justify-center w-full col-span-2 lg:col-span-4 mt-4"></div>
       </form>
 
-      <p className="text-[0.675rem] sm:text-[0.775rem] leading-[1.25rem] mb-2 text-gray-500">Pick-up Location</p>
-      </section>
+      {/*<p className="text-[0.675rem] sm:text-[0.775rem] leading-[1.25rem] mb-2 text-gray-500">Pick-up Location</p>*/}
+    </section>
   );
 };
 
