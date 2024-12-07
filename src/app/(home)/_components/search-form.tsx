@@ -136,8 +136,9 @@ const SearchForm: FC = () => {
                   render={({ field }) => (
                     <DatePicker
                       {...field}
+                      clearIcon={null}
                       calendarIcon={<CalendarIcon />}
-                      className="w-full sm:w-[165px] h-[50px]"
+                      className="w-full sm:w-[135px] h-[50px]"
                       calendarProps={{
                         minDate: new Date(),
                       }}
@@ -194,7 +195,8 @@ const SearchForm: FC = () => {
               {/*<p className="text-[0.675rem] sm:text-[0.775rem] leading-[1.25rem] mb-2 text-gray-500">Pick-up</p>*/}
               <div className="flex items-center gap-3">
                 <DatePicker
-                  className="w-full sm:w-[165px] h-[50px]"
+                  className="w-full sm:w-[135px] h-[50px]"
+                  clearIcon={null}
                   calendarIcon={<Calendar11Icon />}
                   calendarProps={{
                     minDate: new Date((form.watch("startDate") ?? new Date()).getTime() + 3 * 24 * 60 * 60 * 1000),
