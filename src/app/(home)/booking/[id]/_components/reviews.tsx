@@ -4,6 +4,7 @@ import StarFullIcon from "@/components/icons/star-full";
 import UserBestIcon from "@/components/icons/user-icon";
 import { Car, Review } from "@/typing/interfaces";
 import clsx from "clsx";
+import { useState } from "react";
 
 interface ReviewsProps {
   className?: string;
@@ -32,7 +33,9 @@ const ReviewBlock = ({ review }: { review: Review }) => {
                 {review.rating > index ? <StarFullIcon className="w-5 h-5" /> : <StarIcon className="w-5 h-5" />}
               </span>
             ))}
+            <h3>{review.name}</h3>
           </div>
+          <p className="pl-14 text-gray-600 max-sm:pl-0">{review.review}</p>
         </div>
       </div>
     </div>
