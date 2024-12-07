@@ -10,7 +10,7 @@ import { useSearchParams } from "next/navigation";
 import CalendarIcon from "@/components/icons/calendar-days-icon";
 import Calendar11Icon from "@/components/icons/calendar-days11-icon";
 import HourIcon from "@/components/icons/hours-icon";
-import Select, { components, DropdownIndicatorProps, Props } from "react-select";
+import Select, { components, DropdownIndicatorProps } from "react-select";
 
 import "react-date-picker/dist/DatePicker.css";
 import "react-calendar/dist/Calendar.css";
@@ -95,11 +95,9 @@ const SearchForm: FC = () => {
   const HourSelect = (props) => <Select {...props} components={{ DropdownIndicator }} />;
 
   return (
-    <section className="container mx-auto -mt-6 rounded-2xl bg-white p-4"
-    >
+    <section className="container mx-auto -mt-6 rounded-2xl bg-white p-4">
       <form onSubmit={form.handleSubmit(submitHandler)}>
-        <div className="flex flex-col gap-3 sm:flex-row"
-        >
+        <div className="flex flex-col gap-3 sm:flex-row">
           <div className="flex flex-col">
             {/*<p className="text-[0.675rem] sm:text-[0.775rem] leading-[1.25rem] mb-2 text-gray-500">Pick-up</p>*/}
             <Select
@@ -225,7 +223,7 @@ const SearchForm: FC = () => {
       </form>
 
       <p className="text-[0.675rem] sm:text-[0.775rem] leading-[1.25rem] text-gray-500">
-          The minimum rental period is 3 days.
+        The minimum rental period is 3 days.
       </p>
     </section>
   );
