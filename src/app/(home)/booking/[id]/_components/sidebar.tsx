@@ -10,6 +10,7 @@ import { notFound, useSearchParams } from "next/navigation";
 import React, { useEffect, useMemo, useState } from "react";
 import BookCar from "./bookCar";
 import { calculateDailyCost } from "@/hooks/useTotalPriceDay";
+import RentalIncludes from "@/app/(home)/booking/[id]/_components/RentalIncludes";
 
 interface BookingSidebarProps {
   className?: string;
@@ -88,7 +89,7 @@ const BookingSidebar: React.FC<BookingSidebarProps> = React.memo(({ className, c
               <div className="mb-5">
                 <h4 className="font-bold text-2xl text-slate-700 mb-4">Pick-up</h4>
                 <p className="text-slate-800">
-                  {new Date(startDate).toLocaleDateString()} {timeStart}
+                  {new Date(startDate).toLocaleDateString()} at {timeStart}
                   <br />
                   {areas.find((area) => area.id === Number(locationFrom))?.name}
                 </p>
@@ -96,7 +97,7 @@ const BookingSidebar: React.FC<BookingSidebarProps> = React.memo(({ className, c
               <div>
                 <h4 className="font-bold text-2xl text-slate-700 mb-4">Drop-off</h4>
                 <p className="text-slate-800">
-                  {new Date(endDate).toLocaleDateString()} {timeEnd}
+                  {new Date(endDate).toLocaleDateString()} at {timeEnd}
                   <br />
                   {areas.find((area) => area.id === Number(locationTo))?.name}
                 </p>
@@ -105,7 +106,28 @@ const BookingSidebar: React.FC<BookingSidebarProps> = React.memo(({ className, c
           </div>
           {/* Вставляем ссылку внизу */}
           <Link href="/" className="absolute bottom-4 right-4 rounded-md px-4 py-2 text-blue-500">
-            Change Date
+            <div className="flex gap-3">
+              <span className="flex items-center gap-1">
+                <svg width="18" height="18" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                  <path
+                    d="M3 14.205V16.7792C3 17.3315 3.44772 17.7792 4 17.7792H6.60902C6.86041 17.7792 7.10257 17.6845 7.2873 17.514L19.2789 6.44487C19.6793 6.07523 19.7101 5.45301 19.348 5.0457L16.6909 2.05647C16.3138 1.63221 15.6595 1.60656 15.2504 2L3.30689 13.4841C3.11081 13.6727 3 13.9329 3 14.205Z"
+                    stroke="black"
+                    strokeWidth="2"
+                  />
+                  <rect x="2.5" y="20.7792" width="19" height="1" rx="0.5" stroke="black" />
+                  <rect
+                    x="9.25676"
+                    y="16.2431"
+                    width="6.29428"
+                    height="1"
+                    rx="0.5"
+                    transform="rotate(-135 9.25676 16.2431)"
+                    stroke="black"
+                  />
+                </svg>
+              </span>
+              Change Date
+            </div>
           </Link>
         </div>
       </div>
@@ -137,15 +159,20 @@ const BookingSidebar: React.FC<BookingSidebarProps> = React.memo(({ className, c
             </p>
           </div>
         </div>
-        <ul className="list-disc text-slate-700 pl-5 font-medium mt-5">
-          <li>1 additional driver</li>
-          <li>Unlimited Mileage</li>
-          <li>Full to Full</li>
-          <li>
-            Taxed and fees {"("}including airport tax, customer facility fee, tourism tax, and sales tax{")"}
-          </li>
-          <li>Basic Rental Fee</li>
-        </ul>
+
+        {/*<ul className="list-disc text-slate-700 pl-5 font-medium mt-5">*/}
+        {/*  <li>1 additional driver</li>*/}
+        {/*  <li>Unlimited Mileage</li>*/}
+        {/*  <li>Full to Full</li>*/}
+        {/*  <li>*/}
+        {/*    Taxed and fees {"("}including airport tax, customer facility fee, tourism tax, and sales tax{")"}*/}
+        {/*  </li>*/}
+        {/*  <li>Basic Rental Fee</li>*/}
+        {/*</ul>*/}
+        <div className="w-full mt-5 text-slate-700">
+          <RentalIncludes label="" />
+        </div>
+
         <div className="w-full border-t-2 mt-5 pt-5 border-dashed border-tertiary-gray">
           <div className={clsx("flex items-start justify-between gap-4", isPremium && "line-through")}>
             <h4 className="text-gray-500">Refundable Deposit</h4>
