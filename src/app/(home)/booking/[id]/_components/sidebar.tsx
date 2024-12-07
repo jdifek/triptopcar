@@ -1,7 +1,7 @@
 "use client";
 
 import { areas } from "@/app/(home)/_data/areas.data";
-import { useTotalPrice } from "@/hooks/useTotalPrice";
+import { useDropoffPrice, usePickupPrice, useTotalPrice } from "@/hooks/useTotalPrice";
 import { Car } from "@/typing/interfaces";
 import clsx from "clsx";
 import dynamic from "next/dynamic";
@@ -44,6 +44,9 @@ const BookingSidebar: React.FC<BookingSidebarProps> = React.memo(({ className, c
   const [includeChildSeat, setIncludeChildSeat] = useState(false);
   const [dayTotal, setDayTotal] = useState(0);
 
+  const pickupLocationId = Number(searchParams.get("locationFrom")) || 1;
+  const dropoffLocationId = Number(searchParams.get("locationTo")) || 1;
+
   const totalPrice = useMemo(() => {
     return useTotalPrice({
       car,
@@ -52,10 +55,18 @@ const BookingSidebar: React.FC<BookingSidebarProps> = React.memo(({ className, c
       startDate: new Date(startDate),
       endDate: new Date(endDate),
       includeChildSeat: false,
-      pickupLocationId: Number(searchParams.get("locationFrom")) || 1, // ID пункта выдачи
-      dropoffLocationId: Number(searchParams.get("locationTo")) || 1, // ID пункта возврата
+      pickupLocationId: pickupLocationId,
+      dropoffLocationId: dropoffLocationId,
     });
   }, [car.id]);
+
+  const pickupPrice = useMemo(() => {
+    return usePickupPrice(pickupLocationId);
+  }, [pickupLocationId]);
+
+  const dropoffPrice = useMemo(() => {
+    return useDropoffPrice(dropoffLocationId);
+  }, [dropoffLocationId]);
 
   useEffect(() => {
     if (!(startDate.getTime() + 1) || !(endDate.getTime() + 1)) {
@@ -186,6 +197,35 @@ const BookingSidebar: React.FC<BookingSidebarProps> = React.memo(({ className, c
               })()}
             </h4>
           </div>
+
+          {/* Pick-up */}
+          <div className={clsx("flex items-start justify-between gap-4", isPremium && "line-through")}>
+            <h4 className="text-gray-500">Pick-up fee</h4>
+            <h4 className="text-gray-500">
+              {(() => {
+                return new Intl.NumberFormat("th-TH", {
+                  style: "currency",
+                  currency: "THB",
+                  minimumFractionDigits: 0,
+                }).format(pickupPrice);
+              })()}
+            </h4>
+          </div>
+
+          {/* Drop-off */}
+          <div className={clsx("flex items-start justify-between gap-4", isPremium && "line-through")}>
+            <h4 className="text-gray-500">Drop-off fee</h4>
+            <h4 className="text-gray-500">
+              {(() => {
+                return new Intl.NumberFormat("th-TH", {
+                  style: "currency",
+                  currency: "THB",
+                  minimumFractionDigits: 0,
+                }).format(dropoffPrice);
+              })()}
+            </h4>
+          </div>
+
           <div className="flex items-start justify-between gap-4">
             <h4 className="font-bold text-xl text-slate-700">Total</h4>
             <h4 className="text-slate-700 font-bold text-xl">

@@ -39,8 +39,22 @@ export function useTotalPrice({
   const totalPrice = baseRentalFee + insuranceFee + deliveryFee;
 
   // Логирование для отладки
-  console.log("Вызов useTotalPrice", { isPremium, daysQuantity, car, startDate, endDate, includeChildSeat, pickupLocation, dropoffLocation });
-  console.log("totalPrice", Math.round(totalPrice));
+  // console.log("Вызов useTotalPrice", { isPremium, daysQuantity, car, startDate, endDate, includeChildSeat, pickupLocation, dropoffLocation });
+  // console.log("totalPrice", Math.round(totalPrice));
 
   return Math.round(totalPrice);
+}
+
+export function usePickupPrice(pickupLocationId: number) {
+  const pickupLocation = areas.find((area) => area.id === pickupLocationId);
+  const deliveryFee = pickupLocation?.deliveryPrice || 0;
+
+  return Math.round(deliveryFee);
+}
+
+export function useDropoffPrice(dropoffLocationId: number) {
+  const dropoffLocation = areas.find((area) => area.id === dropoffLocationId);
+  const deliveryFee = dropoffLocation?.deliveryPrice || 0;
+
+  return Math.round(deliveryFee);
 }
