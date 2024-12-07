@@ -95,11 +95,13 @@ const SearchForm: FC = () => {
   const HourSelect = (props) => <Select {...props} components={{ DropdownIndicator }} />;
 
   return (
-    <section className="container mx-auto -mt-6 rounded-2xl bg-white p-4 ">
+    <section className="container mx-auto -mt-6 rounded-2xl bg-white p-4"
+    >
       <form onSubmit={form.handleSubmit(submitHandler)}>
-        <div className="flex flex-col gap-6 sm:flex-row">
+        <div className="flex flex-col gap-3 sm:flex-row"
+        >
           <div className="flex flex-col">
-            <p className="text-[0.675rem] sm:text-[0.775rem] leading-[1.25rem] mb-2 text-gray-500">Pick-up Location</p>
+            {/*<p className="text-[0.675rem] sm:text-[0.775rem] leading-[1.25rem] mb-2 text-gray-500">Pick-up</p>*/}
             <Select
               className="w-full sm:w-[180px] h-[50px]"
               classNamePrefix="react-select"
@@ -125,7 +127,7 @@ const SearchForm: FC = () => {
           </div>
 
           <div className="flex flex-col">
-            <p className="text-[0.675rem] sm:text-[0.775rem] leading-[1.25rem] mb-2 text-gray-500">Pick-up Location</p>
+            {/*<p className="text-[0.675rem] sm:text-[0.775rem] leading-[1.25rem] mb-2 text-gray-500">Pick-up</p>*/}
             <div className="flex items-center gap-3">
               <Controller
                 name="startDate"
@@ -145,7 +147,7 @@ const SearchForm: FC = () => {
               />
               <HourSelect
                 aria-label="Start time"
-                className="w-full sm:w-[110px] h-[50px]"
+                className="sm:w-[110px] h-[50px]"
                 classNamePrefix="react-select"
                 name="startTime"
                 onChange={(value) => form.setValue("startTime", value?.value ?? "")}
@@ -159,9 +161,9 @@ const SearchForm: FC = () => {
           </div>
 
           <div className="flex flex-col">
-            <p className="text-[0.675rem] sm:text-[0.775rem] leading-[1.25rem] mb-2 text-gray-500">Pick-up Location</p>
+            {/*<p className="text-[0.675rem] sm:text-[0.775rem] leading-[1.25rem] mb-2 text-gray-500">Pick-up</p>*/}
             <Select
-              className="w-full sm:w-[180px] h-[50px]"
+              className="sm:w-[180px] h-[50px]"
               classNamePrefix="react-select"
               placeholder="Drop-off location"
               options={areas.map((area) => ({
@@ -185,7 +187,7 @@ const SearchForm: FC = () => {
           </div>
 
           <div className="flex flex-col">
-            <p className="text-[0.675rem] sm:text-[0.775rem] leading-[1.25rem] mb-2 text-gray-500">Pick-up Location</p>
+            {/*<p className="text-[0.675rem] sm:text-[0.775rem] leading-[1.25rem] mb-2 text-gray-500">Pick-up</p>*/}
             <div className="flex items-center gap-3">
               <DatePicker
                 className="w-full sm:w-[180px] h-[50px]"
@@ -211,9 +213,9 @@ const SearchForm: FC = () => {
               />
             </div>
           </div>
-º
+
           <div>
-            <p className="text-[0.675rem] sm:text-[0.775rem] leading-[1.25rem] mb-2 text-gray-500">&nbsp;</p>
+            {/*<p className="text-[0.675rem] sm:text-[0.775rem] leading-[1.25rem] mb-2 text-gray-500">&nbsp;</p>*/}
             <button type="submit" className="bg-brand-base text-white h-[50px] px-6 rounded-lg w-full sm:w-auto">
               Search
             </button>
@@ -222,7 +224,9 @@ const SearchForm: FC = () => {
         <div className="flex justify-center w-full col-span-2 lg:col-span-4 mt-4"></div>
       </form>
 
-      {/*<p className="text-[0.675rem] sm:text-[0.775rem] leading-[1.25rem] mb-2 text-gray-500">Pick-up Location</p>*/}
+      <p className="text-[0.675rem] sm:text-[0.775rem] leading-[1.25rem] mb-2 text-gray-500">
+          The minimum rental period is 3 days.
+      </p>
     </section>
   );
 };
