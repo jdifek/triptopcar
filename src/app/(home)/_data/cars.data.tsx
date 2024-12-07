@@ -7,11 +7,11 @@ export const cars: Car[] = [
     name: "Toyota Fortuner",
     carBodyType: "SUV",
     pricePerDay: 2000,
-    engineCapacity: 2.4,
+    engineCapacity: "2.4",
     fuelType: "Diesel",
-    seatsQuantity: 7,  //fdf
+    seatsQuantity: 7, //fdf
     deposit: 15000,
-    year: 2023,
+    year: "2023",
     transmissionType: "Automatic",
     reviews: [
       {
@@ -36,8 +36,8 @@ export const cars: Car[] = [
     name: "Toyota Yaris Ativ",
     carBodyType: "Sedan",
     pricePerDay: 750,
-    engineCapacity: 1.2,
-    year: 2023,
+    engineCapacity: "1.2",
+    year: "2023",
     deposit: 6000,
     fuelType: "Gasoline A95",
     seatsQuantity: 5,
@@ -65,8 +65,8 @@ export const cars: Car[] = [
     name: "Toyota Veloz",
     carBodyType: "Van",
     pricePerDay: 950,
-    engineCapacity: 1.5,
-    year: 2023,
+    engineCapacity: "1.5",
+    year: "2023",
     fuelType: "Gasoline A95",
     deposit: 10000,
     seatsQuantity: 7,
@@ -94,8 +94,8 @@ export const cars: Car[] = [
     name: "Chevrolet Captiva",
     carBodyType: "SUV",
     pricePerDay: 850,
-    engineCapacity: 1.5,
-    year: 2020,
+    engineCapacity: "1.5",
+    year: "2020",
     fuelType: "Gasoline A95",
     deposit: 6000,
     seatsQuantity: 4,
@@ -117,14 +117,14 @@ export const cars: Car[] = [
       },
     ],
   },
-      {
+  {
     id: 5,
     imageUrl: "/mazda-cx30.png",
     name: "Mazda CX-30",
     carBodyType: "SUV",
     pricePerDay: 1200,
-    engineCapacity: 2.0,
-    year: 2023,
+    engineCapacity: "2.0",
+    year: "2023",
     fuelType: "Gasoline A95",
     deposit: 10000,
     seatsQuantity: 5,
@@ -146,17 +146,17 @@ export const cars: Car[] = [
       },
     ],
   },
-    {
+  {
     id: 6,
     imageUrl: "/toyota-fortuner.png",
     name: "Toyota Fortuner",
     carBodyType: "SUV",
     pricePerDay: 1700,
-    engineCapacity: 2.4,
+    engineCapacity: "2.4",
     fuelType: "Diesel",
     seatsQuantity: 7,
-    deposit: 10000, 
-    year: 2023,
+    deposit: 10000,
+    year: "2023",
     transmissionType: "Automatic",
     reviews: [
       {
@@ -175,5 +175,4 @@ export const cars: Car[] = [
       },
     ],
   },
-    
 ];
