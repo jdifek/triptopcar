@@ -8,7 +8,9 @@ import { zodResolver } from "@hookform/resolvers/zod";
 import dynamic from "next/dynamic";
 import { useSearchParams } from "next/navigation";
 import CalendarIcon from "@/components/icons/calendar-days-icon";
-import Select from "react-select";
+import Calendar11Icon from "@/components/icons/calendar-days11-icon";
+import HourIcon from "@/components/icons/hours-icon";
+import Select, { components, DropdownIndicatorProps, Props } from "react-select";
 
 import "react-date-picker/dist/DatePicker.css";
 import "react-calendar/dist/Calendar.css";
@@ -83,6 +85,15 @@ const SearchForm: FC = () => {
     return options;
   };
 
+  const DropdownIndicator = (props: DropdownIndicatorProps) => {
+    return (
+      <components.DropdownIndicator {...props}>
+        <HourIcon />
+      </components.DropdownIndicator>
+    );
+  };
+  const HourSelect = (props) => <Select {...props} components={{ DropdownIndicator }} />;
+
   return (
     <section className="container mx-auto -mt-6 rounded-2xl bg-white p-4 ">
       <form onSubmit={form.handleSubmit(submitHandler)}>
@@ -132,7 +143,7 @@ const SearchForm: FC = () => {
                   />
                 )}
               />
-              <Select
+              <HourSelect
                 aria-label="Start time"
                 className="w-full sm:w-[110px] h-[50px]"
                 classNamePrefix="react-select"
@@ -178,7 +189,7 @@ const SearchForm: FC = () => {
             <div className="flex items-center gap-3">
               <DatePicker
                 className="w-full sm:w-[180px] h-[50px]"
-                calendarIcon={<CalendarIcon />}
+                calendarIcon={<Calendar11Icon />}
                 calendarProps={{
                   minDate: new Date((form.watch("startDate") ?? new Date()).getTime() + 3 * 24 * 60 * 60 * 1000),
                   maxDate: new Date((form.watch("startDate") ?? new Date()).getTime() + 61 * 24 * 60 * 60 * 1000),
@@ -186,7 +197,7 @@ const SearchForm: FC = () => {
                 onChange={(date) => form.setValue("endDate", date as Date)}
                 value={form.watch("endDate")}
               />
-              <Select
+              <HourSelect
                 aria-label="End time"
                 className="w-full sm:w-[110px] h-[50px]"
                 classNamePrefix="react-select"
@@ -200,7 +211,7 @@ const SearchForm: FC = () => {
               />
             </div>
           </div>
-
+º
           <div>
             <p className="text-[0.675rem] sm:text-[0.775rem] leading-[1.25rem] mb-2 text-gray-500">&nbsp;</p>
             <button type="submit" className="bg-brand-base text-white h-[50px] px-6 rounded-lg w-full sm:w-auto">
