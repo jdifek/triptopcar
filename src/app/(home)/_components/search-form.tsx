@@ -97,9 +97,8 @@ const SearchForm: FC = () => {
   return (
     <section className="container mx-auto -mt-6 rounded-2xl bg-white p-4">
       <form onSubmit={form.handleSubmit(submitHandler)}>
-        <div className="flex flex-col gap-3 sm:flex-row">
-          <div className="flex flex-col">
-            {/*<p className="text-[0.675rem] sm:text-[0.775rem] leading-[1.25rem] mb-2 text-gray-500">Pick-up</p>*/}
+        <div className="flex flex-wrap flex-col gap-3 sm:flex-row">
+          <div className="flex flex-row gap-3">
             <Select
               className="w-full sm:w-[180px] h-[50px]"
               classNamePrefix="react-select"
@@ -122,46 +121,41 @@ const SearchForm: FC = () => {
                 value: form.watch("locationFrom"),
               }}
             />
+
+            <Controller
+              name="startDate"
+              control={form.control}
+              render={({ field }) => (
+                <DatePicker
+                  {...field}
+                  calendarIcon={<CalendarIcon />}
+                  className="w-full sm:w-[165px] h-[50px]"
+                  calendarProps={{
+                    minDate: new Date(),
+                  }}
+                  onChange={(date) => form.setValue("startDate", date ? (date as Date) : new Date())}
+                  value={field.value}
+                />
+              )}
+            />
+            <HourSelect
+              aria-label="Start time"
+              className="w-full sm:w-[105px] h-[50px]"
+              classNamePrefix="react-select"
+              name="startTime"
+              onChange={(value: HTMLSelectElement) => form.setValue("startTime", value?.value ?? "")}
+              value={{
+                label: form.watch("startTime"),
+                value: form.watch("startTime"),
+              }}
+              options={generateTimeOptions()}
+            />
           </div>
 
-          <div className="flex flex-col">
-            {/*<p className="text-[0.675rem] sm:text-[0.775rem] leading-[1.25rem] mb-2 text-gray-500">Pick-up</p>*/}
-            <div className="flex items-center gap-3">
-              <Controller
-                name="startDate"
-                control={form.control}
-                render={({ field }) => (
-                  <DatePicker
-                    {...field}
-                    calendarIcon={<CalendarIcon />}
-                    className="w-full sm:w-[180px] h-[50px]"
-                    calendarProps={{
-                      minDate: new Date(),
-                    }}
-                    onChange={(date) => form.setValue("startDate", date ? (date as Date) : new Date())}
-                    value={field.value}
-                  />
-                )}
-              />
-              <HourSelect
-                aria-label="Start time"
-                className="sm:w-[110px] h-[50px]"
-                classNamePrefix="react-select"
-                name="startTime"
-                onChange={(value: HTMLSelectElement) => form.setValue("startTime", value?.value ?? "")}
-                value={{
-                  label: form.watch("startTime"),
-                  value: form.watch("startTime"),
-                }}
-                options={generateTimeOptions()}
-              />
-            </div>
-          </div>
-
-          <div className="flex flex-col">
+          <div className="flex flex-row gap-3">
             {/*<p className="text-[0.675rem] sm:text-[0.775rem] leading-[1.25rem] mb-2 text-gray-500">Pick-up</p>*/}
             <Select
-              className="sm:w-[180px] h-[50px]"
+              className="w-full sm:w-[180px] h-[50px]"
               classNamePrefix="react-select"
               placeholder="Drop-off location"
               options={areas.map((area) => ({
@@ -182,47 +176,49 @@ const SearchForm: FC = () => {
                 value: form.watch("locationTo"),
               }}
             />
-          </div>
 
-          <div className="flex flex-col">
-            {/*<p className="text-[0.675rem] sm:text-[0.775rem] leading-[1.25rem] mb-2 text-gray-500">Pick-up</p>*/}
-            <div className="flex items-center gap-3">
-              <DatePicker
-                className="w-full sm:w-[180px] h-[50px]"
-                calendarIcon={<Calendar11Icon />}
-                calendarProps={{
-                  minDate: new Date((form.watch("startDate") ?? new Date()).getTime() + 3 * 24 * 60 * 60 * 1000),
-                  maxDate: new Date((form.watch("startDate") ?? new Date()).getTime() + 61 * 24 * 60 * 60 * 1000),
-                }}
-                onChange={(date) => form.setValue("endDate", date as Date)}
-                value={form.watch("endDate")}
-              />
-              <HourSelect
-                aria-label="End time"
-                className="w-full sm:w-[110px] h-[50px]"
-                classNamePrefix="react-select"
-                name="endTime"
-                onChange={(value: HTMLSelectElement) => form.setValue("endTime", value?.value ?? "")}
-                value={{
-                  label: form.watch("endTime"),
-                  value: form.watch("endTime"),
-                }}
-                options={generateTimeOptions()}
-              />
-            </div>
+            <DatePicker
+              className="w-full sm:w-[165px] h-[50px]"
+              calendarIcon={<Calendar11Icon />}
+              calendarProps={{
+                minDate: new Date((form.watch("startDate") ?? new Date()).getTime() + 3 * 24 * 60 * 60 * 1000),
+                maxDate: new Date((form.watch("startDate") ?? new Date()).getTime() + 61 * 24 * 60 * 60 * 1000),
+              }}
+              onChange={(date) => form.setValue("endDate", date as Date)}
+              value={form.watch("endDate")}
+            />
+            <HourSelect
+              aria-label="End time"
+              className="w-full sm:w-[105px] h-[50px]"
+              classNamePrefix="react-select"
+              name="endTime"
+              onChange={(value: HTMLSelectElement) => form.setValue("endTime", value?.value ?? "")}
+              value={{
+                label: form.watch("endTime"),
+                value: form.watch("endTime"),
+              }}
+              options={generateTimeOptions()}
+            />
           </div>
 
           <div>
-            {/*<p className="text-[0.675rem] sm:text-[0.775rem] leading-[1.25rem] mb-2 text-gray-500">&nbsp;</p>*/}
             <button type="submit" className="bg-brand-base text-white h-[50px] px-6 rounded-lg w-full sm:w-auto">
               Search
             </button>
           </div>
         </div>
-        {/*<div className="flex justify-center w-full col-span-2 lg:col-span-4 mt-4"></div>*/}
+
+        {/*<div className="flex justify-center w-full col-span-2 lg:col-span-4 mt-4">*/}
+        {/*  <button*/}
+        {/*    type="submit"*/}
+        {/*    className="bg-brand-base text-white h-[50px] px-6 rounded-lg w-full sm:w-auto"*/}
+        {/*  >*/}
+        {/*    Search*/}
+        {/*  </button>*/}
+        {/*</div>*/}
       </form>
 
-      <p className="text-[0.675rem] sm:text-[0.775rem] leading-[1.25rem] text-gray-500">
+      <p className="mt-1 text-[0.675rem] sm:text-[0.775rem] leading-[1.25rem] text-gray-500">
         The minimum rental period is 3 days.
       </p>
     </section>
