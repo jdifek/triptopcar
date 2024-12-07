@@ -148,7 +148,7 @@ const SearchForm: FC = () => {
                 className="sm:w-[110px] h-[50px]"
                 classNamePrefix="react-select"
                 name="startTime"
-                onChange={(value: any) => form.setValue("startTime", value?.value ?? "")}
+                onChange={(value: HTMLSelectElement) => form.setValue("startTime", value?.value ?? "")}
                 value={{
                   label: form.watch("startTime"),
                   value: form.watch("startTime"),
@@ -202,7 +202,7 @@ const SearchForm: FC = () => {
                 className="w-full sm:w-[110px] h-[50px]"
                 classNamePrefix="react-select"
                 name="endTime"
-                onChange={(value: any) => form.setValue("endTime", value?.value ?? "")}
+                onChange={(value: HTMLSelectElement) => form.setValue("endTime", value?.value ?? "")}
                 value={{
                   label: form.watch("endTime"),
                   value: form.watch("endTime"),
