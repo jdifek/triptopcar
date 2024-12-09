@@ -27,7 +27,7 @@ export const cars: Car[] = [
         review:
           "The rental process was smooth and hassle-free. The staff were friendly, professional, and very helpful in providing all the necessary information. They even gave us some great tips on places to visit and the best routes to take.",
         rating: 5,
-      },  
+      },
       {
         id: 3,
         name: "Stephen Hendry",
