@@ -305,4 +305,62 @@ export const cars: Car[] = [
       },
     ],
   },
+      {
+    id: 11,
+    imageUrl: "/bmw_530e.png",
+    name: "BMW 530E",
+    carBodyType: "Sedan",
+    pricePerDay: 7500,
+    engineCapacity: "3.0 Hybrid",
+    fuelType: "Gasoline A95",
+    seatsQuantity: 5,
+    deposit: 40000,
+    year: "2023",
+    transmissionType: "Automatic",
+    reviews: [
+      {
+        id: 1,
+        name: "Joseph",
+        review:
+          "I am used to driving my favorite brand of car, BMW, and I am glad that I can afford to rent it in Thailand, although it is quite an expensive pleasure due to high government taxes.",
+        rating: 5,
+      },
+      {
+        id: 2,
+        name: "Robert",
+        review:
+          "We had to rent a Toyota Fortuner and for the locationVilla on a steep hill.Some taxis in the daughterCould not afford to go up our steep hill and bring us to what was quite uncomfortable.Toyota Fortuner coped with this task perfectly and we are grateful to the service for its prompt work and delivery of the car despite the late hour. Thank you very much!",
+        rating: 5,
+      },
+    ],
+  },
+  {
+    id: 12,
+    imageUrl: "/bmw_x5.png",
+    name: "BMW X5",
+    carBodyType: "SUV",
+    pricePerDay: 13000,
+    engineCapacity: "4.5 Hybrid",
+    fuelType: "Gasoline A95",
+    seatsQuantity: 7,
+    deposit: 10000,
+    year: "2023",
+    transmissionType: "Automatic",
+    reviews: [
+      {
+        id: 1,
+        name: "David Sarokovich",
+        review:
+          "Toyota Fortuner is the most powerful car from diesel SUVs in this company. There was a large company of us and we did not even consider other rental options, since we visit Thailand every year and already had experience renting other models of cars. I recommend everyone who wants a powerful car to choose and specifically Toyota Fortuner.",
+        rating: 5,
+      },
+      {
+        id: 2,
+        name: "Robert V.",
+        review:
+          "We had to rent a Toyota Fortuner and for the locationVilla on a steep hill.Some taxis in the daughterCould not afford to go up our steep hill and bring us to what was quite uncomfortable.Toyota Fortuner coped with this task perfectly and we are grateful to the service for its prompt work and delivery of the car despite the late hour. Thank you very much!",
+        rating: 5,
+      },
+    ],
+  },
 ];
