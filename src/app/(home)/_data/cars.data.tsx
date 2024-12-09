@@ -164,7 +164,7 @@ export const cars: Car[] = [
     id: 6,
     imageUrl: "/toyota_yaris_cross.png",
     name: "Toyota Yaris Cros",
-    carBodyType: "Suv",
+    carBodyType: "SUV",
     pricePerDay: 1250,
     engineCapacity: "1.5 Hybrid",
     year: "2024",
