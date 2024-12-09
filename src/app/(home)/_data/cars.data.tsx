@@ -9,7 +9,7 @@ export const cars: Car[] = [
     pricePerDay: 700,
     engineCapacity: "1.0 Turbo",
     fuelType: "Gasoline A95",
-    seatsQuantity: 4, //fdf
+    seatsQuantity: 4,
     deposit: 6000,
     year: "2023",
     transmissionType: "Automatic",
@@ -75,7 +75,7 @@ export const cars: Car[] = [
   },
   {
     id: 3,
-    imageUrl: "/toyota-veloz.png",
+    imageUrl: "/toyota_veloz.png",
     name: "Toyota Veloz",
     carBodyType: "Van",
     pricePerDay: 950,
