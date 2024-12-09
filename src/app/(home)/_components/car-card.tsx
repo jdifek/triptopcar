@@ -160,8 +160,7 @@ const CarCard: FC<{ car: Car; className?: string }> = ({ car, className }) => {
             href={getCarBookingLink()}
             className="flex w-min items-center rounded-lg bg-brand-base px-4 py-2 text-white ml-auto"
             onClick={(e) => {
-                console.log("Link clicked!");
-                // Убедитесь, что preventDefault() не используется здесь
+                console.log("Generated link:", getCarBookingLink());
               }}
           >
             Book <span className="text-lg ml-2">{">"}</span>
