@@ -6,7 +6,7 @@ export const cars: Car[] = [
     imageUrl: "/honda_jazz.png",
     name: "Honda Jazz",
     carBodyType: "Hatchback",
-    pricePerDay: 2000,
+    pricePerDay: 700,
     engineCapacity: "1.0 Turbo",
     fuelType: "Gasoline A95",
     seatsQuantity: 4, //fdf
