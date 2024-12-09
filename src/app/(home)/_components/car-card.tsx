@@ -70,10 +70,10 @@ const CarCard: FC<{ car: Car; className?: string }> = ({ car, className }) => {
               <SnowflakeIcon className="w-6 h-6" /> Air Condition
             </span>
             <span className="flex items-center gap-1">
-              <SeatIcon className="w-6 h-6" /> {car.seatsQuantity}
+              <SeatIcon className="w-6 h-6" /> {car.seatsQuantity} seats
             </span>
             <span className="flex items-center gap-1">
-              <EngineIcon className="w-6 h-6" /> {car.engineCapacity}L
+              <EngineIcon className="w-6 h-6" /> {car.engineCapacity}
             </span>
             <span className="flex items-center gap-1">
               <CalendarIcon className="w-6 h-6" /> {car.year}

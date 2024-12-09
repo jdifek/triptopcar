@@ -1,6 +1,6 @@
 "use client";
 
-import { FC, useState } from "react";
+import { useState } from "react";
 import Select from "react-select";
 import CarCard from "./car-card";
 import { Car, CarBodyType } from "@/typing/interfaces";
@@ -41,33 +41,21 @@ const CarCatalog = () => {
   const [sort, setSort] = useState<Option | null>(defaultSort);
 
   const carsForRender = cars
-    .filter(
-      (car) =>
-        carTypesFilter.length === 0 ||
-        carTypesFilter.includes(car.carBodyType as any)
-    )
+    .filter((car) => carTypesFilter.length === 0 || carTypesFilter.includes(car.carBodyType as any))
     .toSorted(sortHandlers[sort?.value || "price-high-to-low"]);
 
-    const toggleCarType = (type: CarBodyType) => {
-      setCarTypesFilter((prev) =>
-        prev.includes(type) ? [] : [type]  // Если тип уже выбран, сбрасываем фильтр, иначе выбираем новый тип
-      );
-    };
-    
+  const toggleCarType = (type: CarBodyType) => {
+    setCarTypesFilter(
+      (prev) => (prev.includes(type) ? [] : [type]), // Если тип уже выбран, сбрасываем фильтр, иначе выбираем новый тип
+    );
+  };
 
   return (
     <>
       <div className="rounded-2xl bg-white p-3">
         <ul className="flex gap-8 max-xl:gap-2 font-bold uppercase *:grid *:basis-full *:place-items-center *:rounded-sm *:border *:border-tertiary-gray *:p-2 max-[600px]:grid max-[600px]:grid-cols-3 max-[600px]:px-20 max-[500px]:px-0 max-[425px]:grid-cols-3">
-          <li
-            className={clsx(
-              "max-xl:scale-90"
-            )}
-          >
-            <button
-              className="w-full h-full"
-              onClick={() => setCarTypesFilter([])}
-            >
+          <li className={clsx("max-xl:scale-90")}>
+            <button className="w-full h-full" onClick={() => setCarTypesFilter([])}>
               All
             </button>
           </li>
@@ -75,9 +63,8 @@ const CarCatalog = () => {
             <li
               key={carType.id}
               className={clsx(
-                carTypesFilter.includes(carType.name as any) &&
-                  "bg-tertiary-gray",
-                "max-xl:scale-90 max-md:w-full max-md:h-full"
+                carTypesFilter.includes(carType.name as any) && "bg-tertiary-gray",
+                "max-xl:scale-90 max-md:w-full max-md:h-full",
               )}
             >
               <button
@@ -91,7 +78,7 @@ const CarCatalog = () => {
           ))}
         </ul>
       </div>
-      <div className="flex items-center justify-between rounded-2xl bg-white p-2 max-[350px]:flex-col">
+      <div className="flex items-center justify-between rounded-2xl bg-white p-4 max-[350px]:flex-col">
         <Select
           classNamePrefix="react-select"
           placeholder="Pick-up location"

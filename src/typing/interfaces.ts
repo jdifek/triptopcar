@@ -13,8 +13,8 @@ export interface Car {
   deposit: number;
   carBodyType: CarBodyType["name"];
   pricePerDay: number;
-  engineCapacity: number;
-  year: number;
+  engineCapacity: string;
+  year: string;
   fuelType: "Gasoline A95" | "Diesel" | "Electric";
   seatsQuantity: number; // Тип должен быть числом
   transmissionType: "Automatic" | "Manual";

@@ -109,18 +109,18 @@ const BookCar: React.FC<BookCarProps> = ({ className, car }) => {
         className
       )}
     >
-      <h2 className="text-slate-700 text-2xl font-bold text-center mx-auto">
+      <h2 className="text-slate-700 text-2xl font-bold">
         User Information
       </h2>
       <form
-        className="mt-10 w-full flex items-end gap-5 max-sm:flex-col justify-start"
+        className="mt-4 w-full flex items-end gap-5 max-sm:flex-col justify-start"
         onSubmit={handleSubmit(submitHandler)}
       >
-        <div className="flex flex-col items-center  w-full">
+        <div className="flex flex-col  w-full">
           <div className="flex flex-col items-start gap-2 w-full mb-[7px]">
             <label
               htmlFor="fullName"
-              className="text-lg font-medium text-gray-500"
+              className="text-sm font-medium text-gray-500"
             >
               Full Name
             </label>
@@ -135,7 +135,7 @@ const BookCar: React.FC<BookCarProps> = ({ className, car }) => {
           <div className="flex flex-col items-start gap-2 w-full">
             <label
               htmlFor="phone"
-              className="text-lg font-medium  text-gray-500"
+              className="text-sm font-medium  text-gray-500"
             >
               Phone Number
             </label>

@@ -20,9 +20,9 @@ export function calculateDailyCost(
     dailyCost += childSeatCost;
   }
 
-  console.log(
-    `Дата: ${date.toLocaleDateString()}, Базовая стоимость: ${dailyRate}, Коэффициент сезона: ${seasonCoefficient}, Стоимость за день: ${dailyCost}`,
-  );
+  // console.log(
+  //   `Дата: ${date.toLocaleDateString()}, Базовая стоимость: ${dailyRate}, Коэффициент сезона: ${seasonCoefficient}, Стоимость за день: ${dailyCost}`,
+  // );
 
   return dailyCost;
 }
