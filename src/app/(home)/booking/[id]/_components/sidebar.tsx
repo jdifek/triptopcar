@@ -199,7 +199,7 @@ const BookingSidebar: React.FC<BookingSidebarProps> = React.memo(({ className, c
           </div>
 
           {/* Pick-up */}
-          <div className={clsx("flex items-start justify-between gap-4", isPremium && "line-through")}>
+          <div className={clsx("flex items-start justify-between gap-4")}>
             <h4 className="text-gray-500">Pick-up fee</h4>
             <h4 className="text-gray-500">
               {(() => {
@@ -213,7 +213,7 @@ const BookingSidebar: React.FC<BookingSidebarProps> = React.memo(({ className, c
           </div>
 
           {/* Drop-off */}
-          <div className={clsx("flex items-start justify-between gap-4", isPremium && "line-through")}>
+          <div className={clsx("flex items-start justify-between gap-4")}>
             <h4 className="text-gray-500">Drop-off fee</h4>
             <h4 className="text-gray-500">
               {(() => {
@@ -227,7 +227,7 @@ const BookingSidebar: React.FC<BookingSidebarProps> = React.memo(({ className, c
           </div>
 
           {/* Tax */}
-          <div className={clsx("flex items-start justify-between gap-4", isPremium && "line-through")}>
+          <div className={clsx("flex items-start justify-between gap-4")}>
             <h4 className="text-gray-500">Tax fee (7%)</h4>
             <h4 className="text-gray-500">
               {(() => {
