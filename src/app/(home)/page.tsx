@@ -1,4 +1,4 @@
-import SearchForm from "./_components/search-form";
+import SearchForm2 from "./_components/search-form2";
 import CarCatalog from "./_components/car-catalog";
 import Link from "next/link";
 import Image from "next/image";
@@ -7,7 +7,7 @@ import StillQuestions from "./_components/still-questions";
 export default async function HomePage() {
   return (
     <>
-      <SearchForm />
+      <SearchForm2 />
       <section className="container mx-auto mb-4 mt-8 flex gap-4 min-h-[70vh] max-md:px-4">
         <aside className="basis-1/4 max-xl:basis-1/3 rounded-2xl text-center max-lg:hidden sticky top-5">
           <div className="w-full rounded-2xl bg-white">
