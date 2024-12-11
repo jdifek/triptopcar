@@ -7,12 +7,10 @@ import { useTotalPrice } from "@/hooks/useTotalPrice";
 import { Car } from "@/typing/interfaces";
 import clsx from "clsx";
 import dynamic from "next/dynamic";
-import Link from "next/link";
 import { useRouter, useSearchParams } from "next/navigation";
 import { useEffect } from "react";
 import { useForm } from "react-hook-form";
 import toast from "react-hot-toast";
-import Select from "react-select";
 
 interface BookCarProps {
   className?: string;
@@ -22,6 +20,7 @@ interface BookCarProps {
 interface Form {
   phone: string;
   fullName: string;
+  comment: string;
   pickupLocation: string;
   dropoffLocation: string;
 }
@@ -31,23 +30,12 @@ const BookCar: React.FC<BookCarProps> = ({ className, car }) => {
   const timeStart = searchParams.get("timeStart") ?? "10:00";
   const timeEnd = searchParams.get("timeEnd") ?? "10:00";
   const locationFrom = areas.find(
-    (area) =>
-      area.id ===
-      (Number(searchParams.get("locationFrom")) !== 0
-        ? Number(searchParams.get("locationFrom"))
-        : 1)
-  )?.name;
+    (area) => area.id === (Number(searchParams.get("locationFrom")) !== 0 ? Number(searchParams.get("locationFrom")) : 1),)?.name;
   const locationTo = areas.find(
-    (area) =>
-      area.id ===
-      (Number(searchParams.get("locationTo")) !== 0
-        ? Number(searchParams.get("locationTo"))
-        : 1)
+    (area) => area.id === (Number(searchParams.get("locationTo")) !== 0 ? Number(searchParams.get("locationTo")) : 1),
   )?.name;
   const startDate =
-    Number(searchParams.get("startDate")) !== 0
-      ? Number(searchParams.get("startDate"))
-      : new Date().getTime();
+    Number(searchParams.get("startDate")) !== 0 ? Number(searchParams.get("startDate")) : new Date().getTime();
   const endDate =
     Number(searchParams.get("endDate")) !== 0
       ? Number(searchParams.get("endDate"))
@@ -65,7 +53,6 @@ const BookCar: React.FC<BookCarProps> = ({ className, car }) => {
     dropoffLocationId: Number(searchParams.get("locationTo")) || 1, // ID пункта возврата
   });
 
-
   const { push } = useRouter();
 
   const { mutateAsync: createBooking, isPending, isSuccess } = useBookCar();
@@ -73,7 +60,7 @@ const BookCar: React.FC<BookCarProps> = ({ className, car }) => {
     shouldFocusError: true,
   });
 
-  const submitHandler = async ({ fullName, phone }: Form) => {
+  const submitHandler = async ({ fullName, phone, comment }: Form) => {
     if (fullName && phone && phone.startsWith("+") && phone.length >= 9) {
       createBooking(
         `Car Booking\n\n${car.name} ${car.year}\nPick-up Location: ${
@@ -86,10 +73,10 @@ const BookCar: React.FC<BookCarProps> = ({ className, car }) => {
           timeEnd
         }\nTotal: ${totalPrice} ฿\nDeposit: ${car.deposit} ฿\nInsurance: ${
           isPremium ? "Full" : "Standart"
-        }\n${fullName} ${phone}\n`
+        }\n${fullName} ${phone}\n${comment}\n`,
       );
       push(
-        `/checkout?carId=${car.id}&isPremium=${isPremium}&startDate=${startDate}&endDate=${endDate}&timeStart=${timeStart}&timeEnd=${timeEnd}&dropoffLocation=${locationTo}&pickupLocation=${locationFrom}&fullName=${fullName}&phone=${phone}`
+        `/checkout?carId=${car.id}&isPremium=${isPremium}&startDate=${startDate}&endDate=${endDate}&timeStart=${timeStart}&timeEnd=${timeEnd}&dropoffLocation=${locationTo}&pickupLocation=${locationFrom}&fullName=${fullName}&phone=${phone}`,
       );
     } else {
       toast.error("Please fill all the fields correctly.");
@@ -103,25 +90,15 @@ const BookCar: React.FC<BookCarProps> = ({ className, car }) => {
   }, [isSuccess]);
 
   return (
-    <div
-      className={clsx(
-        "bg-white rounded-lg flex flex-col items-start p-5",
-        className
-      )}
-    >
-      <h2 className="text-slate-700 text-2xl font-bold">
-        User Information
-      </h2>
+    <div className={clsx("bg-white rounded-lg flex flex-col items-start p-5", className)}>
+      <h2 className="text-slate-700 text-2xl font-bold">User Information</h2>
       <form
         className="mt-4 w-full flex items-end gap-5 max-sm:flex-col justify-start"
         onSubmit={handleSubmit(submitHandler)}
       >
         <div className="flex flex-col  w-full">
           <div className="flex flex-col items-start gap-2 w-full mb-[7px]">
-            <label
-              htmlFor="fullName"
-              className="text-sm font-medium text-gray-500"
-            >
+            <label htmlFor="fullName" className="text-sm font-medium text-gray-500">
               Full Name
             </label>
             <input
@@ -133,10 +110,7 @@ const BookCar: React.FC<BookCarProps> = ({ className, car }) => {
             />
           </div>
           <div className="flex flex-col items-start gap-2 w-full">
-            <label
-              htmlFor="phone"
-              className="text-sm font-medium  text-gray-500"
-            >
+            <label htmlFor="phone" className="text-sm font-medium  text-gray-500">
               Phone Number
             </label>
             <input
@@ -145,6 +119,16 @@ const BookCar: React.FC<BookCarProps> = ({ className, car }) => {
               type="tel"
               className="w-full h-[50px] border-[1px] rounded-sm pl-2"
               placeholder="+1 234 567 890"
+            />
+          </div>
+          <div className="flex flex-col items-start gap-2 w-full">
+            <label htmlFor="comment" className="text-sm font-medium  text-gray-500">
+              Comments
+            </label>
+            <textarea
+              id="comment"
+              {...register("comment")}
+              className="w-full border-[1px] rounded-sm pl-2"
             />
           </div>
           <div className="flex flex-col items-start w-[100%]">
