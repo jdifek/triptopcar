@@ -46,7 +46,7 @@ export const cars: Car[] = [
   },
   {
     id: 2,
-    imageUrl: "/honda_city.png",
+    imageUrl: "/honda_city_hatchback.png",
     name: "Honda City",
     carBodyType: "Hatchback",
     pricePerDay: 750,
