@@ -6,7 +6,7 @@ export const cars: Car[] = [
     imageUrl: "/honda_jazz.png",
     name: "Honda Jazz",
     carBodyType: "Hatchback",
-    pricePerDay: 600,
+    pricePerDay: 650,
     engineCapacity: "1.0 Turbo",
     fuelType: "Gasoline A95",
     seatsQuantity: 4,
@@ -46,151 +46,71 @@ export const cars: Car[] = [
   },
   {
     id: 2,
-    imageUrl: "/toyota-yaris-ativ.png",
-    name: "Toyota Yaris Ativ",
-    carBodyType: "Sedan",
-    pricePerDay: 725,
-    engineCapacity: "1.2",
-    year: "2023",
-    deposit: 6000,
+    imageUrl: "/honda_city.png",
+    name: "Honda City",
+    carBodyType: "Hatchback",
+    pricePerDay: 750,
+    engineCapacity: "1.0 Turbo",
     fuelType: "Gasoline A95",
-    seatsQuantity: 5,
-    transmissionType: "Automatic",
-    reviews: [
-      {
-        id: 1,
-        name: "Donald B.",
-        review:
-          "We rented the most affordable car available for our dates Toyota Yaris Ativ. Its was good car, the only thing on the mountain trails was the lack of a 1.2 liter engine.",
-        rating: 4,
-      },
-      {
-        id: 2,
-        name: "Emely Hernandez",
-        review:
-          "We were thrilled with the Toyota Yaris Ativ! It's spacious, perfect for family trips around Phuket. It glides smoothly over bumpy roads, and we enjoyed traveling comfortably on both beaches and mountain roads. I definitely recommend it for rental.",
-        rating: 5,
-      },
-    ],
-  },
-      {
-    id: 3,
-    imageUrl: "/toyota_vios.png",
-    name: "Toyota Vios",
-    carBodyType: "Sedan",
-    pricePerDay: 650,
-    engineCapacity: "1.5",
-    year: "2022",
-    fuelType: "Gasoline A95",
-    deposit: 5000,
-    seatsQuantity: 5,
-    transmissionType: "Automatic",
-    reviews: [
-      {
-        id: 1,
-        name: "Semen A.",
-        review:
-          "Despite its age, it was a good, well-maintained car that was technically looked after, and it never let us down on our trip to Koh Phangan. We were able to enjoy driving the Toyota Vios and enjoy the sights of Thailand to the fullest.",
-        rating: 5,
-      },
-      {
-        id: 2,
-        name: "Victor Shinko",
-        review:
-          "The best car for little money with an engine capacity of 1.5 liters for this money is currently available. I recommend choosing this one for rent.",
-        rating: 5,
-      },
-    ],
-  },
-      {
-    id: 4,
-    imageUrl: "/toyota_veloz.png",
-    name: "Toyota Veloz",
-    carBodyType: "Van",
-    pricePerDay: 950,
-    engineCapacity: "1.5",
-    year: "2023",
-    fuelType: "Gasoline A95",
-    deposit: 10000,
-    seatsQuantity: 7,
-    transmissionType: "Automatic",
-    reviews: [
-      {
-        id: 1,
-        name: "Anderson Grich",
-        review:
-          "I rented a Toyota Vios for my stay in Phuket and it was fantastic. The car was beautiful, reliable and very economical. The rental and return process was quick and smooth, with helpful staff guiding me through it. Highly recommended!",
-        rating: 5,
-      },
-      {
-        id: 2,
-        name: "Emily Johnson",
-        review:
-          "Renting a Toyota Vios in Phuket was a fantastic decision. The car was reliable, comfortable, and perfect for exploring the island. The rental process was smooth and easy, and the staff were very friendly.",
-        rating: 5,
-      },
-    ],
-  },
-      {
-    id: 5,
-    imageUrl: "/mazda_2.png",
-    name: "Mazda 2",
-    carBodyType: "Sedan",
-    pricePerDay: 650,
-    engineCapacity: "1.2",
-    year: "2023",
-    fuelType: "Gasoline A95",
-    deposit: 5000,
-    seatsQuantity: 4,
-    transmissionType: "Automatic",
-    reviews: [
-      {
-        id: 1,
-        name: "Michael",
-        review:
-          "I booked Mazda 2 four months in advance through the website, To get an additional discount on pre-booking. I received the car at Phuket airportIn accordance withAbuseThe same class and model, Color. I can't imagineHolidays in Phuket without a car anymore. Now I will alwaysRent a car, it's very convenient and you can visitSave money on taxis many different places and attractions in Thailand. I recommend everyone to rent cars, it's very convenient and fastFor little money.",
-        rating: 5,
-      },
-      {
-        id: 2,
-        name: "James",
-        review:
-          "I rented a car for two weeks upon arrival right at the Phuket airport. I returned it there to a friendly employee of the company. The only thing I didn't see in the rental conditions was a payment for a car wash of 400 baht at the end of the rental period, since the car was quite dirty after two weeks of use. Otherwise, everything went smoothly and quite easily. Next time I will contact the same company.",
-        rating: 5,
-      },
-    ],
-  },
-      {
-    id: 6,
-    imageUrl: "/toyota_yaris_cross.png",
-    name: "Toyota Yaris Cros",
-    carBodyType: "SUV",
-    pricePerDay: 1250,
-    engineCapacity: "1.5 Hybrid",
     year: "2024",
-    fuelType: "Gasoline A95",
-    deposit: 10000,
+    deposit: 6000,
     seatsQuantity: 5,
     transmissionType: "Automatic",
     reviews: [
       {
         id: 1,
-        name: "William",
+        name: "Smith",
         review:
-          "This wonderful little crossover car turned out to be a very economical assistant on our trip. During the valuable month, it took us to the most remote corners of Thailand. We were very pleased with our decision to rent a Toyota Yaris Atif. I recommend choosing it!",
+          "Honda city hatchback is much more than it may seem at first glance. This car brightened up our vacation in Phuket, we were able to get to the most remote sights of Thailand on our own. I recommend taking this car in a new body.",
         rating: 5,
       },
       {
         id: 2,
-        name: "Johnson",
+        name: "Christopher",
         review:
-          "Compact Micros er is a great optionFor its money. Thanks to hybrid technology, this car consumed less than 5 liters per 100 km. We really liked it. Next time we will choose a car.",
+          "Fresh car with minimum mileage of 3800 km. It is always pleasant to get into the car...",
+        rating: 5,
+      },
+      {
+        id: 3,
+        name: "Christopher",
+        review:
+          "Great staff at the car rental company were polite to us and other peopleThat our flight was delayed for several hours. The rental office is located near the International Airport Phuket within walking distance which was quite convenient. Thank you for the prompt service.",
         rating: 5,
       },
     ],
   },
   {
-    id: 7,
+    id: 3,
+    imageUrl: "/honda_city.png",
+    name: "Honda City",
+    carBodyType: "Sedan",
+    pricePerDay: 750,
+    engineCapacity: "1.0 Turbo",
+    fuelType: "Gasoline A95",
+    year: "2024",
+    deposit: 6000,
+    seatsQuantity: 5,
+    transmissionType: "Automatic",
+    reviews: [
+      {
+        id: 1,
+        name: "Smith",
+        review:
+          "The body of the Honda city sedan is much more successful than its previous model and better than a similar model in terms of cost Toyota Yaris Afiv. If available, choose Honda, 100% you will not be mistaken.",
+        rating: 5,
+      },
+      {
+        id: 2,
+        name: "Christopher",
+        review:
+          "We did not have a transfer to the hotel and we decided to get there ourselves by rented car. We chose the company closest to the Phuket airport and we were not mistaken. The car was new with transit plates, according to the owner, it was bought only a few months ago, which could not pleasantly surprise us. Thanks to the rented car, we received exceptionally pleasant emotions from the ride, although the first few hours it was not easy to navigate the local traffic.",
+        rating: 5,
+      },
+    ],
+  },
+  {
+    id: 4,
     imageUrl: "/honda_civic.png",
     name: "Honda Civic",
     carBodyType: "Sedan",
@@ -219,7 +139,153 @@ export const cars: Car[] = [
     ],
   },
   {
+    id: 5,
+    imageUrl: "/toyota-yaris-ativ.png",
+    name: "Toyota Yaris Ativ",
+    carBodyType: "Sedan",
+    pricePerDay: 725,
+    engineCapacity: "1.2",
+    year: "2023",
+    deposit: 6000,
+    fuelType: "Gasoline A95",
+    seatsQuantity: 5,
+    transmissionType: "Automatic",
+    reviews: [
+      {
+        id: 1,
+        name: "Donald B.",
+        review:
+          "We rented the most affordable car available for our dates Toyota Yaris Ativ. Its was good car, the only thing on the mountain trails was the lack of a 1.2 liter engine.",
+        rating: 4,
+      },
+      {
+        id: 2,
+        name: "Emely Hernandez",
+        review:
+          "We were thrilled with the Toyota Yaris Ativ! It's spacious, perfect for family trips around Phuket. It glides smoothly over bumpy roads, and we enjoyed traveling comfortably on both beaches and mountain roads. I definitely recommend it for rental.",
+        rating: 5,
+      },
+    ],
+  },
+    {
+    id: 6,
+    imageUrl: "/toyota_vios.png",
+    name: "Toyota Vios",
+    carBodyType: "Sedan",
+    pricePerDay: 650,
+    engineCapacity: "1.5",
+    year: "2022",
+    fuelType: "Gasoline A95",
+    deposit: 5000,
+    seatsQuantity: 5,
+    transmissionType: "Automatic",
+    reviews: [
+      {
+        id: 1,
+        name: "Semen A.",
+        review:
+          "Despite its age, it was a good, well-maintained car that was technically looked after, and it never let us down on our trip to Koh Phangan. We were able to enjoy driving the Toyota Vios and enjoy the sights of Thailand to the fullest.",
+        rating: 5,
+      },
+      {
+        id: 2,
+        name: "Victor Shinko",
+        review:
+          "The best car for little money with an engine capacity of 1.5 liters for this money is currently available. I recommend choosing this one for rent.",
+        rating: 5,
+      },
+    ],
+  },
+    {
+    id: 7,
+    imageUrl: "/toyota_veloz.png",
+    name: "Toyota Veloz",
+    carBodyType: "Van",
+    pricePerDay: 950,
+    engineCapacity: "1.5",
+    year: "2023",
+    fuelType: "Gasoline A95",
+    deposit: 10000,
+    seatsQuantity: 7,
+    transmissionType: "Automatic",
+    reviews: [
+      {
+        id: 1,
+        name: "Anderson Grich",
+        review:
+          "I rented a Toyota Vios for my stay in Phuket and it was fantastic. The car was beautiful, reliable and very economical. The rental and return process was quick and smooth, with helpful staff guiding me through it. Highly recommended!",
+        rating: 5,
+      },
+      {
+        id: 2,
+        name: "Emily Johnson",
+        review:
+          "Renting a Toyota Vios in Phuket was a fantastic decision. The car was reliable, comfortable, and perfect for exploring the island. The rental process was smooth and easy, and the staff were very friendly.",
+        rating: 5,
+      },
+    ],
+  },
+      {
     id: 8,
+    imageUrl: "/mazda_2.png",
+    name: "Mazda 2",
+    carBodyType: "Sedan",
+    pricePerDay: 650,
+    engineCapacity: "1.2",
+    year: "2023",
+    fuelType: "Gasoline A95",
+    deposit: 5000,
+    seatsQuantity: 4,
+    transmissionType: "Automatic",
+    reviews: [
+      {
+        id: 1,
+        name: "Michael",
+        review:
+          "I booked Mazda 2 four months in advance through the website, To get an additional discount on pre-booking. I received the car at Phuket airportIn accordance withAbuseThe same class and model, Color. I can't imagineHolidays in Phuket without a car anymore. Now I will alwaysRent a car, it's very convenient and you can visitSave money on taxis many different places and attractions in Thailand. I recommend everyone to rent cars, it's very convenient and fastFor little money.",
+        rating: 5,
+      },
+      {
+        id: 2,
+        name: "James",
+        review:
+          "I rented a car for two weeks upon arrival right at the Phuket airport. I returned it there to a friendly employee of the company. The only thing I didn't see in the rental conditions was a payment for a car wash of 400 baht at the end of the rental period, since the car was quite dirty after two weeks of use. Otherwise, everything went smoothly and quite easily. Next time I will contact the same company.",
+        rating: 5,
+      },
+    ],
+  },
+    {
+    id: 9,
+    imageUrl: "/toyota_yaris_cross.png",
+    name: "Toyota Yaris Cros",
+    carBodyType: "SUV",
+    pricePerDay: 1250,
+    engineCapacity: "1.5 Hybrid",
+    year: "2024",
+    fuelType: "Gasoline A95",
+    deposit: 10000,
+    seatsQuantity: 5,
+    transmissionType: "Automatic",
+    reviews: [
+      {
+        id: 1,
+        name: "William",
+        review:
+          "This wonderful little crossover car turned out to be a very economical assistant on our trip. During the valuable month, it took us to the most remote corners of Thailand. We were very pleased with our decision to rent a Toyota Yaris Atif. I recommend choosing it!",
+        rating: 5,
+      },
+      {
+        id: 2,
+        name: "Johnson",
+        review:
+          "Compact Micros er is a great optionFor its money. Thanks to hybrid technology, this car consumed less than 5 liters per 100 km. We really liked it. Next time we will choose a car.",
+        rating: 5,
+      },
+    ],
+  },
+
+  {
+    id: 10,
     imageUrl: "/chevrolet-captiva.png",
     name: "Chevrolet Captiva",
     carBodyType: "SUV",
@@ -248,7 +314,7 @@ export const cars: Car[] = [
     ],
   },
   {
-    id: 9,
+    id: 11,
     imageUrl: "/mazda_cx30.png",
     name: "Mazda CX30",
     carBodyType: "SUV",
@@ -277,7 +343,7 @@ export const cars: Car[] = [
     ],
   },
   {
-    id: 10,
+    id: 12,
     imageUrl: "/toyota_fortuner.png",
     name: "Toyota Fortuner",
     carBodyType: "SUV",
@@ -306,7 +372,7 @@ export const cars: Car[] = [
     ],
   },
       {
-    id: 11,
+    id: 13,
     imageUrl: "/bmw_530e.png",
     name: "BMW 530E",
     carBodyType: "Sedan",
@@ -335,7 +401,7 @@ export const cars: Car[] = [
     ],
   },
   {
-    id: 12,
+    id: 14,
     imageUrl: "/bmw_x5.png",
     name: "BMW X5",
     carBodyType: "SUV",
