@@ -11,7 +11,6 @@ import { useToast } from "@/components/ui/use-toast";
 
 // Схема валидации
 const carSchema = z.object({
-  name: z.string().min(2, "Name must be at least 2 characters long."),
   year: z.string().regex(/^\d{4}$/, "Year must be a valid 4-digit year."),
   car_body_type: z.string().min(2, "Body type is required."),
   fuel_type: z.string().min(2, "Fuel type is required."),
@@ -21,6 +20,8 @@ const carSchema = z.object({
   seats_quantity: z.number().min(1, "Seats quantity must be at least 1."),
   deposit: z.number().min(0, "Deposit must be at least 0."),
   transmission_type: z.string().min(2, "Transmission type is required."),
+  brand: z.string().min(2, "Brand must be at least 2 characters long."),
+  model: z.string().min(2, "Model must be at least 2 characters long."),
 });
 
 export function CarDialog({ open, onOpenChange, car, onClose }: any) {
@@ -28,7 +29,6 @@ export function CarDialog({ open, onOpenChange, car, onClose }: any) {
   const form = useForm({
     resolver: zodResolver(carSchema),
     defaultValues: car || {
-      name: "",
       year: "",
       car_body_type: "",
       fuel_type: "",
@@ -38,6 +38,8 @@ export function CarDialog({ open, onOpenChange, car, onClose }: any) {
       seats_quantity: 1,
       deposit: 0,
       transmission_type: "",
+      brand: "",
+      model: "",
     },
   });
 
@@ -74,7 +76,6 @@ export function CarDialog({ open, onOpenChange, car, onClose }: any) {
     }
   };
 
-
   return (
     <Dialog open={open} onOpenChange={onOpenChange}>
       <DialogContent>
@@ -85,10 +86,10 @@ export function CarDialog({ open, onOpenChange, car, onClose }: any) {
           <form onSubmit={form.handleSubmit(onSubmit)} className="space-y-4 grid grid-cols-1 sm:grid-cols-2 gap-4">
             <FormField
               control={form.control}
-              name="name"
+              name="brand"
               render={({ field }) => (
                 <FormItem>
-                  <FormLabel>Name</FormLabel>
+                  <FormLabel>Brand</FormLabel>
                   <FormControl>
                     <Input {...field} />
                   </FormControl>
@@ -96,6 +97,20 @@ export function CarDialog({ open, onOpenChange, car, onClose }: any) {
                 </FormItem>
               )}
             />
+            <FormField
+              control={form.control}
+              name="model"
+              render={({ field }) => (
+                <FormItem>
+                  <FormLabel>Model</FormLabel>
+                  <FormControl>
+                    <Input {...field} />
+                  </FormControl>
+                  <FormMessage />
+                </FormItem>
+              )}
+            />
+
             <FormField
               control={form.control}
               name="year"
@@ -181,7 +196,11 @@ export function CarDialog({ open, onOpenChange, car, onClose }: any) {
                 <FormItem>
                   <FormLabel>Seats Quantity</FormLabel>
                   <FormControl>
-                    <Input {...field} type="number" />
+                    <Input
+                      {...field}
+                      type="number"
+                      onChange={(e) => field.onChange(Number(e.target.value) || 0)} // Преобразование в число
+                    />
                   </FormControl>
                   <FormMessage />
                 </FormItem>
@@ -194,7 +213,11 @@ export function CarDialog({ open, onOpenChange, car, onClose }: any) {
                 <FormItem>
                   <FormLabel>Deposit</FormLabel>
                   <FormControl>
-                    <Input {...field} type="number" />
+                    <Input
+                      {...field}
+                      type="number"
+                      onChange={(e) => field.onChange(Number(e.target.value) || 0)} // Преобразование в число
+                    />
                   </FormControl>
                   <FormMessage />
                 </FormItem>

@@ -27,7 +27,7 @@ export default function CarsPage() {
         </Button>
       </div>
 
-      <DataTable columns={columns} data={cars} />
+      <DataTable columns={columns} data={cars.cars} />
 
       <CarDialog
         open={isDialogOpen}

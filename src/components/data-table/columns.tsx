@@ -5,7 +5,8 @@ import { CarActions } from "./actions";
 
 export type Car = {
   id: number;
-  name: string;
+  brand: string;
+  model: string;
   year: string;
   car_body_type: string;
   fuel_type: string;
@@ -14,8 +15,12 @@ export type Car = {
 
 export const columns: ColumnDef<Car>[] = [
   {
-    accessorKey: "name",
-    header: "Name",
+    accessorKey: "brand",
+    header: "Brand",
+  },
+  {
+    accessorKey: "model",
+    header: "Model",
   },
   {
     accessorKey: "year",

@@ -141,7 +141,7 @@ export const columns: ColumnDef<Contract>[] = [
     header: "Amount",
     cell: ({ row }) => {
       const amount = Number(row.getValue("rentalAmount")); // Ensure amount is a number
-      const currency = row.original.rentalCurrency;
+      const currency = row.original.rentalCurrency || "USD";
       return new Intl.NumberFormat("en-US", {
         style: "currency",
         currency,
@@ -165,7 +165,7 @@ export const columns: ColumnDef<Contract>[] = [
     header: "Rental Deposit Amount",
     cell: ({ row }) => {
       const amount = Number(row.getValue("rentalDepositAmount")); // Ensure amount is a number
-      const currency = row.original.rentalDepositCurrency;
+      const currency = row.original.rentalCurrency || "USD"; // default to "USD" if not provided
       return new Intl.NumberFormat("en-US", {
         style: "currency",
         currency,
@@ -192,5 +192,9 @@ export const columns: ColumnDef<Contract>[] = [
         </span>
       );
     },
+  },
+  {
+    id: "actions",
+    cell: ({ row }) => <ContractActions contract={row.original} />,
   },
 ];

@@ -201,7 +201,7 @@ export function ClientDialog({ open, onOpenChange, client, onClose }: any) {
                   <FormControl>
                     <Input
                       {...field}
-                      onChange={(e) => field.onChange(Number(e.target.value) || 0)} // Преобразование в число
+                      onChange={(e) => field.onChange(Number(e.target.value) || 0)}
                     />
                   </FormControl>
                   <FormMessage />

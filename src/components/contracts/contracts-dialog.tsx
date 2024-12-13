@@ -15,9 +15,8 @@ const contractSchema = z.object({
   car_id: z.number().int().positive().nullable().optional(),
   car_brand: z.string().min(1, "Car brand is required").max(100, "Must be less than 100 characters"),
   car_model: z.string().min(1, "Car model is required").max(100, "Must be less than 100 characters"),
-  created_by: z.string().min(1, "Created by is required").max(50, "Must be less than 50 characters"),
-  mileage: z.number().int().positive("Mileage must be a positive number"),
-  fuel_level: z.string().max(20, "Fuel level must be less than 20 characters"),
+  mileage_odo: z.number().int().positive("Mileage must be a positive number"),
+  fuel: z.string().max(20, "Fuel level must be less than 20 characters"),
   is_clean: z.boolean().optional(),
   rental_amount: z.string().regex(/^\d+(\.\d{1,2})?$/, { message: "Enter a valid amount (e.g. 100.00)" }),
   deposit_amount: z.string().regex(/^\d+(\.\d{1,2})?$/, { message: "Enter a valid deposit amount (e.g. 200.00)" }),
@@ -32,6 +31,11 @@ const contractSchema = z.object({
   client_second_phone_number: z.string().max(20, "Second phone number must be less than 20 characters").optional(),
   pickup_location_id: z.number().int().nullable().optional(),
   dropoff_location_id: z.number().int().nullable().optional(),
+  amount: z.string().regex(/^\d+(\.\d{1,2})?$/, { message: "Enter a valid amount (e.g. 1000.00)" }), // Недостающее поле
+  date_start: z.string().refine((val) => !isNaN(Date.parse(val)), { message: "Invalid start date" }), // Добавление даты начала
+  date_end: z.string().refine((val) => !isNaN(Date.parse(val)), { message: "Invalid end date" }), // Добавление даты окончания
+  location_return: z.string().max(255, "Location return must be less than 255 characters").optional(), // Местоположение возврата
+  manager: z.string().max(100, "Manager name must be less than 100 characters").optional(), // Имя менеджера
 });
 
 export function ContractDialog({ open, onOpenChange, contract, onClose }: any) {
@@ -44,9 +48,8 @@ export function ContractDialog({ open, onOpenChange, contract, onClose }: any) {
       car_id: null,
       car_brand: "",
       car_model: "",
-      created_by: "",
-      mileage: 0,
-      fuel_level: "",
+      mileage_odo: 0,
+      fuel: "",
       is_clean: true,
       rental_amount: "",
       deposit_amount: "",
@@ -61,17 +64,24 @@ export function ContractDialog({ open, onOpenChange, contract, onClose }: any) {
       client_second_phone_number: "",
       pickup_location_id: null,
       dropoff_location_id: null,
+      amount: "", // Добавлено
+      date_start: "", // Добавлено
+      date_end: "", // Добавлено
+      location_return: "", // Добавлено
+      manager: "", // Добавлено
     },
   });
 
   const onSubmit = async (data: any) => {
+    console.log("onSubmit called", data);
+
     try {
       // Преобразование данных для сохранения
       const preparedData = {
         ...data,
-        mileage: Number(data.mileage),
         rental_amount: parseFloat(data.rental_amount),
         deposit_amount: parseFloat(data.deposit_amount),
+        amount: parseFloat(data.amount), // Преобразование для amount
       };
 
       const response = await fetch(`/api/contracts${contract ? `/${contract.id}` : ""}`, {
@@ -99,7 +109,6 @@ export function ContractDialog({ open, onOpenChange, contract, onClose }: any) {
       });
     }
   };
-
   return (
     <Dialog open={open} onOpenChange={onOpenChange}>
       <DialogContent>
@@ -107,7 +116,7 @@ export function ContractDialog({ open, onOpenChange, contract, onClose }: any) {
           <DialogTitle>{contract ? "Edit Contract" : "Add New Contract"}</DialogTitle>
         </DialogHeader>
         <Form {...form}>
-          <form onSubmit={form.handleSubmit(onSubmit)} className="grid grid-cols-1 gap-4 sm:grid-cols-2 lg:grid-cols-3">
+          <form onSubmit={form.handleSubmit(onSubmit)} className="grid grid-cols-1 gap-4 sm:grid-cols-2 lg:grid-cols-4">
             {/* Client ID */}
             <FormField
               control={form.control}
@@ -128,6 +137,7 @@ export function ContractDialog({ open, onOpenChange, contract, onClose }: any) {
                 </FormItem>
               )}
             />
+
             {/* Car ID */}
             <FormField
               control={form.control}
@@ -176,20 +186,7 @@ export function ContractDialog({ open, onOpenChange, contract, onClose }: any) {
                 </FormItem>
               )}
             />
-            {/* Created By */}
-            <FormField
-              control={form.control}
-              name="created_by"
-              render={({ field }) => (
-                <FormItem>
-                  <FormLabel>Created By</FormLabel>
-                  <FormControl>
-                    <Input {...field} placeholder="Enter creator's name" />
-                  </FormControl>
-                  <FormMessage />
-                </FormItem>
-              )}
-            />
+
             <FormField
               control={form.control}
               name="manager"
@@ -290,31 +287,22 @@ export function ContractDialog({ open, onOpenChange, contract, onClose }: any) {
                 <FormItem>
                   <FormLabel>Mileage Odo</FormLabel>
                   <FormControl>
-                    <Input {...field} type="number" placeholder="Enter mileage odo" />
+                    <Input
+                      {...field}
+                      type="number"
+                      placeholder="Enter mileage odo"
+                      onChange={(e) => field.onChange(Number(e.target.value) || 0)}
+                    />
                   </FormControl>
                   <FormMessage />
                 </FormItem>
               )}
             />
 
-            {/* Mileage */}
-            <FormField
-              control={form.control}
-              name="mileage"
-              render={({ field }) => (
-                <FormItem>
-                  <FormLabel>Mileage</FormLabel>
-                  <FormControl>
-                    <Input {...field} type="number" placeholder="Enter mileage" />
-                  </FormControl>
-                  <FormMessage />
-                </FormItem>
-              )}
-            />
             {/* Fuel Level */}
             <FormField
               control={form.control}
-              name="fuel_level"
+              name=" fuel"
               render={({ field }) => (
                 <FormItem>
                   <FormLabel>Fuel Level</FormLabel>

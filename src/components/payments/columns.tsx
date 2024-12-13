@@ -28,6 +28,10 @@ const mapPayment = (payment: any): Payment => ({
 // Определение колонок таблицы
 export const columns: ColumnDef<Payment>[] = [
   {
+    accessorKey: "id",
+    header: "Payments ID",
+  },
+  {
     accessorKey: "contractId",
     header: "Contract ID",
   },

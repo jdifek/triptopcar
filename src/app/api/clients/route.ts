@@ -3,57 +3,40 @@ import { PrismaClient } from "@prisma/client";
 
 const prisma = new PrismaClient();
 
+// Получение всех клиентов
 export async function GET() {
   try {
-    const contracts = await prisma.contracts.findMany({
-      include: {
-        clients: true,
-        payments: true,
-      },
-    });
-    return NextResponse.json(contracts);
+    const clients = await prisma.clients.findMany(); // Получаем всех клиентов
+    return NextResponse.json(clients); // Возвращаем данные клиентов
   } catch (error) {
-    return NextResponse.json({ error: "Failed to fetch contracts" }, { status: 500 });
+    return NextResponse.json({ error: "Failed to fetch clients" }, { status: 500 });
   }
 }
 
+// Создание нового клиента
 export async function POST(request: Request) {
-    try {
-      const data = await request.json();
+  try {
+    const data = await request.json(); // Получаем данные из тела запроса
 
-      const { contractData, clientData, paymentData } = data;
+    const { first_name, last_name, passport_number, phone_1, phone_2, status, location_id, hotel_name } = data;
 
-      // Шаг 1: Создайте контракт без клиента
-      const contract = await prisma.contracts.create({
-        data: {
-          ...contractData,
-          client_id: null,  // Клиент ещё не привязан
-        },
-      });
+    // Создание клиента
+    const client = await prisma.clients.create({
+      data: {
+        first_name,
+        last_name,
+        passport_number,
+        phone_1,
+        phone_2,
+        status,
+        location_id,
+        hotel_name,
+      },
+    });
 
-      // Шаг 2: Создайте клиента
-      const client = await prisma.clients.create({
-        data: clientData,
-      });
-
-      // Шаг 3: Обновите контракт, добавив клиента
-      const updatedContract = await prisma.contracts.update({
-        where: { id: contract.id },
-        data: { client_id: client.id },
-      });
-
-      // Шаг 4: Создайте платеж
-      const payment = await prisma.payments.create({
-        data: {
-          ...paymentData,
-          contract_id: updatedContract.id,
-        },
-      });
-
-      return NextResponse.json({ contract: updatedContract, client, payment });
-    } catch (error) {
-      console.error("Error creating contract, client, or payment:", error);
-      return NextResponse.json({ error: "Failed to create contract, client, or payment" }, { status: 500 });
-    }
+    return NextResponse.json(client); // Возвращаем созданного клиента
+  } catch (error) {
+    console.error("Error creating client:", error);
+    return NextResponse.json({ error: "Failed to create client" }, { status: 500 });
   }
-
+}
